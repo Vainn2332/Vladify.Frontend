@@ -2,7 +2,7 @@ interface CardProps {
   title: string;
   artist?: string;
   imageUrl: string;
-  size: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large";
   onClick?: () => void;
 }
 
@@ -14,7 +14,7 @@ export function Card({
   onClick,
 }: CardProps) {
   return (
-    <div className={`card ${size}`} onClick={onClick}>
+    <div className={`card card--${size}`} onClick={onClick}>
       <div className="card-cover">
         <img src={imageUrl} />
       </div>

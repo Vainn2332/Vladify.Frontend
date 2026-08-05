@@ -8,6 +8,16 @@
   cursor: pointer;
 }
 
+.card--small {
+  width: 120px;
+}
+.card--medium {
+  width: 160px;
+}
+.card--large {
+  width: 200px;
+}
+
 .card:hover {
   background-color: #282828;
   transform: translateY(-4px);

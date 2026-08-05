@@ -3,10 +3,9 @@ export function HomePage() {
   return (
     <div className="layout">
       <div className="content">
-        <section className="section-items">
+        <section>
           <h2>Популярные треки</h2>
-
-          <div className="tracks-grid">
+          <div className="section-items">
             <div className="track-card">
               <div className="track-cover"></div>
               <p className="track-title">Название трека</p>
@@ -33,13 +32,6 @@ export function HomePage() {
           </div>
         </section>
       </div>
-
-      {/* 3. Нижняя панель плеера */}
-      <footer className="player-bar">
-        <div>Сейчас играет: Ничего</div>
-        <div>[Кнопки управления]</div>
-        <div>[Громкость]</div>
-      </footer>
     </div>
   );
 }

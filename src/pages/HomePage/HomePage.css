@@ -35,37 +35,3 @@ body {
   flex-wrap: wrap;
   gap: 32px;
 }
-
-.track-card {
-  background-color: #181818;
-  padding: 16px;
-  border-radius: 8px;
-  transition:
-    background-color 0.3s,
-    transform 0.2s;
-  cursor: pointer;
-}
-
-.track-card:hover {
-  background-color: #282828;
-  transform: translateY(-4px);
-}
-
-.track-cover {
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: #333;
-  border-radius: 6px;
-  margin-bottom: 12px;
-}
-
-.track-title {
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.track-artist {
-  color: #a7a7a7;
-  font-size: 12px;
-}

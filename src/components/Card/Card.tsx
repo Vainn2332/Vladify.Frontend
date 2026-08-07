@@ -18,7 +18,7 @@ export function Card({
   return (
     <div className={`card card--${size}`} onClick={onClick}>
       <div className="card-cover">
-        <img src={imageUrl} />
+        <img src={imageUrl} alt="" />
       </div>
       <p className="card-title">{title}</p>
       {artist && <p className="card-artist">{artist}</p>}

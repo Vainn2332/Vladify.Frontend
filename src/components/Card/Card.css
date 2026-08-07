@@ -33,7 +33,11 @@
   background: linear-gradient(45deg, #97b5d3, #c2ccd1, #d0d0e2);
   opacity: 0.9;
   border-radius: 6px;
+}
+
+img {
   object-fit: cover;
+  overflow: hidden;
 }
 
 .card-title {

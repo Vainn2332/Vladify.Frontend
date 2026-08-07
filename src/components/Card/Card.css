@@ -1,5 +1,7 @@
 .card {
-  background: linear-gradient(125deg, #eae6ff, #f4f4f4);
+  background: linear-gradient(120deg, #ffffff 0%, #e2e8f0 50%, #f8fafc 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 20px rgba(100, 116, 139, 0.12);
   padding: 16px;
   border-radius: 8px;
   display: flex;
@@ -21,14 +23,15 @@
 }
 
 .card:hover {
-  background-color: #282828;
   transform: translateY(-4px);
+  opacity: 0.8;
 }
 
 .card-cover {
   width: 100%;
   aspect-ratio: 1;
-  background-color: #333;
+  background: linear-gradient(45deg, #97b5d3, #c2ccd1, #d0d0e2);
+  opacity: 0.9;
   border-radius: 6px;
   object-fit: cover;
 }
@@ -52,10 +55,10 @@
   }
 
   .card--small {
-    flex: 0 0 80px;
+    flex: 0 0 75px;
   }
   .card--medium {
-    flex: 0 0 100px;
+    flex: 0 0 95px;
   }
   .card--large {
     flex: 0 0 120px;

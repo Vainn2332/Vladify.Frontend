@@ -31,17 +31,12 @@ section h2 {
   gap: 32px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 450px) {
   .content {
     padding: 16px;
   }
 
   .section-items {
     gap: 16px;
-    /*justify-content: center;*/
   }
-
-  /*section h2 {
-    text-align: center;
-  }*/
 }

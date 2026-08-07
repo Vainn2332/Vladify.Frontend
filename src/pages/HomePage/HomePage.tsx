@@ -37,6 +37,13 @@ export function HomePage() {
             />
 
             <Card
+              title="some track title"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
+
+            <Card
               title="some track title3"
               artist="some artist"
               imageUrl="someRoute/jpg"

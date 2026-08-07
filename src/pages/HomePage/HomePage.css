@@ -7,7 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #121212;
+  background: linear-gradient(125deg, #faf2e5, #d0e3ff, #eaeaee, #faf2e5);
   color: #ffffff;
   font-family: sans-serif;
 }

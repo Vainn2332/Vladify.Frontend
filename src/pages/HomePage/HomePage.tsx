@@ -1,34 +1,70 @@
 import "./HomePage.css";
+import { Card } from "../../components/Card/Card.tsx";
+
 export function HomePage() {
   return (
     <div className="layout">
       <div className="content">
         <section>
-          <h2>Популярные треки</h2>
+          <h2>New songs</h2>
           <div className="section-items">
-            <div className="track-card">
-              <div className="track-cover"></div>
-              <p className="track-title">Название трека</p>
-              <p className="track-artist">Исполнитель</p>
-            </div>
+            <Card
+              title="some track title1"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="small"
+            />
 
-            <div className="track-card">
-              <div className="track-cover"></div>
-              <p className="track-title">Название трека</p>
-              <p className="track-artist">Исполнитель</p>
-            </div>
+            <Card
+              title="some track title2"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
 
-            <div className="track-card">
-              <div className="track-cover"></div>
-              <p className="track-title">Название трека</p>
-              <p className="track-artist">Исполнитель</p>
-            </div>
+            <Card
+              title="some track title"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="large"
+            />
 
-            <div className="track-card">
-              <div className="track-cover"></div>
-              <p className="track-title">Название трека</p>
-              <p className="track-artist">Исполнитель</p>
-            </div>
+            <Card
+              title="some track title"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
+
+            <Card
+              title="some track title3"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
+
+            <Card
+              title="some track title5"
+              artist="some artist"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2>My Playlists</h2>
+          <div className="section-items">
+            <Card
+              title="some playlist1"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
+            <Card
+              title="some playlist2"
+              imageUrl="someRoute/jpg"
+              size="medium"
+            />
           </div>
         </section>
       </div>

@@ -2,6 +2,8 @@
   background-color: #181818;
   padding: 16px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   transition:
     background-color 0.3s,
     transform 0.2s;
@@ -9,13 +11,13 @@
 }
 
 .card--small {
-  width: 120px;
+  flex: 0 0 120px;
 }
 .card--medium {
-  width: 160px;
+  flex: 0 0 160px;
 }
 .card--large {
-  width: 200px;
+  flex: 0 0 200px;
 }
 
 .card:hover {
@@ -28,7 +30,7 @@
   aspect-ratio: 1;
   background-color: #333;
   border-radius: 6px;
-  margin-bottom: 12px;
+  object-fit: cover;
 }
 
 .card-title {
@@ -40,4 +42,40 @@
 .card-artist {
   color: #a7a7a7;
   font-size: 12px;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+@media (max-width: 450px) {
+  .card {
+    padding: 10px;
+  }
+
+  .card--small {
+    flex: 0 0 80px;
+  }
+  .card--medium {
+    flex: 0 0 100px;
+  }
+  .card--large {
+    flex: 0 0 120px;
+  }
+
+  .card-title {
+    font-size: 12px;
+  }
+
+  .card-artist {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card--small {
+    flex: 0 0 50px;
+  }
+
+  .card--medium {
+    flex: 0 0 60px;
+  }
 }

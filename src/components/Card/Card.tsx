@@ -1,3 +1,5 @@
+import "./Card.css";
+
 interface CardProps {
   title: string;
   artist?: string;

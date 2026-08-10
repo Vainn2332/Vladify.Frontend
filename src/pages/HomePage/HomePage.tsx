@@ -9,7 +9,7 @@ const NEW_SONGS: CardSectionItem[] = [
     id: "track-1",
     title: "Midnight City Drive",
     subtitle: "M83 & The Midnight",
-    imageUrl: "https://picsum.photos/seed/track1/300/300",
+    imageUrl: "https://picsum.hotos/seed/track1/300/300",
   },
   {
     id: "track-2",
@@ -53,6 +53,7 @@ export function HomePage() {
           title="New Songs"
           items={NEW_SONGS}
           emptyMessage="No new songs"
+          linkTemplate="/lolka/{id}"
         />
 
         <CardSection

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import "./Card.css";
 
 export interface CardProps {
   title: string;

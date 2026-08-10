@@ -31,7 +31,7 @@ export function CardSection({
         <p className="card-section-empty">{emptyMessage}</p>
       ) : (
         <div className="card-section-items">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <Card
               title={item.title}
               subtitle={item.subtitle}
@@ -40,6 +40,7 @@ export function CardSection({
                 linkTemplate ? linkTemplate.replace("{id}", item.id) : undefined
               }
               size={cardSize}
+              priority={index < 20}
             />
           ))}
         </div>

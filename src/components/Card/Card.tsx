@@ -1,11 +1,11 @@
-import "./Card.css";
+import { Link } from "react-router";
 
-interface CardProps {
+export interface CardProps {
   title: string;
   subtitle?: string;
   imageUrl: string;
   size?: "small" | "medium" | "large";
-  onClick?: () => void;
+  linkUrl?: string;
 }
 
 export function Card({
@@ -13,15 +13,27 @@ export function Card({
   subtitle,
   imageUrl,
   size = "medium",
-  onClick,
+  linkUrl,
 }: CardProps) {
-  return (
-    <div className={`card card--${size}`} onClick={onClick}>
+  const className = `card card--${size}`;
+
+  const content = (
+    <>
       <div className="card-cover">
-        <img src={imageUrl} alt="" />
+        <img src={imageUrl} alt="" className="card-cover-img" />
       </div>
       <p className="card-title">{title}</p>
       {subtitle && <p className="card-subtitle">{subtitle}</p>}
-    </div>
+    </>
   );
+
+  if (linkUrl) {
+    return (
+      <Link to={linkUrl} className={className}>
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={className}>{content}</div>;
 }

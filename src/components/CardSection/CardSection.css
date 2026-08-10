@@ -1,0 +1,18 @@
+.card-section-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.card-section-title {
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 450px) {
+  .card-section-items {
+    gap: 16px;
+  }
+}

@@ -18,25 +18,8 @@ body {
   overflow-y: auto;
 }
 
-section h2 {
-  width: 100%;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.section-items {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 32px;
-}
-
 @media (max-width: 450px) {
   .content {
     padding: 16px;
-  }
-
-  .section-items {
-    gap: 16px;
   }
 }

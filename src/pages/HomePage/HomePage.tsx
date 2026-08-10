@@ -1,79 +1,65 @@
 import "./HomePage.css";
-import { Card } from "../../components/Card/Card.tsx";
+import {
+  CardSection,
+  type CardSectionItem,
+} from "../../components/CardSection/CardSection";
+
+const NEW_SONGS: CardSectionItem[] = [
+  {
+    id: "track-1",
+    title: "Midnight City Drive",
+    subtitle: "M83 & The Midnight",
+    imageUrl: "https://picsum.photos/seed/track1/300/300",
+  },
+  {
+    id: "track-2",
+    title: "Очень длинное название трека  текста с троеточием ds",
+    subtitle: "Известный Исполнитель",
+    imageUrl: "https://picsum.photos/seed/track2/300/300",
+  },
+  {
+    id: "track-3",
+    title: "Starboy",
+    subtitle: "The Weeknd, Daft Punk",
+    imageUrl: "https://picsum.photos/seed/track3/300/300",
+  },
+  {
+    id: "track-4",
+    title: "Blinding Lights",
+    subtitle: "The Weeknd",
+    imageUrl: "https://picsum.photos/seed/track4/300/300",
+  },
+];
+const PLAYLISTS: CardSectionItem[] = [
+  {
+    id: "playlist-1",
+    title: "Chill Vibes",
+    subtitle: "Relaxing tunes for your day",
+    imageUrl: "https://picsum.photos/seed/playlist1/300/300",
+  },
+  {
+    id: "playlist-2",
+    title: "Workout Hits",
+    subtitle: "Get pumped with these tracks",
+    imageUrl: "https://picsum.photos/seed/playlist2/300/300",
+  },
+];
 
 export function HomePage() {
   return (
     <div className="layout">
       <div className="content">
-        <section>
-          <h2>New songs</h2>
-          <div className="section-items">
-            <Card
-              title="some track title1"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="small"
-            />
+        <CardSection
+          title="New Songs"
+          items={NEW_SONGS}
+          emptyMessage="No new songs"
+        />
 
-            <Card
-              title="some track title2"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-
-            <Card
-              title="some track title"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="large"
-            />
-
-            <Card
-              title="some track title"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-
-            <Card
-              title="some track title"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-
-            <Card
-              title="some track title3"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-
-            <Card
-              title="some track title5"
-              artist="some artist"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-          </div>
-        </section>
-
-        <section>
-          <h2>My Playlists</h2>
-          <div className="section-items">
-            <Card
-              title="some playlist1"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-            <Card
-              title="some playlist2"
-              imageUrl="someRoute/jpg"
-              size="medium"
-            />
-          </div>
-        </section>
+        <CardSection
+          title="My Playlists"
+          items={PLAYLISTS}
+          emptyMessage="No playlists available"
+        />
       </div>
     </div>
   );

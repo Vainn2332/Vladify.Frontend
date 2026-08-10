@@ -2,7 +2,7 @@ import "./Card.css";
 
 interface CardProps {
   title: string;
-  artist?: string;
+  subtitle?: string;
   imageUrl: string;
   size?: "small" | "medium" | "large";
   onClick?: () => void;
@@ -10,7 +10,7 @@ interface CardProps {
 
 export function Card({
   title,
-  artist,
+  subtitle,
   imageUrl,
   size = "medium",
   onClick,
@@ -21,7 +21,7 @@ export function Card({
         <img src={imageUrl} alt="" />
       </div>
       <p className="card-title">{title}</p>
-      {artist && <p className="card-artist">{artist}</p>}
+      {subtitle && <p className="card-subtitle">{subtitle}</p>}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { Card } from "../Card/Card";
 import "./CardSection.css";
 
+const DEFAULT_PRIORITY_CARDS = 12;
+
 export interface CardSectionItem {
   id: string;
   title: string;
@@ -14,6 +16,7 @@ interface CardSectionProps {
   emptyMessage?: string;
   cardSize?: "small" | "medium" | "large";
   linkTemplate?: string;
+  priorityCardsAmount?: number;
 }
 
 export function CardSection({
@@ -22,6 +25,7 @@ export function CardSection({
   emptyMessage = "No items available",
   cardSize = "medium",
   linkTemplate,
+  priorityCardsAmount = DEFAULT_PRIORITY_CARDS,
 }: CardSectionProps) {
   return (
     <section>
@@ -40,7 +44,7 @@ export function CardSection({
                 linkTemplate ? linkTemplate.replace("{id}", item.id) : undefined
               }
               size={cardSize}
-              priority={index < 20}
+              priority={index < priorityCardsAmount}
             />
           ))}
         </div>

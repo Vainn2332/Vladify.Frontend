@@ -29,6 +29,9 @@ export function Card({
           className="card__cover-img"
           loading={priority ? "eager" : "lazy"}
           decoding="async"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
         />
       </div>
       <p className="card__title">{title}</p>

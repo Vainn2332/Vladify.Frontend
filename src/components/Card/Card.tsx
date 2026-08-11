@@ -22,17 +22,17 @@ export function Card({
 
   const content = (
     <>
-      <div className="card-cover">
+      <div className="card__cover">
         <img
           src={imageUrl}
           alt=""
-          className="card-cover-img"
+          className="card__cover-img"
           loading={priority ? "eager" : "lazy"}
           decoding="async"
         />
       </div>
-      <p className="card-title">{title}</p>
-      {subtitle && <p className="card-subtitle">{subtitle}</p>}
+      <p className="card__title">{title}</p>
+      {subtitle && <p className="card__subtitle">{subtitle}</p>}
     </>
   );
 

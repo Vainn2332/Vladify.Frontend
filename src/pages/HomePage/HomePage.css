@@ -1,15 +1,8 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(125deg, #faf2e5, #d0e3ff, #eaeaee, #faf2e5);
-  color: #181818;
-  font-family: calibri, sans-serif;
+  background: var(--color-background-app);
 }
 
 .content {

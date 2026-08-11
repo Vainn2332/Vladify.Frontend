@@ -7,7 +7,7 @@
 
 .card-section-title {
   width: 100%;
-  font-size: 24px;
+  font-size: var(--text-size-large);
   font-weight: bold;
 }
 

@@ -1,9 +1,14 @@
 .card {
-  background: linear-gradient(120deg, #ffffff 0%, #e2e8f0 50%, #f8fafc 100%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 20px rgba(100, 116, 139, 0.12);
+  background: linear-gradient(
+    120deg,
+    var(--color-surface-card-start) 0%,
+    var(--color-surface-card-mid) 50%,
+    var(--color-surface-card-end) 100%
+  );
+  border: 1px solid var(--color-border-card);
+  box-shadow: var(--shadow-card);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -28,28 +33,33 @@
   opacity: 0.8;
 }
 
-.card-cover {
+.card__cover {
   width: 100%;
   aspect-ratio: 1;
-  background: linear-gradient(45deg, #97b5d3, #c2ccd1, #d0d0e2);
+  background: linear-gradient(
+    45deg,
+    var(--color-background-card-cover-start),
+    var(--color-background-card-cover-mid),
+    var(--color-background-card-cover-end)
+  );
   opacity: 0.9;
-  border-radius: 6px;
+  border-radius: var(--border-radius-small);
 }
 
-img {
+.card__cover-img {
   object-fit: cover;
   overflow: hidden;
 }
 
-.card-title {
+.card__title {
   font-weight: bold;
-  font-size: 14px;
+  font-size: var(--text-size-medium);
   margin-bottom: 4px;
 }
 
-.card-subtitle {
-  color: #a7a7a7;
-  font-size: 12px;
+.card__subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--text-size-small);
   margin-top: auto;
   margin-bottom: 0;
 }
@@ -69,11 +79,11 @@ img {
     flex: 0 0 140px;
   }
 
-  .card-title {
+  .card__title {
     font-size: 12px;
   }
 
-  .card-artist {
+  .card__subtitle {
     font-size: 10px;
   }
 }

@@ -7,12 +7,6 @@
 
 .content {
   flex: 1;
-  padding: 32px;
+  padding: 16px;
   overflow-y: auto;
-}
-
-@media (max-width: 450px) {
-  .content {
-    padding: 16px;
-  }
 }

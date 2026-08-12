@@ -5,7 +5,6 @@ export interface CardProps {
   title: string;
   subtitle?: string;
   imageUrl: string;
-  size?: "small" | "medium" | "large";
   linkUrl?: string;
   priority?: boolean;
 }
@@ -14,12 +13,9 @@ export function Card({
   title,
   subtitle,
   imageUrl,
-  size = "medium",
   linkUrl,
   priority = false,
 }: CardProps) {
-  const className = `card card--${size}`;
-
   const content = (
     <>
       <div className="card__cover">
@@ -41,11 +37,11 @@ export function Card({
 
   if (linkUrl) {
     return (
-      <Link to={linkUrl} className={className}>
+      <Link to={linkUrl} className="card">
         {content}
       </Link>
     );
   }
 
-  return <div className={className}>{content}</div>;
+  return <div className="card">{content}</div>;
 }

@@ -13,7 +13,8 @@ const NEW_SONGS: CardSectionItem[] = [
   },
   {
     id: "track-2",
-    title: "Очень длинное название трека  текста с троеточием ds",
+    title:
+      "Очень длинное название трека  текста с троеточием которое обрезается и не помещается в одну строку",
     subtitle: "Известный Исполнитель",
     imageUrl: "https://picsum.photos/seed/track2/300/300",
   },
@@ -28,6 +29,18 @@ const NEW_SONGS: CardSectionItem[] = [
     title: "Blinding Lights",
     subtitle: "The Weeknd",
     imageUrl: "https://picsum.photos/seed/track4/300/300",
+  },
+  {
+    id: "track-5",
+    title: "Blinding Lights",
+    subtitle: "The Weeknd",
+    imageUrl: "https://picsum.photos/seed/track4/300/300",
+  },
+  {
+    id: "track-6",
+    title: "Blinding Lights",
+    subtitle: "The Weeknd",
+    imageUrl: "https://picsum.photos/seed/track6/300/300",
   },
 ];
 const PLAYLISTS: CardSectionItem[] = [

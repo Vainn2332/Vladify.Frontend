@@ -1,18 +1,14 @@
-.card-section-items {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 32px;
+.card-section__items {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(80px, 22vw, 160px), 1fr)
+  );
+  gap: clamp(8px, 2vw, 32px);
 }
 
-.card-section-title {
+.card-section__title {
   width: 100%;
   font-size: var(--text-size-large);
   font-weight: bold;
-}
-
-@media (max-width: 450px) {
-  .card-section-items {
-    gap: 16px;
-  }
 }

@@ -21,7 +21,6 @@ export function Card({
       <div className="card__cover">
         <img
           src={imageUrl}
-          alt=""
           className="card__cover-img"
           loading={priority ? "eager" : "lazy"}
           decoding="async"

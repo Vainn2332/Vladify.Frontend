@@ -7,10 +7,10 @@
     #faf2e5
   );
 
-  --color-surface-card-start: #ffffff;
+  --color-surface-card-start: #fff;
   --color-surface-card-mid: #e2e8f0;
   --color-surface-card-end: #f8fafc;
-  --color-border-card: rgba(255, 255, 255, 0.5);
+  --color-border-card: rgb(255, 255, 255 / 50%);
 
   --color-background-card-cover-start: #97b5d3;
   --color-background-card-cover-mid: #c2ccd1;
@@ -19,7 +19,7 @@
   --color-text-primary: #181818;
   --color-text-secondary: #858585;
 
-  --shadow-card: 0 8px 20px rgba(100, 116, 139, 0.12);
+  --shadow-card: 0 8px 20px rgb(100, 116, 139 / 12%);
 
   --border-radius-medium: 8px;
   --border-radius-small: 6px;
@@ -27,6 +27,7 @@
   --text-size-large: 24px;
   --text-size-medium: 18px;
   --text-size-small: 14px;
+  --text-size-xsmall: 12px;
 }
 
 *,

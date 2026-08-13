@@ -1,7 +1,6 @@
 import { Card } from "../Card/Card";
 import "./CardSection.css";
-
-const DEFAULT_PRIORITY_CARDS = 12;
+import { DEFAULT_PRIORITY_CARDS } from "./CardSection.constants";
 
 export interface CardSectionItem {
   id: string;
@@ -13,39 +12,32 @@ export interface CardSectionItem {
 interface CardSectionProps {
   title: string;
   items: CardSectionItem[];
-  emptyMessage?: string;
-  linkTemplate?: string;
+  linkTemplate?: (item: CardSectionItem) => string;
   priorityCardsAmount?: number;
 }
 
 export function CardSection({
   title,
   items,
-  emptyMessage = "No items available",
   linkTemplate,
   priorityCardsAmount = DEFAULT_PRIORITY_CARDS,
 }: CardSectionProps) {
-  return (
+  return items.length === 0 ? null : (
     <section>
       <h2 className="card-section__title">{title}</h2>
-
-      {items.length === 0 ? (
-        <p className="card-section__empty">{emptyMessage}</p>
-      ) : (
-        <div className="card-section__items">
-          {items.map((item, index) => (
-            <Card
-              title={item.title}
-              subtitle={item.subtitle}
-              imageUrl={item.imageUrl}
-              linkUrl={
-                linkTemplate ? linkTemplate.replace("{id}", item.id) : undefined
-              }
-              priority={index < priorityCardsAmount}
-            />
-          ))}
-        </div>
-      )}
+      <div className="card-section__items">
+        {items.map((item, index) => (
+          <Card
+            key={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            imageUrl={item.imageUrl}
+            linkUrl={linkTemplate?.(item)}
+            isPriority={index < priorityCardsAmount}
+          />
+        ))}
+      </div>
+      )
     </section>
   );
 }

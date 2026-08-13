@@ -65,15 +65,10 @@ export function HomePage() {
         <CardSection
           title="New Songs"
           items={NEW_SONGS}
-          emptyMessage="No new songs"
-          linkTemplate="/lolka/{id}"
+          linkTemplate={(item) => `/tracks/${item.id}`}
         />
 
-        <CardSection
-          title="My Playlists"
-          items={PLAYLISTS}
-          emptyMessage="No playlists available"
-        />
+        <CardSection title="My Playlists" items={PLAYLISTS} />
       </div>
     </div>
   );

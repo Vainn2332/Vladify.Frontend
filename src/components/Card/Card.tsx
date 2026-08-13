@@ -6,7 +6,24 @@ export interface CardProps {
   subtitle?: string;
   imageUrl: string;
   linkUrl?: string;
-  priority?: boolean;
+  isPriority?: boolean;
+}
+
+interface CardWrapperProps {
+  children: React.ReactNode;
+  linkUrl?: string;
+}
+
+function CardWrapper({ children, linkUrl }: CardWrapperProps) {
+  if (linkUrl) {
+    return (
+      <Link to={linkUrl} className="card">
+        {children}
+      </Link>
+    );
+  }
+
+  return <div className="card">{children}</div>;
 }
 
 export function Card({
@@ -14,15 +31,15 @@ export function Card({
   subtitle,
   imageUrl,
   linkUrl,
-  priority = false,
+  isPriority = false,
 }: CardProps) {
-  const content = (
-    <>
+  return (
+    <CardWrapper linkUrl={linkUrl}>
       <div className="card__cover">
         <img
           src={imageUrl}
           className="card__cover-img"
-          loading={priority ? "eager" : "lazy"}
+          loading={isPriority ? "eager" : "lazy"}
           decoding="async"
           onError={(e) => {
             e.currentTarget.style.display = "none";
@@ -31,16 +48,6 @@ export function Card({
       </div>
       <p className="card__title">{title}</p>
       {subtitle && <p className="card__subtitle">{subtitle}</p>}
-    </>
+    </CardWrapper>
   );
-
-  if (linkUrl) {
-    return (
-      <Link to={linkUrl} className="card">
-        {content}
-      </Link>
-    );
-  }
-
-  return <div className="card">{content}</div>;
 }

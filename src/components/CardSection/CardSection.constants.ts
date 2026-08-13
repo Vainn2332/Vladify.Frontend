@@ -1,0 +1,1 @@
+export const DEFAULT_PRIORITY_CARDS = 12;

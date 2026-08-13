@@ -6,7 +6,7 @@ export interface CardProps {
   subtitle?: string;
   imageUrl: string;
   linkUrl?: string;
-  isPriority?: boolean;
+  priority?: "high" | "low";
 }
 
 interface CardWrapperProps {
@@ -31,7 +31,7 @@ export function Card({
   subtitle,
   imageUrl,
   linkUrl,
-  isPriority = false,
+  priority = "low",
 }: CardProps) {
   return (
     <CardWrapper linkUrl={linkUrl}>
@@ -39,7 +39,7 @@ export function Card({
         <img
           src={imageUrl}
           className="card__cover-img"
-          loading={isPriority ? "eager" : "lazy"}
+          loading={priority === "high" ? "eager" : "lazy"}
           decoding="async"
           onError={(e) => {
             e.currentTarget.style.display = "none";

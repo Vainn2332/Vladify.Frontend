@@ -33,11 +33,10 @@ export function CardSection({
             subtitle={item.subtitle}
             imageUrl={item.imageUrl}
             linkUrl={linkTemplate?.(item)}
-            isPriority={index < priorityCardsAmount}
+            priority={index < priorityCardsAmount ? "high" : "low"}
           />
         ))}
       </div>
-      )
     </section>
   );
 }

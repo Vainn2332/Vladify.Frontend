@@ -1,7 +1,7 @@
-@import "url(tailwindcss)";
+@import "tailwindcss";
 
-:root {
-  --color-background-app: linear-gradient(
+@theme {
+  --background-image-app: linear-gradient(
     125deg,
     #faf2e5,
     #d0e3ff,
@@ -12,24 +12,24 @@
   --color-surface-card-start: #fff;
   --color-surface-card-mid: #e2e8f0;
   --color-surface-card-end: #f8fafc;
-  --color-border-card: rgb(255, 255, 255 / 50%);
+  --color-card-border: rgb(255, 255, 255 / 50%);
 
-  --color-background-card-cover-start: #97b5d3;
-  --color-background-card-cover-mid: #c2ccd1;
-  --color-background-card-cover-end: #d0d0e2;
+  --color-card-cover-start: #97b5d3;
+  --color-card-cover-mid: #c2ccd1;
+  --color-card-cover-end: #d0d0e2;
 
-  --color-text-primary: #181818;
-  --color-text-secondary: #858585;
+  --color-primary: #181818;
+  --color-secondary: #858585;
 
   --shadow-card: 0 8px 20px rgb(100, 116, 139 / 12%);
 
-  --border-radius-medium: 8px;
-  --border-radius-small: 6px;
+  --radius-medium: 8px;
+  --radius-small: 6px;
 
-  --text-size-large: 24px;
-  --text-size-medium: 18px;
-  --text-size-small: 14px;
-  --text-size-xsmall: 12px;
+  --text-large: 24px;
+  --text-medium: 18px;
+  --text-small: 14px;
+  --text-xsmall: 12px;
 }
 
 *,

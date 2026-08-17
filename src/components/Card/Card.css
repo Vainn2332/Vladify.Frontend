@@ -1,12 +1,7 @@
 .card {
-  background: linear-gradient(
-    120deg,
-    var(--color-surface-card-start) 0%,
-    var(--color-surface-card-mid) 50%,
-    var(--color-surface-card-end) 100%
-  );
+  background: var(--background-image-card);
   border: 1px solid var(--color-card-border);
-  border-radius: var(--border-radius-medium);
+  border-radius: var(--radius-medium);
   box-shadow: var(--shadow-card);
   padding: 16px;
   display: flex;
@@ -35,7 +30,7 @@
   );
   margin-bottom: 8px;
   opacity: 0.9;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   overflow: hidden;
 }
 

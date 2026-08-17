@@ -6,12 +6,6 @@ import {
 
 const NEW_SONGS: CardSectionItem[] = [
   {
-    id: "track-1",
-    title: "Midnight City Drive",
-    subtitle: "M83 & The Midnight",
-    imageUrl: "https://picsum.hotos/seed/track1/300/300",
-  },
-  {
     id: "track-2",
     title:
       "Очень длинное название трека  текста с троеточием которое обрезается и не помещается в одну строку",

@@ -15,6 +15,13 @@
     #e2e8f0 50%,
     #f8fafc 100%
   );
+  --background-image-login-page-card: linear-gradient(
+    90deg,
+    #fff0fe,
+    #f0fcff,
+    #fafafa,
+    #fffeeb
+  );
 
   --color-card-border: rgba(255, 255, 255, 0.5);
 

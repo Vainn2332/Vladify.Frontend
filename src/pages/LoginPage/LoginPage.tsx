@@ -3,6 +3,9 @@ import logo from "../../assets/logo.png";
 
 export function LoginPage() {
   const { loginWithRedirect } = useAuth0();
+  const handleLogin = () => {
+    loginWithRedirect();
+  };
 
   return (
     <div className="bg-app flex h-dvh flex-col p-4">
@@ -17,7 +20,7 @@ export function LoginPage() {
         </div>
         <p>Please log in to continue.</p>
         <button
-          onClick={() => loginWithRedirect()}
+          onClick={handleLogin}
           className="mt-4 cursor-pointer rounded-xl bg-blue-500 px-4 py-2 text-white transition-all hover:-translate-y-1 hover:bg-blue-600"
         >
           Log In

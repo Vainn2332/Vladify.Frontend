@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+
 export function Header() {
   return (
     <div className="grid grid-cols-3 items-center gap-2 bg-linear-to-r from-cyan-300/70 to-teal-500/40 p-4 text-sm md:text-base lg:text-2xl">

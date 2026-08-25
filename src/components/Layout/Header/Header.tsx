@@ -4,7 +4,7 @@ export function Header() {
   return (
     <div className="grid grid-cols-3 items-center gap-2 bg-linear-to-r from-cyan-300/70 to-teal-500/40 p-4 text-sm md:text-base lg:text-2xl">
       <div className="flex items-center justify-center gap-2">
-        <Link to={"/"} className="">
+        <Link to={"/"}>
           <img
             src={logo}
             alt="Vladify logo"

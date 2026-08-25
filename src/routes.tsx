@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       {
         path: "*",
         element: (
-          <div style={{ padding: 32, textAlign: "center" }}>
+          <div className="p-8 text-center">
             <h2>404 — Страница не найдена</h2>
           </div>
         ),

@@ -19,7 +19,9 @@ export function Header() {
         placeholder="Search"
         className="w-full max-w-80 justify-self-center rounded-2xl bg-white/85 py-1 text-center text-cyan-950 shadow-sm backdrop-blur-md transition-all duration-200 outline-none hover:bg-white/70 hover:shadow focus:bg-white/70 focus:ring-2 focus:ring-blue-500/40"
       ></input>
-      <div className="flex justify-center">Quit</div>
+      <div className="flex justify-center">
+        <Link to="/Logout">Quit</Link>
+      </div>
     </div>
   );
 }

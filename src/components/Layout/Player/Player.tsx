@@ -21,7 +21,7 @@ export function Player() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-xl flex-col items-center px-1">
+      <div className="flex w-full max-w-xl flex-col items-center justify-self-center px-1">
         <div className="flex items-center gap-4">
           <button className="cursor-pointer hover:opacity-70">
             <SkipBack className="h-4 w-4 fill-current sm:h-5 sm:w-5" />

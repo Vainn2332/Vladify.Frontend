@@ -38,7 +38,7 @@ export function Player() {
           type="range"
           min="0"
           max="100"
-          className="mt-4 h-1 w-full cursor-pointer appearance-none rounded bg-black/50 accent-white/80 hover:opacity-75"
+          className="mt-4 h-0.75 w-full cursor-pointer appearance-none rounded bg-black/50 accent-white/80 hover:opacity-75"
         />
       </div>
 

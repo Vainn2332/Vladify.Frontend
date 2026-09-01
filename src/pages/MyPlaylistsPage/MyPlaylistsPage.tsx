@@ -18,7 +18,7 @@ export function MyPlaylistsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreatePlaylist = (title: string) => {
-    console.log("Создаем плейлист:", title);
+    console.log("Created playlist:", title);
   };
 
   return (

@@ -28,7 +28,7 @@ export function CreatePlaylistModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 pb-28">
       <div className="w-full max-w-md rounded-xl bg-white/75 p-6 shadow-2xl">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-black/90">Создать плейлист</h3>
+          <h3 className="text-xl font-bold text-black/90">Create playlist</h3>
           <button
             type="button"
             onClick={onClose}
@@ -41,7 +41,7 @@ export function CreatePlaylistModal({
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             type="text"
-            placeholder="Название плейлиста"
+            placeholder="Playlist name"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
@@ -54,7 +54,7 @@ export function CreatePlaylistModal({
               disabled={!title.trim()}
               className="rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Создать
+              Create
             </button>
           </div>
         </form>

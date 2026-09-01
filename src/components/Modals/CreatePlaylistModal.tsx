@@ -52,7 +52,7 @@ export function CreatePlaylistModal({
             <button
               type="submit"
               disabled={!title.trim()}
-              className="rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Create
             </button>

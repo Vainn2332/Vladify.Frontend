@@ -1,7 +1,7 @@
 import {
-  Pause,
-  SkipBack,
-  SkipForward,
+  Pause as PauseIcon,
+  SkipBack as SkipBackIcon,
+  SkipForward as SkipForwardIcon,
   Volume1 as VolumeIcon,
 } from "lucide-react";
 
@@ -29,13 +29,13 @@ export function Player() {
       <div className="flex w-full max-w-xl flex-col items-center justify-self-center px-1">
         <div className="flex items-center gap-4">
           <button className="cursor-pointer hover:opacity-70">
-            <SkipBack className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
+            <SkipBackIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
           </button>
           <button className="cursor-pointer hover:opacity-70">
-            <Pause className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
+            <PauseIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
           </button>
           <button className="cursor-pointer hover:opacity-70">
-            <SkipForward className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
+            <SkipForwardIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
           </button>
         </div>
 

@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         path: "*",
         element: (
           <div className="p-8 text-center">
-            <h2>404 — Страница не найдена</h2>
+            <h2>404 — Page not found</h2>
           </div>
         ),
       },

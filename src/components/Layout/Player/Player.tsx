@@ -13,10 +13,10 @@ export function Player() {
         </div>
         <div className="flex min-w-0 flex-col">
           <span className="line-clamp-2 text-xs wrap-break-word sm:text-sm">
-            Name of very long long track
+            Name of track
           </span>
-          <span className="line-clamp-2 text-[10px] wrap-break-word text-gray-400 sm:text-xs">
-            author name that is too big
+          <span className="text-2xs line-clamp-2 wrap-break-word text-gray-400 sm:text-xs">
+            author name
           </span>
         </div>
       </div>

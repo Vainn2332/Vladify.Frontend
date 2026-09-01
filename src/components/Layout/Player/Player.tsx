@@ -1,4 +1,9 @@
-import { Pause, SkipBack, SkipForward, Volume1 } from "lucide-react";
+import {
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume1 as VolumeIcon,
+} from "lucide-react";
 
 export function Player() {
   return (
@@ -43,7 +48,7 @@ export function Player() {
       </div>
 
       <div className="flex min-w-0 flex-1 items-center justify-end gap-1">
-        <Volume1 className="h-5 w-5 fill-current" />
+        <VolumeIcon className="h-5 w-5 fill-current" />
         <input
           type="range"
           min="0"

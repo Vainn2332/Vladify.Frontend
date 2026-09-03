@@ -4,6 +4,7 @@ import {
   SkipForward as SkipForwardIcon,
   Volume1 as VolumeIcon,
 } from "lucide-react";
+import { IconButton } from "../../Buttons/IconButton";
 
 export function Player() {
   return (
@@ -28,15 +29,9 @@ export function Player() {
 
       <div className="flex w-full max-w-xl flex-col items-center justify-self-center px-1">
         <div className="flex items-center gap-4">
-          <button className="cursor-pointer hover:opacity-70">
-            <SkipBackIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
-          </button>
-          <button className="cursor-pointer hover:opacity-70">
-            <PauseIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
-          </button>
-          <button className="cursor-pointer hover:opacity-70">
-            <SkipForwardIcon className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
-          </button>
+          <IconButton icon={SkipBackIcon} aria-label="Previous track" />
+          <IconButton icon={PauseIcon} aria-label="Pause" />
+          <IconButton icon={SkipForwardIcon} aria-label="Next track" />
         </div>
 
         <input

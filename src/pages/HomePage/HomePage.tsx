@@ -1,4 +1,3 @@
-import "./HomePage.css";
 import {
   CardSection,
   type CardSectionItem,
@@ -54,16 +53,14 @@ const PLAYLISTS: CardSectionItem[] = [
 
 export function HomePage() {
   return (
-    <div className="layout">
-      <div className="content">
-        <CardSection
-          title="New Songs"
-          items={NEW_SONGS}
-          linkTemplate={(item) => `/tracks/${item.id}`}
-        />
+    <>
+      <CardSection
+        title="New Songs"
+        items={NEW_SONGS}
+        linkTemplate={(item) => `/tracks/${item.id}`}
+      />
 
-        <CardSection title="My Playlists" items={PLAYLISTS} />
-      </div>
-    </div>
+      <CardSection title="My Playlists" items={PLAYLISTS} />
+    </>
   );
 }

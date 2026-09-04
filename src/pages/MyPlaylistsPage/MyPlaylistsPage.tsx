@@ -22,7 +22,7 @@ export function MyPlaylistsPage() {
   };
 
   return (
-    <div className="bg-app flex flex-1 flex-col">
+    <>
       <CardSection
         items={MY_PLAYLISTS}
         title="My playlists"
@@ -43,6 +43,6 @@ export function MyPlaylistsPage() {
           onSubmit={handleCreatePlaylist}
         />
       )}
-    </div>
+    </>
   );
 }

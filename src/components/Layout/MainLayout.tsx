@@ -7,7 +7,7 @@ export function MainLayout() {
     <div className="bg-app flex min-h-dvh flex-col">
       <Header />
 
-      <main className="flex-1 pb-24">
+      <main className="flex-1 p-4 pb-24">
         <Outlet />
       </main>
 

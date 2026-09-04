@@ -30,11 +30,6 @@ export const router = createBrowserRouter([
           </div>
         ),
       },
-
-      {
-        path: "/MyPlaylists",
-        element: <MyPlaylistsPage />,
-      },
     ],
   },
   {

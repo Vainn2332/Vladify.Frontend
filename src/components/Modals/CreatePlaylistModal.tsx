@@ -13,31 +13,27 @@ export function CreatePlaylistModal({
   onSubmit,
 }: CreatePlaylistModalProps) {
   const [title, setTitle] = useState("");
-
   const handleClose = useCallback(() => {
     setTitle("");
     onClose();
   }, [onClose]);
-
   useEffect(() => {
-    if (!isOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, handleClose]);
+  }, [handleClose]);
 
-  if (!isOpen) return null;
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     onSubmit(title.trim());
     handleClose();
   };
+
+  if (!isOpen) return null;
 
   return (
     <div

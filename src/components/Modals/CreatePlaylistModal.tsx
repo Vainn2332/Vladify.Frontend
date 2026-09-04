@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { X as CloseButton } from "lucide-react";
 
 interface CreatePlaylistModalProps {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export function CreatePlaylistModal({
             onClick={onClose}
             className="cursor-pointer text-gray-400 hover:text-black/70"
           >
-            <X className="size-5" />
+            <CloseButton className="size-5" />
           </button>
         </div>
 

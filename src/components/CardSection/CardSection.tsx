@@ -11,6 +11,7 @@ export interface CardSectionItem {
 
 interface CardSectionProps {
   title: string;
+  action?: React.ReactNode;
   items: CardSectionItem[];
   linkTemplate?: (item: CardSectionItem) => string;
   priorityCardsAmount?: number;
@@ -21,10 +22,14 @@ export function CardSection({
   items,
   linkTemplate,
   priorityCardsAmount = DEFAULT_PRIORITY_CARDS,
+  action,
 }: CardSectionProps) {
   return items.length === 0 ? null : (
     <section>
-      <h2 className="card-section__title">{title}</h2>
+      <div className="flex items-center gap-2">
+        <h2 className="card-section__title">{title}</h2>
+        {action}
+      </div>
       <div className="card-section__items">
         {items.map((item, index) => (
           <Card

@@ -60,7 +60,11 @@ export function HomePage() {
         linkTemplate={(item) => `/tracks/${item.id}`}
       />
 
-      <CardSection title="My Playlists" items={PLAYLISTS} />
+      <CardSection
+        title="My Playlists"
+        items={PLAYLISTS}
+        linkTemplate={(item) => `/tracks/${item.id}`}
+      />
     </>
   );
 }

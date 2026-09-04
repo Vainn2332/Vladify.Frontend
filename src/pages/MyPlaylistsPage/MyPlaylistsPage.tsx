@@ -26,6 +26,7 @@ export function MyPlaylistsPage() {
       <CardSection
         items={MY_PLAYLISTS}
         title="My playlists"
+        linkTemplate={(item) => `/tracks/${item.id}`}
         action={
           <button
             type="button"

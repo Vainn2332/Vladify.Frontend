@@ -4,7 +4,7 @@ import "./Card.css";
 export interface CardProps {
   title: string;
   subtitle?: string;
-  imageUrl: string;
+  imageUrl?: string;
   linkUrl?: string;
   priority?: "high" | "low";
 }
@@ -35,16 +35,19 @@ export function Card({
 }: CardProps) {
   return (
     <CardWrapper linkUrl={linkUrl}>
+      {/* Without an image the cover keeps its gradient as the placeholder. */}
       <div className="card__cover">
-        <img
-          src={imageUrl}
-          className="card__cover-img"
-          loading={priority === "high" ? "eager" : "lazy"}
-          decoding="async"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        />
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            className="card__cover-img"
+            loading={priority === "high" ? "eager" : "lazy"}
+            decoding="async"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        )}
       </div>
       <p className="card__title">{title}</p>
       {subtitle && <p className="card__subtitle">{subtitle}</p>}

@@ -37,11 +37,12 @@ export function MyPlaylistsPage() {
         }
       />
 
-      <CreatePlaylistModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleCreatePlaylist}
-      />
+      {isModalOpen && (
+        <CreatePlaylistModal
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleCreatePlaylist}
+        />
+      )}
     </div>
   );
 }

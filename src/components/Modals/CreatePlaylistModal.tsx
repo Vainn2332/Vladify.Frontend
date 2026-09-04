@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { X as CloseButton } from "lucide-react";
 
 interface CreatePlaylistModalProps {
@@ -14,24 +14,44 @@ export function CreatePlaylistModal({
 }: CreatePlaylistModalProps) {
   const [title, setTitle] = useState("");
 
+  const handleClose = useCallback(() => {
+    setTitle("");
+    onClose();
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, handleClose]);
+
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     onSubmit(title.trim());
-    setTitle("");
-    onClose();
+    handleClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 pb-28">
+    <div
+      onClick={(e) => {
+        if (e.target === e.currentTarget) handleClose();
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 pb-28"
+    >
       <div className="w-full max-w-md rounded-xl bg-white/75 p-6 shadow-2xl">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-xl font-bold text-black/90">Create playlist</h3>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="cursor-pointer text-gray-400 hover:text-black/70"
           >
             <CloseButton className="size-5" />

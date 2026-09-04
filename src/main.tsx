@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")!).render(
       cacheLocation="localstorage"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: "https://Vladify/musicAPI",
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
       }}
     >
       <App />

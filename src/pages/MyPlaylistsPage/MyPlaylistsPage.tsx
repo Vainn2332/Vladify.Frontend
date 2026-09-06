@@ -8,7 +8,7 @@ import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
-import { PAGE_SIZE } from "./myPlaylistsConstants";
+import { usePageSize } from "./usePageSize";
 
 function toCardItem(playlist: playlist): CardSectionItem {
   return {
@@ -21,28 +21,38 @@ function toCardItem(playlist: playlist): CardSectionItem {
 
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
+  const pageSize = usePageSize();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [prevPageSize, setPrevPageSize] = useState(pageSize);
+
+  // A different page size means the current page number no longer maps to the
+  // same items, so restart from the first page when the breakpoint changes.
+  // React's recommended "adjust state during render" pattern, not an effect.
+  if (pageSize !== prevPageSize) {
+    setPrevPageSize(pageSize);
+    setPageNumber(1);
+  }
 
   useEffect(() => {
     let cancelled = false;
 
     playlistsService
-      .getAll({ pageNumber, pageSize: PAGE_SIZE })
+      .getAll({ pageNumber, pageSize })
       .then((data) => {
         if (cancelled) return;
         setPlaylists(data);
-        setHasMore(data.length === PAGE_SIZE);
+        setHasMore(data.length === pageSize);
       })
       .catch((error) => console.error("Failed to load playlists:", error));
 
     return () => {
       cancelled = true;
     };
-  }, [playlistsService, pageNumber, reloadToken]);
+  }, [playlistsService, pageNumber, pageSize, reloadToken]);
 
   const handleCreatePlaylist = async (title: string) => {
     try {
@@ -72,7 +82,7 @@ export function MyPlaylistsPage() {
       />
 
       {(pageNumber > 1 || hasMore) && (
-        <div className="flex flex-1 items-center justify-center">
+        <div className="mt-auto mb-20">
           <Pagination
             pageNumber={pageNumber}
             hasMore={hasMore}

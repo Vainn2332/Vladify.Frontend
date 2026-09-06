@@ -71,13 +71,15 @@ export function MyPlaylistsPage() {
         }
       />
 
-      {(pageNumber > 1 || hasMore || true) && (
-        <Pagination
-          pageNumber={pageNumber}
-          hasMore={hasMore}
-          onNextPage={() => setPageNumber((page) => page + 1)}
-          onPrevPage={() => setPageNumber((page) => page - 1)}
-        />
+      {(pageNumber > 1 || hasMore) && (
+        <div className="flex flex-1 items-center justify-center">
+          <Pagination
+            pageNumber={pageNumber}
+            hasMore={hasMore}
+            onNextPage={() => setPageNumber((page) => page + 1)}
+            onPrevPage={() => setPageNumber((page) => page - 1)}
+          />
+        </div>
       )}
 
       {isModalOpen && (

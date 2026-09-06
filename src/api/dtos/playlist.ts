@@ -6,3 +6,7 @@ export interface playlist {
   authorName: string;
   songs: song[];
 }
+
+export interface CreatePlaylistDto {
+  name: string;
+}

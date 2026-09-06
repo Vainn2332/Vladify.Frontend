@@ -7,6 +7,8 @@ import { CirclePlus } from "lucide-react";
 import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal";
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { PAGE_SIZE } from "./myPlaylistsConstants";
 
 function toCardItem(playlist: playlist): CardSectionItem {
   return {
@@ -20,27 +22,32 @@ function toCardItem(playlist: playlist): CardSectionItem {
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     playlistsService
-      .getAll()
+      .getAll({ pageNumber, pageSize: PAGE_SIZE })
       .then((data) => {
-        if (!cancelled) setPlaylists(data);
+        if (cancelled) return;
+        setPlaylists(data);
+        setHasMore(data.length === PAGE_SIZE);
       })
       .catch((error) => console.error("Failed to load playlists:", error));
 
     return () => {
       cancelled = true;
     };
-  }, [playlistsService]);
+  }, [playlistsService, pageNumber, reloadToken]);
 
   const handleCreatePlaylist = async (title: string) => {
     try {
-      const created = await playlistsService.add({ name: title });
-      setPlaylists((prev) => [...prev, created]);
+      await playlistsService.add({ name: title });
+      setReloadToken((token) => token + 1);
     } catch (error) {
       console.error("Failed to create playlist:", error);
     }
@@ -63,6 +70,15 @@ export function MyPlaylistsPage() {
           </button>
         }
       />
+
+      {(pageNumber > 1 || hasMore || true) && (
+        <Pagination
+          pageNumber={pageNumber}
+          hasMore={hasMore}
+          onNextPage={() => setPageNumber((page) => page + 1)}
+          onPrevPage={() => setPageNumber((page) => page - 1)}
+        />
+      )}
 
       {isModalOpen && (
         <CreatePlaylistModal

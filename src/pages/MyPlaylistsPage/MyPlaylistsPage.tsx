@@ -1,32 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CardSection,
   type CardSectionItem,
 } from "../../components/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
 import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal";
-import { usePlaylists } from "../../hooks/usePlaylists";
-import type { Playlist } from "../../api/types";
-import {
-  PLAYLISTS_PAGE_NUMBER,
-  PLAYLISTS_PAGE_SIZE,
-} from "./MyPlaylistsPage.constants";
+import { usePlaylistsService } from "../../api/services/usePlaylistsService";
+import type { playlist } from "../../api/dtos/playlist";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { usePageSize } from "./usePageSize";
 
-// The API carries no cover image, so the card falls back to its gradient.
-function toCardSectionItem(playlist: Playlist): CardSectionItem {
+function toCardItem(playlist: playlist): CardSectionItem {
   return {
     id: playlist.id,
     title: playlist.name,
     subtitle: playlist.authorName,
+    imageUrl: `https://picsum.photos/seed/${playlist.id}/300/300`,
   };
 }
 
 export function MyPlaylistsPage() {
+  const playlistsService = usePlaylistsService();
+  const pageSize = usePageSize();
+  const [playlists, setPlaylists] = useState<playlist[]>([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { playlists, isLoading, error, reload } = usePlaylists({
-    pageNumber: PLAYLISTS_PAGE_NUMBER,
-    pageSize: PLAYLISTS_PAGE_SIZE,
-  });
 
   const handleCreatePlaylist = (title: string) => {
     console.log("Created playlist:", title);
@@ -60,10 +60,9 @@ export function MyPlaylistsPage() {
   return (
     <>
       <CardSection
-        items={playlists.map(toCardSectionItem)}
+        items={MY_PLAYLISTS}
         title="My playlists"
         linkTemplate={(item) => `/tracks/${item.id}`}
-        emptyState={renderEmptyState()}
         action={
           <button
             type="button"
@@ -74,6 +73,17 @@ export function MyPlaylistsPage() {
           </button>
         }
       />
+
+      {(pageNumber > 1 || hasMore) && (
+        <div className="mt-auto mb-20">
+          <Pagination
+            pageNumber={pageNumber}
+            hasMore={hasMore}
+            onNextPage={() => setPageNumber((page) => page + 1)}
+            onPrevPage={() => setPageNumber((page) => page - 1)}
+          />
+        </div>
+      )}
 
       {isModalOpen && (
         <CreatePlaylistModal

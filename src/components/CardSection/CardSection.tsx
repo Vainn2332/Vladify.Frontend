@@ -16,10 +16,10 @@ interface CardSectionProps {
   linkTemplate?: (item: CardSectionItem) => string;
   priorityCardsAmount?: number;
   /**
-   * Rendered in place of the cards when there are none. Without it an empty
-   * section disappears entirely, heading and action included.
+   * Shown in place of the card grid when `items` is empty, keeping the title
+   * and action visible. When omitted, an empty section renders nothing.
    */
-  emptyState?: React.ReactNode;
+  placeholder?: React.ReactNode;
 }
 
 export function CardSection({
@@ -28,11 +28,11 @@ export function CardSection({
   linkTemplate,
   priorityCardsAmount = DEFAULT_PRIORITY_CARDS,
   action,
-  emptyState,
+  placeholder,
 }: CardSectionProps) {
   const isEmpty = items.length === 0;
 
-  if (isEmpty && !emptyState) return null;
+  if (isEmpty && placeholder === undefined) return null;
 
   return (
     <section>
@@ -41,7 +41,7 @@ export function CardSection({
         {action}
       </div>
       {isEmpty ? (
-        emptyState
+        placeholder
       ) : (
         <div className="card-section__items">
           {items.map((item, index) => (

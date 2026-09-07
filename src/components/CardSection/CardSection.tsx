@@ -15,10 +15,6 @@ interface CardSectionProps {
   items: CardSectionItem[];
   linkTemplate?: (item: CardSectionItem) => string;
   priorityCardsAmount?: number;
-  /**
-   * Shown in place of the card grid when `items` is empty, keeping the title
-   * and action visible. When omitted, an empty section renders nothing.
-   */
   placeholder?: React.ReactNode;
 }
 

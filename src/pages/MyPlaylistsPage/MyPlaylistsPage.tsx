@@ -8,7 +8,7 @@ import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
-import { usePageSize } from "./usePageSize";
+import { usePagination } from "./usePagination";
 
 function toCardItem(playlist: playlist): CardSectionItem {
   return {
@@ -21,35 +21,32 @@ function toCardItem(playlist: playlist): CardSectionItem {
 
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
-  const pageSize = usePageSize();
+  const {
+    pageNumber,
+    pageSize,
+    hasNextPage,
+    goToNextPage,
+    goToPrevPage,
+    reportLoadedCount,
+  } = usePagination();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const [prevPageSize, setPrevPageSize] = useState(pageSize);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (pageSize !== prevPageSize) {
-    setPrevPageSize(pageSize);
-    setPageNumber(1);
-  }
-
   useEffect(() => {
     let cancelled = false;
-
     playlistsService
       .getAll({ pageNumber, pageSize })
       .then((data) => {
         if (cancelled) return;
         setPlaylists(data);
-        setHasNextPage(data.length === pageSize);
+        reportLoadedCount(data.length);
       })
       .catch((error) => console.error("Failed to load playlists:", error));
-
     return () => {
       cancelled = true;
     };
-  }, [playlistsService, pageNumber, pageSize, reloadToken]);
+  }, [playlistsService, pageNumber, pageSize, reloadToken, reportLoadedCount]);
 
   const handleCreatePlaylist = async (title: string) => {
     try {
@@ -83,8 +80,8 @@ export function MyPlaylistsPage() {
           <Pagination
             pageNumber={pageNumber}
             hasNextPage={hasNextPage}
-            onNextPage={() => setPageNumber((page) => page + 1)}
-            onPrevPage={() => setPageNumber((page) => page - 1)}
+            onNextPage={() => goToNextPage()}
+            onPrevPage={() => goToPrevPage()}
           />
         </div>
       )}

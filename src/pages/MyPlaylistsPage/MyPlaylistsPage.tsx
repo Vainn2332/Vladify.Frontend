@@ -27,42 +27,49 @@ export function MyPlaylistsPage() {
   const [hasMore, setHasMore] = useState(false);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [prevPageSize, setPrevPageSize] = useState(pageSize);
 
-  const handleCreatePlaylist = (title: string) => {
-    console.log("Created playlist:", title);
-  };
+  // A different paczage size means the current page number no longer maps to the
+  // same items, so restart from the first page when the breakpoint changes.
+  // React's recommended "adjust state during render" pattern, not an effect.
+  if (pageSize !== prevPageSize) {
+    setPrevPageSize(pageSize);
+    setPageNumber(1);
+  }
 
-  const renderEmptyState = () => {
-    if (isLoading) {
-      return <p className="text-secondary">Loading playlists...</p>;
+  useEffect(() => {
+    let cancelled = false;
+
+    playlistsService
+      .getAll({ pageNumber, pageSize })
+      .then((data) => {
+        if (cancelled) return;
+        setPlaylists(data);
+        setHasMore(data.length === pageSize);
+      })
+      .catch((error) => console.error("Failed to load playlists:", error));
+
+    return () => {
+      cancelled = true;
+    };
+  }, [playlistsService, pageNumber, pageSize, reloadToken]);
+
+  const handleCreatePlaylist = async (title: string) => {
+    try {
+      await playlistsService.add({ name: title });
+      setReloadToken((token) => token + 1);
+    } catch (error) {
+      console.error("Failed to create playlist:", error);
     }
-
-    if (error) {
-      return (
-        <div className="flex flex-col items-start gap-2">
-          <p className="text-secondary">
-            Could not load your playlists. {error.message}
-          </p>
-          <button
-            type="button"
-            onClick={reload}
-            className="cursor-pointer rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400"
-          >
-            Try again
-          </button>
-        </div>
-      );
-    }
-
-    return <p className="text-secondary">You have no playlists yet.</p>;
   };
 
   return (
     <>
       <CardSection
-        items={MY_PLAYLISTS}
+        items={playlists.map(toCardItem)}
         title="My playlists"
         linkTemplate={(item) => `/tracks/${item.id}`}
+        placeholder={<p className="text-primary">Create your first playlist</p>}
         action={
           <button
             type="button"

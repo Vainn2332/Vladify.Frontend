@@ -1,13 +1,13 @@
 interface paginationProps {
   pageNumber: number;
-  hasMore: boolean;
+  hasNextPage: boolean;
   onNextPage: () => void;
   onPrevPage: () => void;
 }
 
 export function Pagination({
   pageNumber,
-  hasMore,
+  hasNextPage,
   onNextPage,
   onPrevPage,
 }: paginationProps) {
@@ -24,7 +24,7 @@ export function Pagination({
       <span className="text-sm text-black/70">Page {pageNumber}</span>
       <button
         type="button"
-        disabled={!hasMore}
+        disabled={!hasNextPage}
         onClick={() => onNextPage()}
         className="cursor-pointer rounded-lg px-2 ring-1 ring-black/20 hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40"
       >

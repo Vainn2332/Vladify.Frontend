@@ -24,14 +24,11 @@ export function MyPlaylistsPage() {
   const pageSize = usePageSize();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [prevPageSize, setPrevPageSize] = useState(pageSize);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [prevPageSize, setPrevPageSize] = useState(pageSize);
 
-  // A different paczage size means the current page number no longer maps to the
-  // same items, so restart from the first page when the breakpoint changes.
-  // React's recommended "adjust state during render" pattern, not an effect.
   if (pageSize !== prevPageSize) {
     setPrevPageSize(pageSize);
     setPageNumber(1);
@@ -45,7 +42,7 @@ export function MyPlaylistsPage() {
       .then((data) => {
         if (cancelled) return;
         setPlaylists(data);
-        setHasMore(data.length === pageSize);
+        setHasNextPage(data.length === pageSize);
       })
       .catch((error) => console.error("Failed to load playlists:", error));
 
@@ -81,11 +78,11 @@ export function MyPlaylistsPage() {
         }
       />
 
-      {(pageNumber > 1 || hasMore) && (
+      {(pageNumber > 1 || hasNextPage) && (
         <div className="mt-auto mb-20">
           <Pagination
             pageNumber={pageNumber}
-            hasMore={hasMore}
+            hasNextPage={hasNextPage}
             onNextPage={() => setPageNumber((page) => page + 1)}
             onPrevPage={() => setPageNumber((page) => page - 1)}
           />

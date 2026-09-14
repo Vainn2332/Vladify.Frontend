@@ -22,6 +22,7 @@ function toCardItem(playlist: playlist): CardSectionItem {
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { pageNumber, pageSize, hasNextPage, goToNextPage, goToPrevPage } =
@@ -35,7 +36,12 @@ export function MyPlaylistsPage() {
         if (cancelled) return;
         setPlaylists(data);
       })
-      .catch((error) => console.error("Failed to load playlists:", error));
+      .catch((error) => {
+        if (!cancelled) console.error("Failed to load playlists:", error);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -56,7 +62,11 @@ export function MyPlaylistsPage() {
         items={playlists.map(toCardItem)}
         title="My playlists"
         linkTemplate={(item) => `/tracks/${item.id}`}
-        placeholder={<p className="text-primary">Create your first playlist</p>}
+        placeholder={
+          <p className="text-primary">
+            {isLoading ? "Loading…" : "Create your first playlist"}
+          </p>
+        }
         action={
           <button
             type="button"

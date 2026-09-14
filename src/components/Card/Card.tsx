@@ -35,7 +35,6 @@ export function Card({
 }: CardProps) {
   return (
     <CardWrapper linkUrl={linkUrl}>
-      {/* Without an image the cover keeps its gradient as the placeholder. */}
       <div className="card__cover">
         {imageUrl && (
           <img

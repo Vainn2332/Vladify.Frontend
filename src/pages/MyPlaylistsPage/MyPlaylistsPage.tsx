@@ -21,14 +21,8 @@ function toCardItem(playlist: playlist): CardSectionItem {
 
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
-  const {
-    pageNumber,
-    pageSize,
-    hasNextPage,
-    goToNextPage,
-    goToPrevPage,
-    reportLoadedCount,
-  } = usePagination();
+  const { pageNumber, pageSize, hasNextPage, goToNextPage, goToPrevPage } =
+    usePagination();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,13 +34,12 @@ export function MyPlaylistsPage() {
       .then((data) => {
         if (cancelled) return;
         setPlaylists(data);
-        reportLoadedCount(data.length);
       })
       .catch((error) => console.error("Failed to load playlists:", error));
     return () => {
       cancelled = true;
     };
-  }, [playlistsService, pageNumber, pageSize, reloadToken, reportLoadedCount]);
+  }, [playlistsService, pageNumber, pageSize, reloadToken]);
 
   const handleCreatePlaylist = async (title: string) => {
     try {
@@ -75,11 +68,11 @@ export function MyPlaylistsPage() {
         }
       />
 
-      {(pageNumber > 1 || hasNextPage) && (
+      {(pageNumber > 1 || hasNextPage(playlists.length)) && (
         <div className="mt-auto mb-20">
           <Pagination
             pageNumber={pageNumber}
-            hasNextPage={hasNextPage}
+            hasNextPage={hasNextPage(playlists.length)}
             onNextPage={() => goToNextPage()}
             onPrevPage={() => goToPrevPage()}
           />

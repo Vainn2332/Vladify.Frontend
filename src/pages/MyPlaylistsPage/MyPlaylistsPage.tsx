@@ -8,7 +8,7 @@ import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
-import { usePagination } from "./usePagination";
+import { usePagination } from "../../hooks/usePagination";
 
 function toCardItem(playlist: playlist): CardSectionItem {
   return {

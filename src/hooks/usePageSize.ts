@@ -3,7 +3,7 @@ import {
   DESKTOP_MEDIA_QUERY,
   DESKTOP_PAGINATION_SIZE,
   MOBILE_PAGINATION_SIZE,
-} from "./myPlaylistsConstants";
+} from "../pages/MyPlaylistsPage/myPlaylistsConstants";
 
 export function usePageSize(): number {
   const [isDesktop, setIsDesktop] = useState(

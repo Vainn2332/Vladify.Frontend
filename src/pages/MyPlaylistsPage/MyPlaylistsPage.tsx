@@ -21,11 +21,11 @@ function toCardItem(playlist: playlist): CardSectionItem {
 
 export function MyPlaylistsPage() {
   const playlistsService = usePlaylistsService();
-  const { pageNumber, pageSize, hasNextPage, goToNextPage, goToPrevPage } =
-    usePagination();
   const [playlists, setPlaylists] = useState<playlist[]>([]);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { pageNumber, pageSize, hasNextPage, goToNextPage, goToPrevPage } =
+    usePagination(playlists.length);
 
   useEffect(() => {
     let cancelled = false;
@@ -68,11 +68,11 @@ export function MyPlaylistsPage() {
         }
       />
 
-      {(pageNumber > 1 || hasNextPage(playlists.length)) && (
+      {(pageNumber > 1 || hasNextPage) && (
         <div className="mt-auto mb-20">
           <Pagination
             pageNumber={pageNumber}
-            hasNextPage={hasNextPage(playlists.length)}
+            hasNextPage={hasNextPage}
             onNextPage={() => goToNextPage()}
             onPrevPage={() => goToPrevPage()}
           />

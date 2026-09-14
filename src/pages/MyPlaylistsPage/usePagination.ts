@@ -4,12 +4,12 @@ import { usePageSize } from "./usePageSize";
 export interface Pagination {
   pageNumber: number;
   pageSize: number;
-  hasNextPage: (fetchedAmount: number) => boolean;
+  hasNextPage: boolean;
   goToNextPage: () => void;
   goToPrevPage: () => void;
 }
 
-export function usePagination(): Pagination {
+export function usePagination(fetchedAmount: number): Pagination {
   const pageSize = usePageSize();
   const [pageNumber, setPageNumber] = useState(1);
   const [prevPageSize, setPrevPageSize] = useState(pageSize);
@@ -23,7 +23,7 @@ export function usePagination(): Pagination {
   return {
     pageNumber,
     pageSize,
-    hasNextPage: (fetchedAmount: number) => fetchedAmount === pageSize,
+    hasNextPage: fetchedAmount === pageSize,
     goToNextPage: () => setPageNumber((page) => page + 1),
     goToPrevPage: () => setPageNumber((page) => page - 1),
   };

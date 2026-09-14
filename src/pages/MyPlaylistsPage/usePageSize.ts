@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   DESKTOP_MEDIA_QUERY,
-  DESKTOP_PAGE_SIZE,
-  MOBILE_PAGE_SIZE,
+  DESKTOP_PAGINATION_SIZE,
+  MOBILE_PAGINATION_SIZE,
 } from "./myPlaylistsConstants";
 
 export function usePageSize(): number {
@@ -19,5 +19,5 @@ export function usePageSize(): number {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  return isDesktop ? DESKTOP_PAGE_SIZE : MOBILE_PAGE_SIZE;
+  return isDesktop ? DESKTOP_PAGINATION_SIZE : MOBILE_PAGINATION_SIZE;
 }

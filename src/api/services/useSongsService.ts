@@ -1,20 +1,32 @@
 import { useMemo } from "react";
 import { useApiClient } from "../useApiClient";
-import type { song } from "../dtos/song";
+import type { addSongDto, song, updateSongDto } from "../dtos/song";
+import type { paginationParams } from "../dtos/paginationParams";
 
 export interface SongsService {
-  getAll(): Promise<song[]>;
+  add(dto:addSongDto):Promise<song>;
+  getAll(params:paginationParams): Promise<song[]>;
   getById(id: string): Promise<song>;
+  update(dto:updateSongDto):Promise<song>;
+  delete(id:number):Promise<song>;
 }
+
+const defaultRoute="/songs"
 
 export function useSongsService(): SongsService {
   const api = useApiClient();
 
   return useMemo(
     () => ({
-      getAll: () => api.get<song[]>("/songs").then((r) => r.data),
+      add: (dto)=>api.post<song>(defaultRoute,dto).then((r)=>r.data),
 
-      getById: (id) => api.get<song>(`/songs/${id}`).then((r) => r.data),
+      getAll: (params) => api.get<song[]>(defaultRoute,{params}).then((r) => r.data),
+
+      getById: (id) => api.get<song>(`${defaultRoute}/${id}`).then((r) => r.data),
+    
+      update: (dto)=> api.put<song>(`${defaultRoute}/${dto.id}`,...dto).then((r)=>r.data),
+
+      delete:(id)=> api.delete<void>(`${defaultRoute}/${id}`).then((r) => r.data),
     }),
     [api],
   );

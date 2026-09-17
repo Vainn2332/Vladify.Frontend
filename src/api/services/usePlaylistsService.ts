@@ -14,28 +14,30 @@ export interface PlaylistsService {
   delete(id: string): Promise<void>;
 }
 
+const defaultRoute="/playlists";
+
 export function usePlaylistsService(): PlaylistsService {
   const api = useApiClient();
 
   return useMemo(
     () => ({
-      add: (dto) => api.post<playlist>("/playlists", dto).then((r) => r.data),
+      add: (dto) => api.post<playlist>(`${defaultRoute}`, dto).then((r) => r.data),
       
-      addSongToPlaylist:(dto)=> api.post<playlist>(`/playlists/${dto.playlistId}/songs/${dto.songId}`,...dto).then((r)=>r.data),
+      addSongToPlaylist:(dto)=> api.post<playlist>(`${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`,...dto).then((r)=>r.data),
 
       getAll: (params) =>
-         api.get<playlist[]>("/playlists", { params }).then((r) => r.data),
+         api.get<playlist[]>(`${defaultRoute}`, { params }).then((r) => r.data),
 
       getById: (id) =>
-        api.get<playlist>(`/playlists/${id}`).then((r) => r.data),
+        api.get<playlist>(`${defaultRoute}/${id}`).then((r) => r.data),
 
-      getPlaylistsOfUser:(params)=>api.get<playlist>("/playlists",{params}).then((r)=>r.data), 
+      getPlaylistsOfUser:(params)=>api.get<playlist>(`${defaultRoute}`,{params}).then((r)=>r.data), 
 
-      update: (dto)=>api.put<playlist>(`/playlists/${dto.id},...dto`),
+      update: (dto)=>api.put<playlist>(`${defaultRoute}/${dto.id},...dto`),
 
-      deleteSongFromPlaylist: (dto)=> api.delete<playlist>(`/playlists/${dto.playlistId}/songs/${dto.songId}`).then((r)=>r.data),
-      
-      delete: (id) => api.delete<void>(`/playlists/${id}`).then((r) => r.data),
+      deleteSongFromPlaylist: (dto)=> api.delete<playlist>(`${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`).then((r)=>r.data),
+
+      delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then((r) => r.data),
     }),
     [api],
   );

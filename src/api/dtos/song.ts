@@ -7,14 +7,14 @@ export interface song {
   duration: string;
 }
 
-export interface addSongDto{
-  title:string;
-  album:string;
-  duration:string;
+export interface addSongDto {
+  title: string;
+  album: string;
+  duration: string;
 }
 
-export interface updateSongDto{
-  id:string;  
-  title:string;
-  album:string;
+export interface updateSongDto {
+  id: string;
+  title: string;
+  album: string;
 }

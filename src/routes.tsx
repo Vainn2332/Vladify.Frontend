@@ -4,6 +4,7 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { MainLayout } from "./components/Layout/MainLayout";
 import { MyPlaylistsPage } from "./pages/MyPlaylistsPage/MyPlaylistsPage";
+import { PlaylistPage } from "./pages/PlaylistPage/PlaylistPage";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
           {
             path: "/MyPlaylists",
             element: <MyPlaylistsPage />,
+          },
+          {
+            path: "/Playlists",
+            element: <PlaylistPage />,
           },
         ],
       },

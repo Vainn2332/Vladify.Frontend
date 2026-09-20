@@ -14,7 +14,7 @@ export function usePagination(fetchedAmount: number): Pagination {
   const [pageNumber, setPageNumber] = useState(1);
   const [prevPageSize, setPrevPageSize] = useState(pageSize);
 
-  // if we resize our window => reset to first page(there was be bug when pagination was inconsistent when switching page size).
+  // if we resize our window/screen => reset to first page(there was a bug when pagination was inconsistent).
   if (pageSize !== prevPageSize) {
     setPrevPageSize(pageSize);
     setPageNumber(1);

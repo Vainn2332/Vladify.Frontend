@@ -9,11 +9,13 @@ const ICON_SIZES = {
 interface IconButtonProps extends React.ComponentProps<"button"> {
   icon: LucideIcon;
   size?: "sm" | "md" | "lg";
+  isFilled?: boolean;
 }
 
 export function IconButton({
   icon: Icon,
   size = "md",
+  isFilled = false,
   ...props
 }: IconButtonProps) {
   return (
@@ -22,7 +24,9 @@ export function IconButton({
       className="cursor-pointer hover:opacity-70"
       {...props}
     >
-      <Icon className={`fill-current ${ICON_SIZES[size]}`} />
+      <Icon
+        className={`${isFilled ? "fill-current" : ""} ${ICON_SIZES[size]}`}
+      />
     </button>
   );
 }

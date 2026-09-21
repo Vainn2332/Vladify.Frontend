@@ -41,7 +41,7 @@ export function Card({
             src={imageUrl}
             className="card__cover-img"
             loading={priority === "high" ? "eager" : "lazy"}
-            decoding="async"
+            decoding={priority === "high" ? "sync" : "async"}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}

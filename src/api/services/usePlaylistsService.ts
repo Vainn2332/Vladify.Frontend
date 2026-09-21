@@ -8,13 +8,14 @@ import type {
   updatePlaylistDto,
 } from "../dtos/playlist";
 import type { paginationParams } from "../dtos/paginationParams";
+import type { pagedResult } from "../dtos/pagedResult";
 
 export interface PlaylistsService {
   add(dto: createPlaylistDto): Promise<playlist>;
   addSongToPlaylist(dto: addSongToPlaylistDto): Promise<playlist>;
-  getAll(params: paginationParams): Promise<playlist[]>;
+  getAll(params: paginationParams): Promise<pagedResult<playlist>>;
   getById(id: string): Promise<playlist>;
-  getPlaylistsOfUser(params: paginationParams): Promise<playlist[]>;
+  getPlaylistsOfUser(params: paginationParams): Promise<pagedResult<playlist>>;
   update(dto: updatePlaylistDto): Promise<playlist>;
   deleteSongFromPlaylist(dto: deleteSongFromPlaylistDto): Promise<playlist>;
   delete(id: string): Promise<void>;
@@ -37,13 +38,17 @@ export function usePlaylistsService(): PlaylistsService {
           .then((r) => r.data),
 
       getAll: (params) =>
-        api.get<playlist[]>(defaultRoute, { params }).then((r) => r.data),
+        api
+          .get<pagedResult<playlist>>(defaultRoute, { params })
+          .then((r) => r.data),
 
       getById: (id) =>
         api.get<playlist>(`${defaultRoute}/${id}`).then((r) => r.data),
 
       getPlaylistsOfUser: (params) =>
-        api.get<playlist[]>(defaultRoute, { params }).then((r) => r.data),
+        api
+          .get<pagedResult<playlist>>(defaultRoute, { params })
+          .then((r) => r.data),
 
       update: (dto) => {
         const { id, ...body } = dto;

@@ -2,10 +2,11 @@ import { useMemo } from "react";
 import { useApiClient } from "../useApiClient";
 import type { addSongDto, song, updateSongDto } from "../dtos/song";
 import type { paginationParams } from "../dtos/paginationParams";
+import type { pagedResult } from "../dtos/pagedResult";
 
 export interface SongsService {
   add(dto: addSongDto): Promise<song>;
-  getAll(params: paginationParams): Promise<song[]>;
+  getAll(params: paginationParams): Promise<pagedResult<song>>;
   getById(id: string): Promise<song>;
   update(dto: updateSongDto): Promise<song>;
   delete(id: number): Promise<void>;
@@ -21,7 +22,9 @@ export function useSongsService(): SongsService {
       add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
 
       getAll: (params) =>
-        api.get<song[]>(defaultRoute, { params }).then((r) => r.data),
+        api
+          .get<pagedResult<song>>(defaultRoute, { params })
+          .then((r) => r.data),
 
       getById: (id) =>
         api.get<song>(`${defaultRoute}/${id}`).then((r) => r.data),

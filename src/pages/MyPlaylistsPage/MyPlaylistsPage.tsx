@@ -32,9 +32,9 @@ export function MyPlaylistsPage() {
     let cancelled = false;
     playlistsService
       .getAll({ pageNumber, pageSize })
-      .then((data) => {
+      .then((response) => {
         if (cancelled) return;
-        setPlaylists(data);
+        setPlaylists(response.data);
       })
       .catch((error) => {
         if (!cancelled) console.error("Failed to load playlists:", error);

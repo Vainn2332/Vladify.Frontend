@@ -15,7 +15,10 @@ export interface PlaylistsService {
   addSongToPlaylist(dto: addSongToPlaylistDto): Promise<playlist>;
   getAll(params: paginationParams): Promise<pagedResult<playlist>>;
   getById(id: string): Promise<playlist>;
-  getPlaylistsOfUser(params: paginationParams): Promise<pagedResult<playlist>>;
+  getPlaylistsOfUser(
+    params: paginationParams,
+    id: number,
+  ): Promise<pagedResult<playlist>>;
   update(dto: updatePlaylistDto): Promise<playlist>;
   deleteSongFromPlaylist(dto: deleteSongFromPlaylistDto): Promise<playlist>;
   delete(id: string): Promise<void>;
@@ -45,9 +48,9 @@ export function usePlaylistsService(): PlaylistsService {
       getById: (id) =>
         api.get<playlist>(`${defaultRoute}/${id}`).then((r) => r.data),
 
-      getPlaylistsOfUser: (params) =>
+      getPlaylistsOfUser: (params, id) =>
         api
-          .get<pagedResult<playlist>>(defaultRoute, { params })
+          .get<pagedResult<playlist>>(`${defaultRoute}/${id}`, { params })
           .then((r) => r.data),
 
       update: (dto) => {

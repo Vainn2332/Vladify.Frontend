@@ -25,8 +25,8 @@ export function MyPlaylistsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { pageNumber, pageSize, hasNextPage, goToNextPage, goToPrevPage } =
-    usePagination(playlists.length);
+  const { pageNumber, pageSize, goToNextPage, goToPrevPage } = usePagination();
+  const [hasNextPage, setHasNextPage] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -35,6 +35,7 @@ export function MyPlaylistsPage() {
       .then((response) => {
         if (cancelled) return;
         setPlaylists(response.data);
+        setHasNextPage(response.hasNextPage);
       })
       .catch((error) => {
         if (!cancelled) console.error("Failed to load playlists:", error);

@@ -30,6 +30,7 @@ export function MyPlaylistsPage() {
 
   useEffect(() => {
     let cancelled = false;
+    setIsLoading(true);
     playlistsService
       .getAll({ pageNumber, pageSize })
       .then((response) => {
@@ -86,6 +87,7 @@ export function MyPlaylistsPage() {
             hasNextPage={hasNextPage}
             onNextPage={() => goToNextPage()}
             onPrevPage={() => goToPrevPage()}
+            isLoading={isLoading}
           />
         </div>
       )}

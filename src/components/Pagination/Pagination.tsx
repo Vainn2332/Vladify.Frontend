@@ -1,6 +1,7 @@
 interface paginationProps {
   pageNumber: number;
   hasNextPage: boolean;
+  isLoading: boolean;
   onNextPage: () => void;
   onPrevPage: () => void;
 }
@@ -10,12 +11,13 @@ export function Pagination({
   hasNextPage,
   onNextPage,
   onPrevPage,
+  isLoading,
 }: paginationProps) {
   return (
     <div className="mt-4 flex items-center justify-center gap-4">
       <button
         type="button"
-        disabled={pageNumber === 1}
+        disabled={isLoading || pageNumber === 1}
         onClick={() => onPrevPage()}
         className="cursor-pointer rounded-lg px-2 ring-1 ring-black/20 hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40"
       >
@@ -24,7 +26,7 @@ export function Pagination({
       <span className="text-sm text-black/70">Page {pageNumber}</span>
       <button
         type="button"
-        disabled={!hasNextPage}
+        disabled={isLoading || !hasNextPage}
         onClick={() => onNextPage()}
         className="cursor-pointer rounded-lg px-2 ring-1 ring-black/20 hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40"
       >

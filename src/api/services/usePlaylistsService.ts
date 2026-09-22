@@ -44,11 +44,10 @@ export function usePlaylistsService(): PlaylistsService {
       getById: (id) =>
         api.get<playlist>(`${defaultRoute}/${id}`).then((r) => r.data),
 
-      update: (dto) => {
+      update: async (dto) => {
         const { id, ...body } = dto;
-        return api
-          .put<playlist>(`${defaultRoute}/${id}`, body)
-          .then((r) => r.data);
+        const r = await api.put<playlist>(`${defaultRoute}/${id}`, body);
+        return r.data;
       },
 
       deleteSongFromPlaylist: (dto) =>

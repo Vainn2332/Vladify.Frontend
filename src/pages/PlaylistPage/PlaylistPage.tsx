@@ -6,13 +6,12 @@ const data = {
   metadata: "blablalba",
 };
 
-const meta = <li className="list-inside list-disc">{data.metadata}</li>;
 export function PlaylistPage() {
   return (
     <PlaylistHeader
       headerImage={data.headerImage}
       headerName={data.headerName}
-      metadata={meta}
+      metadata={<li className="list-inside list-disc">{data.metadata}</li>}
     />
   );
 }

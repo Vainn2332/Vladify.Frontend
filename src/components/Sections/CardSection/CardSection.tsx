@@ -1,4 +1,4 @@
-import { Card } from "../Card/Card";
+import { Card } from "../../Card/Card";
 import "./CardSection.css";
 import { DEFAULT_PRIORITY_CARDS } from "./CardSection.constants";
 

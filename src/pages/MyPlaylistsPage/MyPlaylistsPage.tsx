@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   CardSection,
   type CardSectionItem,
-} from "../../components/CardSection/CardSection";
+} from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
 import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal";
 

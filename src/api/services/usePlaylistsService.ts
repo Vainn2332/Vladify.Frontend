@@ -13,8 +13,11 @@ import type { pagedResult } from "../dtos/pagedResult";
 export interface PlaylistsService {
   add(dto: createPlaylistDto): Promise<playlist>;
   addSongToPlaylist(dto: addSongToPlaylistDto): Promise<playlist>;
-  getAll(params: paginationParams): Promise<pagedResult<playlist>>;
-  getById(id: string): Promise<playlist>;
+  getAll(
+    params: paginationParams,
+    signal?: AbortSignal,
+  ): Promise<pagedResult<playlist>>;
+  getById(id: string, signal?: AbortSignal): Promise<playlist>;
   update(dto: updatePlaylistDto): Promise<playlist>;
   deleteSongFromPlaylist(dto: deleteSongFromPlaylistDto): Promise<playlist>;
   delete(id: string): Promise<void>;
@@ -36,13 +39,15 @@ export function usePlaylistsService(): PlaylistsService {
           )
           .then((r) => r.data),
 
-      getAll: (params) =>
+      getAll: (params, signal) =>
         api
-          .get<pagedResult<playlist>>(defaultRoute, { params })
+          .get<pagedResult<playlist>>(defaultRoute, { params, signal })
           .then((r) => r.data),
 
-      getById: (id) =>
-        api.get<playlist>(`${defaultRoute}/${id}`).then((r) => r.data),
+      getById: (id, signal) =>
+        api
+          .get<playlist>(`${defaultRoute}/${id}`, { signal })
+          .then((r) => r.data),
 
       update: async (dto) => {
         const { id, ...body } = dto;

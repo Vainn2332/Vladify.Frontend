@@ -6,8 +6,11 @@ import type { pagedResult } from "../dtos/pagedResult";
 
 export interface SongsService {
   add(dto: addSongDto): Promise<song>;
-  getAll(params: paginationParams): Promise<pagedResult<song>>;
-  getById(id: string): Promise<song>;
+  getAll(
+    params: paginationParams,
+    signal?: AbortSignal,
+  ): Promise<pagedResult<song>>;
+  getById(id: string, signal?: AbortSignal): Promise<song>;
   update(dto: updateSongDto): Promise<song>;
   delete(id: number): Promise<void>;
 }
@@ -21,13 +24,13 @@ export function useSongsService(): SongsService {
     () => ({
       add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
 
-      getAll: (params) =>
+      getAll: (params, signal) =>
         api
-          .get<pagedResult<song>>(defaultRoute, { params })
+          .get<pagedResult<song>>(defaultRoute, { params, signal })
           .then((r) => r.data),
 
-      getById: (id) =>
-        api.get<song>(`${defaultRoute}/${id}`).then((r) => r.data),
+      getById: (id, signal) =>
+        api.get<song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
 
       update: (dto) => {
         const { id, ...body } = dto;

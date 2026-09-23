@@ -29,24 +29,24 @@ export function MyPlaylistsPage() {
   const [hasNextPage, setHasNextPage] = useState(false);
 
   useEffect(() => {
-    let ignore = false;
+    const abortController = new AbortController();
     setIsLoading(true);
+
     playlistsService
       .getAll({ pageNumber, pageSize })
       .then((response) => {
-        if (ignore) return;
         setPlaylists(response.data);
         setHasNextPage(response.hasNextPage);
+        setIsLoading(false);
       })
       .catch((error) => {
-        if (!ignore) console.error("Failed to load playlists:", error);
-      })
-      .finally(() => {
-        if (!ignore) setIsLoading(false);
+        if (abortController.signal.aborted) {
+          console.error("Failed to load playlists:", error);
+          setIsLoading(false);
+        }
       });
-    return () => {
-      ignore = true;
-    };
+
+    return () => abortController.abort();
   }, [playlistsService, pageNumber, pageSize, reloadToken]);
 
   const handleCreatePlaylist = async (title: string) => {

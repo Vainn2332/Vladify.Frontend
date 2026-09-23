@@ -29,23 +29,23 @@ export function MyPlaylistsPage() {
   const [hasNextPage, setHasNextPage] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
+    let ignore = false;
     setIsLoading(true);
     playlistsService
       .getAll({ pageNumber, pageSize })
       .then((response) => {
-        if (cancelled) return;
+        if (ignore) return;
         setPlaylists(response.data);
         setHasNextPage(response.hasNextPage);
       })
       .catch((error) => {
-        if (!cancelled) console.error("Failed to load playlists:", error);
+        if (!ignore) console.error("Failed to load playlists:", error);
       })
       .finally(() => {
-        if (!cancelled) setIsLoading(false);
+        if (!ignore) setIsLoading(false);
       });
     return () => {
-      cancelled = true;
+      ignore = true;
     };
   }, [playlistsService, pageNumber, pageSize, reloadToken]);
 

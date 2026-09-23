@@ -16,7 +16,7 @@ export function PlaylistHeader({
     <div className="flex gap-5">
       <img
         src={headerImage}
-        className="bg-app aspect-square max-w-52 rounded-lg border border-white"
+        className="bg-app aspect-square max-w-30 rounded-lg border border-white sm:max-w-40"
         onError={(e) => {
           e.currentTarget.style.display = "none";
         }}
@@ -27,11 +27,6 @@ export function PlaylistHeader({
           <IconButton icon={RenameIcon} />
         </div>
         <p>{metadata}</p>
-        {/*
-        <ul className="list-inside list-disc">
-          <li>{metadata}</li>
-        </ul>
-        */}
       </div>
     </div>
   );

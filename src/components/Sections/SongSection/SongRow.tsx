@@ -19,22 +19,22 @@ export function SongRow({
     <tr className="text-primary hover:bg-primary/10 cursor-pointer">
       <td className="p-2 text-center">{index + 1}</td>
       <td className="p-2">
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-3">
           <img
-            className="aspect-square w-12 rounded"
+            className="aspect-square w-12 shrink-0 rounded"
             src={song.coverUrl}
             onError={(e) => (e.currentTarget.style.display = "none")}
             alt="song cover"
           />
-          <div>
+          <div className="min-w-0">
             <p className="truncate font-bold">{song.title}</p>
             <p className="text-secondary truncate">{song.author}</p>
           </div>
         </div>
       </td>
-      <td className="p-2">{song.album}</td>
-      {showAddedAt && <td className="p-2">{song.addedAt}</td>}
-      <td className="p-2">{song.duration}</td>
+      <td className="truncate p-2">{song.album}</td>
+      {showAddedAt && <td className="truncate p-2">{song.addedAt}</td>}
+      <td className="p-2 whitespace-nowrap">{song.duration}</td>
       <td className="p-2 text-center">
         <IconButton
           className="aspect-square w-5 cursor-pointer"

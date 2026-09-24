@@ -17,17 +17,17 @@ export function SongSection({
 
   //TODO: СДЕЛАТЬ АДАПТИВНОСТЬ, СДЕЛАТЬ ПО ЦЕНТРУ НЕКОТОРЫЕ ПОЛЯ,ПОПРАВИТЬ PADDING
   return (
-    <table className="sm:text-medium w-full overflow-hidden rounded-xl bg-white/85 text-left text-xs">
+    <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
       <thead className="border-b border-black/10 text-xs text-black/50 uppercase">
         <tr>
-          <th className="w-8 p-4">#</th>
+          <th className="w-10 p-2">#</th>
           <th className="p-2">Название</th>
           <th className="p-2">Альбом</th>
-          {showAddedAt && <th className="p-4">Дата добавления</th>}
-          <th className="p-4">
+          {showAddedAt && <th className="p-2">Дата добавления</th>}
+          <th className="w-16 p-2">
             <Clock className="size-4" />
           </th>
-          <th className="w-10 p-4" />
+          <th className="w-12 p-2" />
         </tr>
       </thead>
 

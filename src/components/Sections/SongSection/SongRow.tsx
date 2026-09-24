@@ -26,7 +26,7 @@ export function SongRow({
             onError={(e) => (e.currentTarget.style.display = "none")}
             alt="song cover"
           />
-          <div>
+          <div className="max-w-30">
             <p className="truncate font-bold">{song.title}</p>
             <p className="text-secondary truncate">{song.author}</p>
           </div>

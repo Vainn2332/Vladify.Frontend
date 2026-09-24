@@ -28,7 +28,7 @@ const SONGS: song[] = [
   },
   {
     id: "song-3",
-    title: "I Amsafsssssssdszxvцуываывпыпвыпв",
+    title: "I Amsafsssssssdszxv",
     author: "Влад Помозовфыв",
     coverUrl: "https://picsum.photos/seed/track3/300/300",
     album: "Hands like houses",

@@ -17,6 +17,7 @@ const SONGS: song[] = [
     author: "Владислав",
     coverUrl: "https://picsum.photos/seed/track1/300/300",
     duration: "02:00",
+    addedAt: "12422",
   },
   {
     id: "song-2",
@@ -25,6 +26,7 @@ const SONGS: song[] = [
     coverUrl: "https://picsum.photos/seed/track2/300/300",
     album: "Conquer Divide",
     duration: "02:00",
+    addedAt: "12422",
   },
   {
     id: "song-3",
@@ -33,6 +35,7 @@ const SONGS: song[] = [
     coverUrl: "https://picsum.photos/seed/track3/300/300",
     album: "Hands like houses",
     duration: "03:40",
+    addedAt: "12422",
   },
   {
     id: "song-4",

@@ -22,7 +22,7 @@ export function SongSection({
         <tr>
           <th className="w-8 p-4">#</th>
           <th className="p-2">Название</th>
-          <th className="p-2">Альбом</th>
+          <th className="hidden p-2 sm:table-cell">Альбом</th>
           {showAddedAt && <th className="p-4">Дата добавления</th>}
           <th className="p-4">
             <Clock className="size-4" />

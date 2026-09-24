@@ -32,7 +32,7 @@ export function SongRow({
           </div>
         </div>
       </td>
-      <td className="p-2">{song.album}</td>
+      <td className="hidden p-2 sm:table-cell">{song.album}</td>
       {showAddedAt && <td className="p-2">{song.addedAt}</td>}
       <td className="p-2">{song.duration}</td>
       <td className="p-2 text-center">

@@ -28,8 +28,8 @@ const SONGS: song[] = [
   },
   {
     id: "song-3",
-    title: "I Am",
-    author: "Влад Помозов",
+    title: "I Amsafsssssssdszxv",
+    author: "Влад Помозовфыв",
     coverUrl: "https://picsum.photos/seed/track3/300/300",
     album: "Hands like houses",
     duration: "03:40",
@@ -58,8 +58,8 @@ export function PlaylistPage() {
         metadata={<li className="list-inside list-disc">{data.metadata}</li>}
       />
 
-      <div className="mt-6">
-        <SongSection songs={songs} onDelete={handleDelete} />
+      <div className="mt-20">
+        <SongSection songs={songs} onDelete={handleDelete} showAddedAt={true} />
       </div>
     </>
   );

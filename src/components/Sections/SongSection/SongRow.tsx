@@ -16,8 +16,8 @@ export function SongRow({
   showAddedAt = false,
 }: SongRowProps) {
   return (
-    <tr key={song.id} className="text-primary">
-      <td className="p-2">{index + 1}</td>
+    <tr className="text-primary hover:bg-primary/10 cursor-pointer">
+      <td className="p-2 text-center">{index + 1}</td>
       <td className="p-2">
         <div className="flex items-center gap-3">
           <img
@@ -27,15 +27,15 @@ export function SongRow({
             alt="song cover"
           />
           <div>
-            <p className="text-medium">{song.title}</p>
-            <p className="text-primary/50 text-sm">{song.author}</p>
+            <p className="truncate font-bold">{song.title}</p>
+            <p className="text-secondary truncate">{song.author}</p>
           </div>
         </div>
       </td>
       <td className="p-2">{song.album}</td>
       {showAddedAt && <td className="p-2">{song.addedAt}</td>}
       <td className="p-2">{song.duration}</td>
-      <td className="p-2">
+      <td className="p-2 text-center">
         <IconButton
           className="aspect-square w-5 cursor-pointer"
           icon={DeleteIcon}

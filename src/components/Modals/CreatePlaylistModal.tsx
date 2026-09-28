@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
-import { X as CloseButton } from "lucide-react";
+import { useState } from "react";
+import { Modal } from "./Modal";
 
 interface CreatePlaylistModalProps {
+  title: string;
   onClose: () => void;
   onSubmit: (title: string) => void;
 }
 
 export function CreatePlaylistModal({
+  title,
   onClose,
   onSubmit,
 }: CreatePlaylistModalProps) {
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  const [playlistTitle, setPlaylistTitle] = useState("");
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,46 +22,27 @@ export function CreatePlaylistModal({
   };
 
   return (
-    <div
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 pb-28"
-    >
-      <div className="w-full max-w-md rounded-xl bg-white/75 p-6 shadow-2xl">
-        <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-black/90">Create playlist</h3>
+    <Modal onClose={onClose} title="Create playlist">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <input
+          type="text"
+          placeholder="Playlist name"
+          value={playlistTitle}
+          onChange={(e) => setPlaylistTitle(e.target.value)}
+          autoFocus
+          className="rounded-xl bg-cyan-900/50 px-4 py-2.5 text-white placeholder-gray-300 ring-1 ring-cyan-700/50 outline-none focus:ring-2 focus:ring-cyan-400"
+        />
+
+        <div className="flex justify-end gap-2 pt-2">
           <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="cursor-pointer text-gray-400 hover:text-black/70"
+            type="submit"
+            disabled={!playlistTitle.trim()}
+            className="cursor-pointer rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <CloseButton className="size-5" />
+            Create
           </button>
         </div>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Playlist name"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            autoFocus
-            className="rounded-xl bg-cyan-900/50 px-4 py-2.5 text-white placeholder-gray-300 ring-1 ring-cyan-700/50 outline-none focus:ring-2 focus:ring-cyan-400"
-          />
-
-          <div className="flex justify-end gap-2 pt-2">
-            <button
-              type="submit"
-              disabled={!title.trim()}
-              className="cursor-pointer rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-950 transition-all hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Create
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      </form>
+    </Modal>
   );
 }

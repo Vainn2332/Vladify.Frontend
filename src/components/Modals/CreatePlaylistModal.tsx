@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 
 interface CreatePlaylistModalProps {
-  title: string;
   onClose: () => void;
   onSubmit: (title: string) => void;
 }
 
 export function CreatePlaylistModal({
-  title,
   onClose,
   onSubmit,
 }: CreatePlaylistModalProps) {
@@ -17,7 +15,7 @@ export function CreatePlaylistModal({
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit(title.trim());
+    onSubmit(playlistTitle.trim());
     onClose();
   };
 

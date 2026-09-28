@@ -1,6 +1,5 @@
 import { Card } from "../Card/Card";
 import "./CardSection.css";
-import { DEFAULT_PRIORITY_CARDS } from "./CardSection.constants";
 
 export interface CardSectionItem {
   id: string;
@@ -14,7 +13,6 @@ interface CardSectionProps {
   action?: React.ReactNode;
   items: CardSectionItem[];
   linkTemplate?: (item: CardSectionItem) => string;
-  priorityCardsAmount?: number;
   placeholder?: React.ReactNode;
 }
 
@@ -22,7 +20,6 @@ export function CardSection({
   title,
   items,
   linkTemplate,
-  priorityCardsAmount = DEFAULT_PRIORITY_CARDS,
   action,
   placeholder,
 }: CardSectionProps) {
@@ -40,14 +37,13 @@ export function CardSection({
         placeholder
       ) : (
         <div className="card-section__items">
-          {items.map((item, index) => (
+          {items.map((item) => (
             <Card
               key={item.id}
               title={item.title}
               subtitle={item.subtitle}
               imageUrl={item.imageUrl}
               linkUrl={linkTemplate?.(item)}
-              priority={index < priorityCardsAmount ? "high" : "low"}
             />
           ))}
         </div>

@@ -15,7 +15,6 @@ export function SongSection({
 }: SongSectionProps) {
   if (songs.length === 0) return null;
 
-  //TODO: СДЕЛАТЬ АДАПТИВНОСТЬ, СДЕЛАТЬ ПО ЦЕНТРУ НЕКОТОРЫЕ ПОЛЯ,ПОПРАВИТЬ PADDING
   return (
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
       <thead className="text-2xs border-b border-black/10 text-black/50 uppercase sm:text-xs">

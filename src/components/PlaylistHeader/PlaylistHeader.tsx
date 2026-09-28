@@ -23,7 +23,7 @@ export function PlaylistHeader({
       ></img>
       <div className="flex flex-col text-sm">
         <div className="flex gap-4">
-          <h1 className="text-2xl font-bold">{headerName}</h1>
+          <h1 className="text-xl font-bold sm:text-2xl">{headerName}</h1>
           <IconButton icon={RenameIcon} />
         </div>
         <p>{metadata}</p>

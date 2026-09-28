@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
 import type { song } from "../../models/song";
+import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 
 const data = {
   headerImage: "https://picsum.photos/seed/track2/300/300",
@@ -49,9 +50,15 @@ const SONGS: song[] = [
 
 export function PlaylistPage() {
   const [songs, setSongs] = useState<song[]>(SONGS);
+  const [songToDelete, setSongToDelete] = useState<song | null>(null);
 
-  const handleDelete = (id: string) =>
-    setSongs((current) => current.filter((song) => song.id !== id));
+  const findSongToDelete = (id: string) =>
+    setSongToDelete(songs.find((s) => s.id === id) ?? null);
+
+  const handleDeleteConfirm = () =>
+    setSongs((current) =>
+      current.filter((song) => song.id !== songToDelete?.id),
+    );
 
   return (
     <>
@@ -62,8 +69,21 @@ export function PlaylistPage() {
       />
 
       <div className="mt-20">
-        <SongSection songs={songs} onDelete={handleDelete} showAddedAt={true} />
+        <SongSection
+          songs={songs}
+          onDelete={findSongToDelete}
+          showAddedAt={true}
+        />
       </div>
+
+      {songToDelete && (
+        <ConfirmModal
+          message={`Remove ${songToDelete.title} from playlist?`}
+          onClose={() => setSongToDelete(null)}
+          onConfirm={handleDeleteConfirm}
+          title="Delete song"
+        />
+      )}
     </>
   );
 }

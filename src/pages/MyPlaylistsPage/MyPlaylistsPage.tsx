@@ -63,7 +63,7 @@ export function MyPlaylistsPage() {
       <CardSection
         items={playlists.map(toCardItem)}
         title="My playlists"
-        linkTemplate={(item) => `/tracks/${item.id}`}
+        linkTemplate={(item) => `/playlists/${item.id}`}
         placeholder={
           <p className="text-primary">
             {isLoading ? "Loading…" : "Create your first playlist"}

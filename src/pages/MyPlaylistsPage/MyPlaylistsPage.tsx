@@ -40,7 +40,7 @@ export function MyPlaylistsPage() {
         setIsLoading(false);
       })
       .catch((error) => {
-        if (abortController.signal.aborted) {
+        if (!abortController.signal.aborted) {
           console.error("Failed to load playlists:", error);
           setIsLoading(false);
         }

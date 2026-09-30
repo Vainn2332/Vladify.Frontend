@@ -1,6 +1,6 @@
 import { Clock } from "lucide-react";
 import { SongRow } from "./SongRow";
-import type { song } from "../../../models/song";
+import type { song } from "../../../api/dtos/song";
 
 interface SongSectionProps {
   songs: song[];

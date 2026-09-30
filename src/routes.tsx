@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             element: <MyPlaylistsPage />,
           },
           {
-            path: "/Playlists",
+            path: "/Playlists/:playlistId?",
             element: <PlaylistPage />,
           },
         ],

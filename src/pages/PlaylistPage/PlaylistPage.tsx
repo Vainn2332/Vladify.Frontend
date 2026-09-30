@@ -3,11 +3,15 @@ import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
 import type { song } from "../../api/dtos/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
+import { Navigate, useParams } from "react-router-dom";
+
+interface PlaylistPageContentProps {
+  playlistId: string;
+}
 
 const data = {
   headerImage: "https://picsum.photos/seed/300/300",
   headerName: "someHeader",
-  metadata: "blablalba",
 };
 
 const SONGS: song[] = [
@@ -247,6 +251,15 @@ const SONGS: song[] = [
 ];
 
 export function PlaylistPage() {
+  const { playlistId } = useParams<string>();
+
+  if (!playlistId) return <Navigate to="/MyPlaylists" replace />;
+
+  return <PlaylistPageContent key={playlistId} playlistId={playlistId} />;
+}
+
+//fetch logic will be added in next PR
+function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const [songs, setSongs] = useState<song[]>(SONGS);
   const [songToDelete, setSongToDelete] = useState<song | null>(null);
 
@@ -263,7 +276,7 @@ export function PlaylistPage() {
       <PlaylistHeader
         headerImage={data.headerImage}
         headerName={data.headerName}
-        metadata={<li className="list-inside list-disc">{data.metadata}</li>}
+        metadata={<li className="list-inside list-disc">{playlistId}</li>}
       />
 
       <div className="mt-16">

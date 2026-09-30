@@ -22,7 +22,7 @@ export function ConfirmModal({
 
   return (
     <Modal title={title} onClose={onClose}>
-      <p className="text-black/80">{message}</p>
+      <div className="text-black/80">{message}</div>
 
       <div className="flex justify-end gap-2 pt-6">
         <button

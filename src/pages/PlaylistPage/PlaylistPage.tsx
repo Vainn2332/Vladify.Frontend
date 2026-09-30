@@ -316,7 +316,11 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
 
       {songToDelete && (
         <ConfirmModal
-          message={`Remove ${songToDelete.title} from playlist?`}
+          message={
+            <>
+              Remove <b>${songToDelete.title}</b> from playlist?
+            </>
+          }
           onClose={() => setSongToDelete(null)}
           onConfirm={handleDeleteConfirm}
           title="Delete song"

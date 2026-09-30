@@ -3,8 +3,10 @@ export interface song {
   title: string;
   album: string;
   author: string;
-  authorId: number;
+  authorId?: number;
   duration: string;
+  addedAt?: string;
+  coverUrl: string;
 }
 
 export interface addSongDto {

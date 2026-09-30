@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
-import type { song } from "../../models/song";
+import type { song } from "../../api/dtos/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 
 const data = {
-  headerImage: "https://picsum.photos/seed/track2/300/300",
+  headerImage: "https://picsum.photos/seed/300/300",
   headerName: "someHeader",
   metadata: "blablalba",
 };

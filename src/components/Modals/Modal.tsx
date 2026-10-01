@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { X as CloseButton } from "lucide-react";
+import { X as CloseIcon } from "lucide-react";
+import { IconButton } from "../Buttons/IconButton";
 
 interface ModalProps {
   title: string;
@@ -27,13 +28,12 @@ export function Modal({ title, onClose, children }: ModalProps) {
       <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-xl font-bold text-black/90">{title}</h3>
-          <button
-            type="button"
+
+          <IconButton
+            icon={CloseIcon}
             onClick={onClose}
-            className="cursor-pointer text-gray-400 hover:text-black/70"
-          >
-            <CloseButton className="size-5" />
-          </button>
+            className="text-gray-400 hover:text-black/70"
+          />
         </div>
 
         {children}

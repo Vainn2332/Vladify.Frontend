@@ -44,7 +44,10 @@ export function SongRow({
         <IconButton
           className="aspect-square w-5 cursor-pointer hover:text-red-500"
           icon={DeleteIcon}
-          onClick={() => onDelete(song.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(song.id);
+          }}
         />
       </td>
     </tr>

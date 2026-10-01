@@ -21,7 +21,11 @@ export function IconButton({
   ...props
 }: IconButtonProps) {
   return (
-    <button type="button" className={`cursor-pointer ${className}`} {...props}>
+    <button
+      type="button"
+      className={`flex cursor-pointer items-center ${className}`}
+      {...props}
+    >
       <Icon
         className={`${isFilled ? "fill-current" : ""} ${ICON_SIZES[size]}`}
       />

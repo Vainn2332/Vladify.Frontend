@@ -3,6 +3,7 @@ import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
 import type { song } from "../../api/dtos/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
+import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { Navigate, useParams } from "react-router-dom";
 
 interface PlaylistPageContentProps {
@@ -289,6 +290,11 @@ export function PlaylistPage() {
 function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const [songs, setSongs] = useState<song[]>(SONGS);
   const [songToDelete, setSongToDelete] = useState<song | null>(null);
+  const [playlistName, setPlaylistName] = useState(data.headerName);
+  const [isRenameOpen, setIsRenameOpen] = useState(false);
+
+  //will call playlistsService.update once fetch logic is added
+  const handleRename = (name: string) => setPlaylistName(name);
 
   const findSongToDelete = (id: string) =>
     setSongToDelete(songs.find((s) => s.id === id) ?? null);
@@ -302,8 +308,9 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
     <>
       <PlaylistHeader
         headerImage={data.headerImage}
-        headerName={data.headerName}
+        headerName={playlistName}
         metadata={<li className="list-inside list-disc">{playlistId}</li>}
+        onRename={() => setIsRenameOpen(true)}
       />
 
       <div className="mt-16">
@@ -324,6 +331,16 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
           onClose={() => setSongToDelete(null)}
           onConfirm={handleDeleteConfirm}
           title="Delete song"
+        />
+      )}
+
+      {isRenameOpen && (
+        <TextInputModal
+          title="Rename playlist"
+          placeholder="Playlist name"
+          initialValue={playlistName}
+          onClose={() => setIsRenameOpen(false)}
+          onSubmit={handleRename}
         />
       )}
     </>

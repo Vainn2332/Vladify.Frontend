@@ -4,7 +4,7 @@ import {
   type CardSectionItem,
 } from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
-import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal";
+import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -93,7 +93,10 @@ export function MyPlaylistsPage() {
       )}
 
       {isModalOpen && (
-        <CreatePlaylistModal
+        <TextInputModal
+          title="Create playlist"
+          placeholder="Playlist name"
+          submitLabel="Create"
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleCreatePlaylist}
         />

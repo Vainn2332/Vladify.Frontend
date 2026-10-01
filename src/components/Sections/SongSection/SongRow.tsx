@@ -6,6 +6,7 @@ interface SongRowProps {
   index: number;
   song: song;
   onDelete: (id: string) => void;
+  onClick: (id:string)=> void;
   showAddedAt?: boolean;
 }
 
@@ -13,10 +14,11 @@ export function SongRow({
   index,
   song,
   onDelete,
+  onClick,
   showAddedAt = false,
 }: SongRowProps) {
   return (
-    <tr className="text-primary hover:bg-primary/10 cursor-pointer">
+    <tr className="text-primary hover:bg-primary/10 cursor-pointer" onClick={()=>onClick(song.id)}>
       <td className="p-2 text-center">{index + 1}</td>
       <td className="p-2">
         <div className="flex items-center gap-3">

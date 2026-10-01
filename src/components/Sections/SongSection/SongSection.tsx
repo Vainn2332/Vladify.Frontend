@@ -6,12 +6,14 @@ interface SongSectionProps {
   songs: song[];
   showAddedAt?: boolean;
   onDelete: (id: string) => void;
+  onClick: (id: string) => void;
 }
 
 export function SongSection({
   songs,
   showAddedAt = false,
   onDelete,
+  onClick,
 }: SongSectionProps) {
   if (songs.length === 0) return null;
 
@@ -35,6 +37,7 @@ export function SongSection({
           <SongRow
             index={index}
             onDelete={onDelete}
+            onClick={onClick}
             song={song}
             showAddedAt={showAddedAt}
             key={song.id}

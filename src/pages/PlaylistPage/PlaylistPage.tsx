@@ -293,7 +293,6 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const [playlistName, setPlaylistName] = useState(data.headerName);
   const [isRenameOpen, setIsRenameOpen] = useState(false);
 
-  //will call playlistsService.update once fetch logic is added
   const handleRename = (name: string) => setPlaylistName(name);
 
   const findSongToDelete = (id: string) =>
@@ -303,6 +302,11 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
     setSongs((current) =>
       current.filter((song) => song.id !== songToDelete?.id),
     );
+
+    //temporary stub for this PR.Will be changed when api would be added
+  const handleClick  =(id:string)=> {
+    console.log(`song with ${id} clicked!`);
+  }
 
   return (
     <>
@@ -317,6 +321,7 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
         <SongSection
           songs={songs}
           onDelete={findSongToDelete}
+          onClick={handleClick}
           showAddedAt={true}
         />
       </div>

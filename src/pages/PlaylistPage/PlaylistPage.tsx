@@ -5,6 +5,7 @@ import type { song } from "../../api/dtos/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { Navigate, useParams } from "react-router-dom";
+import type { playlist } from "../../api/dtos/playlist";
 
 interface PlaylistPageContentProps {
   playlistId: string;
@@ -12,7 +13,6 @@ interface PlaylistPageContentProps {
 
 const data = {
   headerImage: "https://picsum.photos/seed/late-night-drive/300/300",
-  headerName: "Late Night Drive",
 };
 
 const SONGS: song[] = [
@@ -277,6 +277,12 @@ const SONGS: song[] = [
     addedAt: "2026-09-27",
   },
 ];
+const playlist: playlist = {
+  authorName: "vlad",
+  id: "1",
+  name: "Late Night Drive",
+  songs: SONGS,
+};
 
 export function PlaylistPage() {
   const { playlistId } = useParams<string>();
@@ -290,7 +296,7 @@ export function PlaylistPage() {
 function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const [songs, setSongs] = useState<song[]>(SONGS);
   const [songToDelete, setSongToDelete] = useState<song | null>(null);
-  const [playlistName, setPlaylistName] = useState(data.headerName);
+  const [playlistName, setPlaylistName] = useState(playlist.name);
   const [isRenameOpen, setIsRenameOpen] = useState(false);
 
   const handleRename = (name: string) => setPlaylistName(name);
@@ -303,17 +309,22 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
       current.filter((song) => song.id !== songToDelete?.id),
     );
 
-    //temporary stub for this PR.Will be changed when api would be added
-  const handleClick  =(id:string)=> {
+  //temporary stub for this PR. Will be changed when api would be added
+  const handleClick = (id: string) => {
     console.log(`song with ${id} clicked!`);
-  }
+  };
 
   return (
     <>
       <PlaylistHeader
         headerImage={data.headerImage}
         headerName={playlistName}
-        metadata={<li className="list-inside list-disc">{playlistId}</li>}
+        metadata={
+          <div className="list-inside list-disc">
+            <li>{playlistId}</li>
+            <li> {playlist.authorName}</li>
+          </div>
+        }
         onRename={() => setIsRenameOpen(true)}
       />
 

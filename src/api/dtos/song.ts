@@ -5,6 +5,8 @@ export interface song {
   author: string;
   authorId: number;
   duration: string;
+  addedAt: string;
+  coverUrl: string;
 }
 
 export interface addSongDto {

@@ -29,9 +29,17 @@ export function Player() {
 
       <div className="flex w-full max-w-xl flex-col items-center justify-self-center px-1">
         <div className="flex items-center gap-4">
-          <IconButton icon={SkipBackIcon} aria-label="Previous track" />
-          <IconButton icon={PauseIcon} aria-label="Pause" />
-          <IconButton icon={SkipForwardIcon} aria-label="Next track" />
+          <IconButton
+            icon={SkipBackIcon}
+            isFilled={true}
+            aria-label="Previous track"
+          />
+          <IconButton icon={PauseIcon} isFilled={true} aria-label="Pause" />
+          <IconButton
+            icon={SkipForwardIcon}
+            isFilled={true}
+            aria-label="Next track"
+          />
         </div>
 
         <input

@@ -1,7 +1,7 @@
 import {
   CardSection,
   type CardSectionItem,
-} from "../../components/CardSection/CardSection";
+} from "../../components/Sections/CardSection/CardSection";
 
 const NEW_SONGS: CardSectionItem[] = [
   {

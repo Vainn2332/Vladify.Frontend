@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import {
   CardSection,
   type CardSectionItem,
-} from "../../components/CardSection/CardSection";
+} from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
-import { CreatePlaylistModal } from "../../components/Modals/CreatePlaylistModal";
+import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { usePlaylistsService } from "../../api/services/usePlaylistsService";
 import type { playlist } from "../../api/dtos/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -40,7 +40,7 @@ export function MyPlaylistsPage() {
         setIsLoading(false);
       })
       .catch((error) => {
-        if (abortController.signal.aborted) {
+        if (!abortController.signal.aborted) {
           console.error("Failed to load playlists:", error);
           setIsLoading(false);
         }
@@ -63,7 +63,7 @@ export function MyPlaylistsPage() {
       <CardSection
         items={playlists.map(toCardItem)}
         title="My playlists"
-        linkTemplate={(item) => `/tracks/${item.id}`}
+        linkTemplate={(item) => `/playlists/${item.id}`}
         placeholder={
           <p className="text-primary">
             {isLoading ? "Loading…" : "Create your first playlist"}
@@ -93,7 +93,10 @@ export function MyPlaylistsPage() {
       )}
 
       {isModalOpen && (
-        <CreatePlaylistModal
+        <TextInputModal
+          title="Create playlist"
+          placeholder="Playlist name"
+          submitLabel="Create"
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleCreatePlaylist}
         />

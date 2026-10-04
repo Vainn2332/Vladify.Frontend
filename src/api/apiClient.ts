@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getTokenAsyncNotSetError } from "../constants/errors";
+import { TokenGetterNotSetError } from "../constants/errors";
 
 let getTokenAsync: (() => Promise<string>) | null = null;
 export function setTokenGetter(getter: () => Promise<string>) {
@@ -15,7 +15,7 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(async (config) => {
   if (!getTokenAsync) {
-    throw getTokenAsyncNotSetError;
+    throw new TokenGetterNotSetError();
   }
   const token = await getTokenAsync();
   config.headers.Authorization = `Bearer ${token}`;

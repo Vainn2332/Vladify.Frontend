@@ -6,6 +6,7 @@ import "./index.css";
 import { queryClient } from "./api/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { AuthTokenBridge } from "./components/Auth/AuthTokenBridge";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -20,7 +21,9 @@ createRoot(document.getElementById("root")!).render(
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AuthTokenBridge>
+          <App />
+        </AuthTokenBridge>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Auth0Provider>

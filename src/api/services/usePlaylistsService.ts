@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import { useApiClient } from "../useApiClient";
 import type {
   addSongToPlaylistDto,
   createPlaylistDto,
@@ -9,6 +7,7 @@ import type {
 } from "../dtos/playlist";
 import type { paginationParams } from "../dtos/paginationParams";
 import type { pagedResult } from "../dtos/pagedResult";
+import { apiClient as api } from "../apiClient";
 
 export interface PlaylistsService {
   add(dto: createPlaylistDto): Promise<playlist>;
@@ -26,44 +25,37 @@ export interface PlaylistsService {
 const defaultRoute = "/playlists";
 
 export function usePlaylistsService(): PlaylistsService {
-  const api = useApiClient();
+  return {
+    add: (dto) => api.post<playlist>(defaultRoute, dto).then((r) => r.data),
 
-  return useMemo(
-    () => ({
-      add: (dto) => api.post<playlist>(defaultRoute, dto).then((r) => r.data),
+    addSongToPlaylist: (dto) =>
+      api
+        .post<playlist>(`${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`)
+        .then((r) => r.data),
 
-      addSongToPlaylist: (dto) =>
-        api
-          .post<playlist>(
-            `${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`,
-          )
-          .then((r) => r.data),
+    getAll: (params, signal) =>
+      api
+        .get<pagedResult<playlist>>(defaultRoute, { params, signal })
+        .then((r) => r.data),
 
-      getAll: (params, signal) =>
-        api
-          .get<pagedResult<playlist>>(defaultRoute, { params, signal })
-          .then((r) => r.data),
+    getById: (id, signal) =>
+      api
+        .get<playlist>(`${defaultRoute}/${id}`, { signal })
+        .then((r) => r.data),
 
-      getById: (id, signal) =>
-        api
-          .get<playlist>(`${defaultRoute}/${id}`, { signal })
-          .then((r) => r.data),
+    update: async (dto) => {
+      const { id, ...body } = dto;
+      const r = await api.put<playlist>(`${defaultRoute}/${id}`, body);
+      return r.data;
+    },
 
-      update: async (dto) => {
-        const { id, ...body } = dto;
-        const r = await api.put<playlist>(`${defaultRoute}/${id}`, body);
-        return r.data;
-      },
+    deleteSongFromPlaylist: (dto) =>
+      api
+        .delete<playlist>(
+          `${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`,
+        )
+        .then((r) => r.data),
 
-      deleteSongFromPlaylist: (dto) =>
-        api
-          .delete<playlist>(
-            `${defaultRoute}/${dto.playlistId}/songs/${dto.songId}`,
-          )
-          .then((r) => r.data),
-
-      delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then(() => {}),
-    }),
-    [api],
-  );
+    delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then(() => {}),
+  };
 }

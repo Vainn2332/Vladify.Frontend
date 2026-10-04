@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from "axios";
+import axios from "axios";
 import { getTokenAsyncNotSetError } from "../constants/errors";
 
 let getTokenAsync: (() => Promise<string>) | null = null;
@@ -6,22 +6,18 @@ export function setTokenGetter(getter: () => Promise<string>) {
   getTokenAsync = getter;
 }
 
-export function apiClient(): AxiosInstance {
-  const client = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  client.interceptors.request.use(async (config) => {
-    if (!getTokenAsync) {
-      throw getTokenAsyncNotSetError;
-    }
-    const token = await getTokenAsync();
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  });
-
-  return client;
-}
+apiClient.interceptors.request.use(async (config) => {
+  if (!getTokenAsync) {
+    throw getTokenAsyncNotSetError;
+  }
+  const token = await getTokenAsync();
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});

@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { App } from "./App";
 import "./index.css";
+import { queryClient } from "./api/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,7 +19,10 @@ createRoot(document.getElementById("root")!).render(
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
       }}
     >
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </Auth0Provider>
   </StrictMode>,
 );

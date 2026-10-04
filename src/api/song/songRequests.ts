@@ -3,7 +3,7 @@ import type { addSongDto, song, updateSongDto } from "./song";
 import type { paginationParams } from "../dtos/paginationParams";
 import type { pagedResult } from "../dtos/pagedResult";
 
-export interface SongsService {
+export interface SongRequests {
   add(dto: addSongDto): Promise<song>;
   getAll(
     params: paginationParams,
@@ -16,22 +16,20 @@ export interface SongsService {
 
 const defaultRoute = "/songs";
 
-export function songRequests(): SongsService {
-  return {
-    add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
+export const songRequests: SongRequests = {
+  add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
 
-    getAll: (params, signal) =>
-      api
-        .get<pagedResult<song>>(defaultRoute, { params, signal })
-        .then((r) => r.data),
+  getAll: (params, signal) =>
+    api
+      .get<pagedResult<song>>(defaultRoute, { params, signal })
+      .then((r) => r.data),
 
-    getById: (id, signal) =>
-      api.get<song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
+  getById: (id, signal) =>
+    api.get<song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
 
-    update: (dto) => {
-      const { id, ...body } = dto;
-      return api.put<song>(`${defaultRoute}/${id}`, body).then((r) => r.data);
-    },
-    delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then(() => {}),
-  };
-}
+  update: (dto) => {
+    const { id, ...body } = dto;
+    return api.put<song>(`${defaultRoute}/${id}`, body).then((r) => r.data);
+  },
+  delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then(() => {}),
+};

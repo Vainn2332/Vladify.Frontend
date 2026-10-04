@@ -4,7 +4,7 @@ import type {
   deleteSongFromPlaylistDto,
   playlist,
   updatePlaylistDto,
-} from "../dtos/playlist";
+} from "./playlist";
 import type { paginationParams } from "../dtos/paginationParams";
 import type { pagedResult } from "../dtos/pagedResult";
 import { apiClient as api } from "../apiClient";
@@ -24,7 +24,7 @@ export interface PlaylistsService {
 
 const defaultRoute = "/playlists";
 
-export function usePlaylistsService(): PlaylistsService {
+export function playlistRequests(): PlaylistsService {
   return {
     add: (dto) => api.post<playlist>(defaultRoute, dto).then((r) => r.data),
 

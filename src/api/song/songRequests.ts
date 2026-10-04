@@ -1,5 +1,5 @@
 import { apiClient as api } from "../apiClient";
-import type { addSongDto, song, updateSongDto } from "../dtos/song";
+import type { addSongDto, song, updateSongDto } from "./song";
 import type { paginationParams } from "../dtos/paginationParams";
 import type { pagedResult } from "../dtos/pagedResult";
 
@@ -16,7 +16,7 @@ export interface SongsService {
 
 const defaultRoute = "/songs";
 
-export function useSongsService(): SongsService {
+export function songRequests(): SongsService {
   return {
     add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
 

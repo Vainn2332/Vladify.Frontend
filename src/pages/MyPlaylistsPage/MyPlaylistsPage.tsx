@@ -5,8 +5,8 @@ import {
 } from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
-import { usePlaylistsService } from "../../api/services/usePlaylistsService";
-import type { playlist } from "../../api/dtos/playlist";
+import { usePlaylistsService } from "../../api/playlist/playlistRequests";
+import type { playlist } from "../../api/playlist/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { usePagination } from "../../hooks/usePagination";
 

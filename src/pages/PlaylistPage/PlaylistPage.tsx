@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
-import type { song } from "../../api/dtos/song";
+import type { song } from "../../api/song/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { Navigate, useParams } from "react-router-dom";
-import type { playlist } from "../../api/dtos/playlist";
+import type { playlist } from "../../api/playlist/playlist";
 
 interface PlaylistPageContentProps {
   playlistId: string;

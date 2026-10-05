@@ -8,7 +8,7 @@ const ICON_SIZES = {
 
 interface IconButtonProps extends React.ComponentProps<"button"> {
   icon: LucideIcon;
-  className: string;
+  className?: string;
   size?: "sm" | "md" | "lg";
   isFilled?: boolean;
 }

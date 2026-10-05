@@ -6,5 +6,6 @@ export const playlistKeys = {
   all: () => [PLAYLISTS_QUERY_KEY] as const,
   list: () => [...playlistKeys.all(), "list"] as const,
   page: (params: paginationParams) => [...playlistKeys.list(), params] as const,
-  detail: (id: string) => [...playlistKeys.all(), id] as const,
+  details: () => [...playlistKeys.all(), "detail"] as const,
+  detail: (id: string) => [...playlistKeys.details(), id] as const,
 };

@@ -4,9 +4,9 @@ import type { paginationParams } from "../dtos/paginationParams";
 import { songRequests } from "./songRequests";
 
 export const songQueries = {
-  list: (params: paginationParams) =>
+  page: (params: paginationParams) =>
     queryOptions({
-      queryKey: songKeys.list(params),
+      queryKey: songKeys.page(params),
       queryFn: ({ signal }) => songRequests.getAll(params, signal),
     }),
 

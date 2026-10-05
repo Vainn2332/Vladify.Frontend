@@ -4,9 +4,9 @@ import { playlistRequests } from "./playlistRequests";
 import { playlistKeys } from "./playlistKeys";
 
 export const playlistQueries = {
-  list: (params: paginationParams) =>
+  page: (params: paginationParams) =>
     queryOptions({
-      queryKey: playlistKeys.list(params),
+      queryKey: playlistKeys.page(params),
       queryFn: ({ signal }) => playlistRequests.getAll(params, signal),
     }),
 

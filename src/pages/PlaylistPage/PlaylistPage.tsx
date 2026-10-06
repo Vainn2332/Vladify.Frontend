@@ -5,284 +5,15 @@ import type { song } from "../../api/song/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { Navigate, useParams } from "react-router-dom";
-import type { playlist } from "../../api/playlist/playlist";
+import { playlistQueries } from "../../api/playlist/playlistQueries";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { playlistMutations } from "../../api/playlist/playlistMutations";
 
 interface PlaylistPageContentProps {
   playlistId: string;
 }
 
-const data = {
-  headerImage: "https://picsum.photos/seed/late-night-drive/300/300",
-};
-
-const SONGS: song[] = [
-  {
-    id: "song-1",
-    title: "Paralyzed",
-    album: "Conquer Divide",
-    author: "Conquer Divide",
-    authorId: 1,
-    coverUrl: "https://picsum.photos/seed/track1/300/300",
-    duration: "03:32",
-    addedAt: "2026-06-02",
-  },
-  {
-    id: "song-2",
-    title: "Messages",
-    album: "Conquer Divide",
-    author: "Conquer Divide",
-    authorId: 1,
-    coverUrl: "https://picsum.photos/seed/track2/300/300",
-    duration: "03:18",
-    addedAt: "2026-06-02",
-  },
-  {
-    id: "song-3",
-    title: "I Am",
-    album: "Dissonants",
-    author: "Hands Like Houses",
-    authorId: 2,
-    coverUrl: "https://picsum.photos/seed/track3/300/300",
-    duration: "03:25",
-    addedAt: "2026-06-05",
-  },
-  {
-    id: "song-4",
-    title: "Colourblind",
-    album: "Unimagine",
-    author: "Hands Like Houses",
-    authorId: 2,
-    coverUrl: "https://picsum.photos/seed/track4/300/300",
-    duration: "03:36",
-    addedAt: "2026-06-09",
-  },
-  {
-    id: "song-5",
-    title: "Do I Wanna Know?",
-    album: "AM",
-    author: "Arctic Monkeys",
-    authorId: 3,
-    coverUrl: "https://picsum.photos/seed/track5/300/300",
-    duration: "04:32",
-    addedAt: "2026-06-14",
-  },
-  {
-    id: "song-6",
-    title: "R U Mine?",
-    album: "AM",
-    author: "Arctic Monkeys",
-    authorId: 3,
-    coverUrl: "https://picsum.photos/seed/track6/300/300",
-    duration: "03:21",
-    addedAt: "2026-06-14",
-  },
-  {
-    id: "song-7",
-    title: "505",
-    album: "Favourite Worst Nightmare",
-    author: "Arctic Monkeys",
-    authorId: 3,
-    coverUrl: "https://picsum.photos/seed/track7/300/300",
-    duration: "04:13",
-    addedAt: "2026-06-20",
-  },
-  {
-    id: "song-8",
-    title: "Weird Fishes/Arpeggi",
-    album: "In Rainbows",
-    author: "Radiohead",
-    authorId: 4,
-    coverUrl: "https://picsum.photos/seed/track8/300/300",
-    duration: "05:18",
-    addedAt: "2026-06-27",
-  },
-  {
-    id: "song-9",
-    title: "Karma Police",
-    album: "OK Computer",
-    author: "Radiohead",
-    authorId: 4,
-    coverUrl: "https://picsum.photos/seed/track9/300/300",
-    duration: "04:24",
-    addedAt: "2026-07-01",
-  },
-  {
-    id: "song-10",
-    title: "Instant Crush",
-    album: "Random Access Memories",
-    author: "Daft Punk",
-    authorId: 5,
-    coverUrl: "https://picsum.photos/seed/track10/300/300",
-    duration: "05:37",
-    addedAt: "2026-07-04",
-  },
-  {
-    id: "song-11",
-    title: "Digital Love",
-    album: "Discovery",
-    author: "Daft Punk",
-    authorId: 5,
-    coverUrl: "https://picsum.photos/seed/track11/300/300",
-    duration: "04:58",
-    addedAt: "2026-07-04",
-  },
-  {
-    id: "song-12",
-    title: "The Less I Know the Better",
-    album: "Currents",
-    author: "Tame Impala",
-    authorId: 6,
-    coverUrl: "https://picsum.photos/seed/track12/300/300",
-    duration: "03:36",
-    addedAt: "2026-07-11",
-  },
-  {
-    id: "song-13",
-    title: "Let It Happen",
-    album: "Currents",
-    author: "Tame Impala",
-    authorId: 6,
-    coverUrl: "https://picsum.photos/seed/track13/300/300",
-    duration: "07:47",
-    addedAt: "2026-07-15",
-  },
-  {
-    id: "song-14",
-    title: "Dreams",
-    album: "Rumours",
-    author: "Fleetwood Mac",
-    authorId: 7,
-    coverUrl: "https://picsum.photos/seed/track14/300/300",
-    duration: "04:14",
-    addedAt: "2026-07-19",
-  },
-  {
-    id: "song-15",
-    title: "HUMBLE.",
-    album: "DAMN.",
-    author: "Kendrick Lamar",
-    authorId: 8,
-    coverUrl: "https://picsum.photos/seed/track15/300/300",
-    duration: "02:57",
-    addedAt: "2026-07-23",
-  },
-  {
-    id: "song-16",
-    title: "Happier Than Ever",
-    album: "Happier Than Ever",
-    author: "Billie Eilish",
-    authorId: 9,
-    coverUrl: "https://picsum.photos/seed/track16/300/300",
-    duration: "04:58",
-    addedAt: "2026-07-30",
-  },
-  {
-    id: "song-17",
-    title: "Can You Feel My Heart",
-    album: "Sempiternal",
-    author: "Bring Me The Horizon",
-    authorId: 10,
-    coverUrl: "https://picsum.photos/seed/track17/300/300",
-    duration: "04:00",
-    addedAt: "2026-08-03",
-  },
-  {
-    id: "song-18",
-    title: "Drown",
-    album: "That's the Spirit",
-    author: "Bring Me The Horizon",
-    authorId: 10,
-    coverUrl: "https://picsum.photos/seed/track18/300/300",
-    duration: "03:42",
-    addedAt: "2026-08-03",
-  },
-  {
-    id: "song-19",
-    title: "Come As You Are",
-    album: "Nevermind",
-    author: "Nirvana",
-    authorId: 11,
-    coverUrl: "https://picsum.photos/seed/track19/300/300",
-    duration: "03:39",
-    addedAt: "2026-08-10",
-  },
-  {
-    id: "song-20",
-    title: "Blinding Lights",
-    album: "After Hours",
-    author: "The Weeknd",
-    authorId: 12,
-    coverUrl: "https://picsum.photos/seed/track20/300/300",
-    duration: "03:20",
-    addedAt: "2026-08-16",
-  },
-  {
-    id: "song-21",
-    title: "Teardrop",
-    album: "Mezzanine",
-    author: "Massive Attack",
-    authorId: 13,
-    coverUrl: "https://picsum.photos/seed/track21/300/300",
-    duration: "05:29",
-    addedAt: "2026-08-21",
-  },
-  {
-    id: "song-22",
-    title: "Dog Days Are Over",
-    album: "Lungs",
-    author: "Florence + The Machine",
-    authorId: 14,
-    coverUrl: "https://picsum.photos/seed/track22/300/300",
-    duration: "04:12",
-    addedAt: "2026-08-28",
-  },
-  {
-    id: "song-23",
-    title: "I Write Sins Not Tragedies",
-    album: "A Fever You Can't Sweat Out",
-    author: "Panic! At The Disco",
-    authorId: 15,
-    coverUrl: "https://picsum.photos/seed/track23/300/300",
-    duration: "03:06",
-    addedAt: "2026-09-04",
-  },
-  {
-    id: "song-24",
-    title: "This Ain't a Scene, It's an Arms Race",
-    album: "Infinity on High",
-    author: "Fall Out Boy",
-    authorId: 16,
-    coverUrl: "https://picsum.photos/seed/track24/300/300",
-    duration: "03:32",
-    addedAt: "2026-09-12",
-  },
-  {
-    id: "song-25",
-    title: "Storm",
-    album: "Lift Your Skinny Fists Like Antennas to Heaven",
-    author: "Godspeed You! Black Emperor",
-    authorId: 17,
-    coverUrl: "https://picsum.photos/seed/track25/300/300",
-    duration: "22:32",
-    addedAt: "2026-09-19",
-  },
-  {
-    id: "song-26",
-    title: "Bohemian Rhapsody",
-    album: "A Night at the Opera",
-    author: "Queen",
-    authorId: 18,
-    coverUrl: "https://picsum.photos/seed/track26/300/300",
-    duration: "05:55",
-    addedAt: "2026-09-27",
-  },
-];
-const playlist: playlist = {
-  authorName: "vlad",
-  id: "1",
-  name: "Late Night Drive",
-  songs: SONGS,
-};
+const headerImageUrl = "https://picsum.photos/seed/late-night-drive/300/300";
 
 export function PlaylistPage() {
   const { playlistId } = useParams<string>();
@@ -292,24 +23,35 @@ export function PlaylistPage() {
   return <PlaylistPageContent key={playlistId} playlistId={playlistId} />;
 }
 
-//fetch logic will be added in next PR
 function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
-  const [songs, setSongs] = useState<song[]>(SONGS);
   const [songToDelete, setSongToDelete] = useState<song | null>(null);
-  const [playlistName, setPlaylistName] = useState(playlist.name);
   const [isRenameOpen, setIsRenameOpen] = useState(false);
+  const { data, isPending, isError } = useQuery(
+    playlistQueries.detail(playlistId),
+  );
+  const renamePlaylist = useMutation(playlistMutations.rename);
+  const deleteSongFromPlaylist = useMutation(
+    playlistMutations.removeSongFromPlaylist,
+  );
 
-  const handleRename = (name: string) => setPlaylistName(name);
+  if (isPending) return <p>Loading...</p>;
+  if (isError || !data) return <p>Error loading playlist.</p>;
+
+  const songs = data?.songs ?? [];
+
+  const handleRename = (name: string) =>
+    renamePlaylist.mutate({ id: playlistId, name });
 
   const findSongToDelete = (id: string) =>
     setSongToDelete(songs.find((s) => s.id === id) ?? null);
 
   const handleDeleteConfirm = () =>
-    setSongs((current) =>
-      current.filter((song) => song.id !== songToDelete?.id),
-    );
+    deleteSongFromPlaylist.mutate({
+      playlistId,
+      songId: songToDelete!.id,
+    });
 
-  //temporary stub for this PR. Will be changed when api would be added
+  //TODO: implement song playback when clicking on a song in the playlist
   const handleClick = (id: string) => {
     console.log(`song with ${id} clicked!`);
   };
@@ -317,12 +59,11 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   return (
     <>
       <PlaylistHeader
-        headerImage={data.headerImage}
-        headerName={playlistName}
+        headerImage={headerImageUrl}
+        headerName={data.name}
         metadata={
           <div className="list-inside list-disc">
-            <li>{playlistId}</li>
-            <li> {playlist.authorName}</li>
+            <li> {data.authorName}</li>
           </div>
         }
         onRename={() => setIsRenameOpen(true)}
@@ -354,7 +95,7 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
         <TextInputModal
           title="Rename playlist"
           placeholder="Playlist name"
-          initialValue={playlistName}
+          initialValue={data.name}
           onClose={() => setIsRenameOpen(false)}
           onSubmit={handleRename}
         />

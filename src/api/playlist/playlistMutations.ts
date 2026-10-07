@@ -25,6 +25,31 @@ export const playlistMutations = {
   removeSongFromPlaylist: mutationOptions({
     mutationFn: (dto: deleteSongFromPlaylistDto) =>
       playlistRequests.deleteSongFromPlaylist(dto),
+
+    onMutate: async ({ playlistId, songId }, { client }) => {
+      const queryKey = playlistKeys.detail(playlistId);
+
+      await client.cancelQueries({ queryKey });
+
+      const previousData = client.getQueryData(queryKey);
+
+      client.setQueryData(queryKey, (oldData: any) => {
+        if (!oldData) return oldData;
+        return {
+          ...oldData,
+          songs: oldData.songs.filter((song: any) => song.id !== songId),
+        };
+      });
+      return { previousData };
+    },
+    onError: (_error, _variables, onMutateResult, { client }) => {
+      if (onMutateResult?.previousData) {
+        client.setQueryData(
+          playlistKeys.detail(onMutateResult.previousData.id),
+          onMutateResult.previousData,
+        );
+      }
+    },
     onSuccess: (data, variables, _onMutateResult, { client }) => {
       client.setQueryData(playlistKeys.detail(variables.playlistId), data);
     },

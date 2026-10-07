@@ -1,6 +1,6 @@
 import type { paginationParams } from "../dtos/paginationParams";
 
-const PLAYLISTS_QUERY_KEY = "playlists";
+const PLAYLISTS_QUERY_KEY: string = "playlists";
 
 export const playlistKeys = {
   all: () => [PLAYLISTS_QUERY_KEY] as const,

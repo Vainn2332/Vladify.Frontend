@@ -6,6 +6,7 @@ import type {
   updatePlaylistDto,
 } from "./playlist";
 import { playlistKeys } from "./playlistKeys";
+import { playlistQueries } from "./playlistQueries";
 
 export const playlistMutations = {
   create: mutationOptions({
@@ -27,25 +28,25 @@ export const playlistMutations = {
       playlistRequests.deleteSongFromPlaylist(dto),
 
     onMutate: async ({ playlistId, songId }, { client }) => {
-      const queryKey = playlistKeys.detail(playlistId);
+      const queryKey = playlistQueries.detail(playlistId).queryKey;
 
       await client.cancelQueries({ queryKey });
 
       const previousData = client.getQueryData(queryKey);
 
-      client.setQueryData(queryKey, (oldData: any) => {
+      client.setQueryData(queryKey, (oldData) => {
         if (!oldData) return oldData;
         return {
           ...oldData,
-          songs: oldData.songs.filter((song: any) => song.id !== songId),
+          songs: oldData.songs.filter((song) => song.id !== songId),
         };
       });
       return { previousData };
     },
-    onError: (_error, _variables, onMutateResult, { client }) => {
+    onError: (_error, { playlistId }, onMutateResult, { client }) => {
       if (onMutateResult?.previousData) {
         client.setQueryData(
-          playlistKeys.detail(onMutateResult.previousData.id),
+          playlistKeys.detail(playlistId),
           onMutateResult.previousData,
         );
       }

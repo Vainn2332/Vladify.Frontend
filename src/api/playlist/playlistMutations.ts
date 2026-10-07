@@ -17,8 +17,29 @@ export const playlistMutations = {
 
   rename: mutationOptions({
     mutationFn: (dto: updatePlaylistDto) => playlistRequests.update(dto),
-    onSuccess: (data, variables, _onMutateResult, { client }) => {
-      client.setQueryData(playlistKeys.detail(variables.id), data);
+    onMutate: async ({ id, name }, { client }) => {
+      const queryKey = playlistQueries.detail(id).queryKey;
+      await client.cancelQueries({ queryKey });
+
+      const previousName = client.getQueryData(queryKey)?.name;
+      client.setQueryData(queryKey, (old) => old && { ...old, name });
+
+      return { previousName };
+    },
+
+    onError: (_error, { id }, onMutateResult, { client }) => {
+      if (onMutateResult?.previousName) {
+        client.setQueryData(
+          playlistKeys.detail(id),
+          onMutateResult.previousName,
+        );
+      }
+    },
+    onSuccess: (data, { id }, _onMutateResult, { client }) => {
+      client.setQueryData(
+        playlistQueries.detail(id).queryKey,
+        (old) => old && { ...old, name: data.name },
+      );
       return client.invalidateQueries({ queryKey: playlistKeys.list() });
     },
   }),

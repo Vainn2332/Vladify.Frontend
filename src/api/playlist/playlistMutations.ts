@@ -26,7 +26,6 @@ export const playlistMutations = {
 
       return { previousName };
     },
-
     onError: (_error, { id }, onMutateResult, { client }) => {
       if (onMutateResult?.previousName) {
         client.setQueryData(

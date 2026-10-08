@@ -24,13 +24,14 @@ export const playlistMutations = {
       const previousName = client.getQueryData(queryKey)?.name;
       client.setQueryData(queryKey, (old) => old && { ...old, name });
 
-      return { previousName };
+      return { previousName, queryKey };
     },
-    onError: (_error, { id }, onMutateResult, { client }) => {
-      if (onMutateResult?.previousName) {
+    onError: (_error, _variables, onMutateResult, { client }) => {
+      const previousName = onMutateResult?.previousName;
+      if (previousName) {
         client.setQueryData(
-          playlistKeys.detail(id),
-          onMutateResult.previousName,
+          onMutateResult.queryKey,
+          (old) => old && { ...old, name: previousName },
         );
       }
     },
@@ -39,6 +40,7 @@ export const playlistMutations = {
         playlistQueries.detail(id).queryKey,
         (old) => old && { ...old, name: data.name },
       );
+
       return client.invalidateQueries({ queryKey: playlistKeys.list() });
     },
   }),
@@ -56,11 +58,13 @@ export const playlistMutations = {
 
       client.setQueryData(queryKey, (oldData) => {
         if (!oldData) return oldData;
+
         return {
           ...oldData,
           songs: oldData.songs.filter((song) => song.id !== songId),
         };
       });
+
       return { previousData };
     },
     onError: (_error, { playlistId }, onMutateResult, { client }) => {

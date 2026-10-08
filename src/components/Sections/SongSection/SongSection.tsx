@@ -15,7 +15,12 @@ export function SongSection({
   onDelete,
   onClick,
 }: SongSectionProps) {
-  if (songs.length === 0) return null;
+  if (songs.length === 0)
+    return (
+      <div className="text-secondary flex h-32 justify-center">
+        No songs in this playlist.
+      </div>
+    );
 
   return (
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">

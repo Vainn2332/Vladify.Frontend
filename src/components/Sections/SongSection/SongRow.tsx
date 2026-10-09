@@ -1,6 +1,7 @@
 import { Trash2 as DeleteIcon } from "lucide-react";
 import type { song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
+import { formatDuration } from "../../../utils/formatDuration";
 
 interface SongRowProps {
   index: number;
@@ -39,7 +40,7 @@ export function SongRow({
       </td>
       <td className="hidden p-2 sm:table-cell">{song.album}</td>
       {showAddedAt && <td className="p-2">{song.addedAt}</td>}
-      <td className="p-2">{song.duration}</td>
+      <td className="p-2">{formatDuration(song.duration)}</td>
       {onDelete && (
         <td className="p-2 text-center">
           <IconButton

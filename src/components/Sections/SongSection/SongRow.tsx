@@ -1,5 +1,5 @@
 import { Trash2 as DeleteIcon } from "lucide-react";
-import type { song } from "../../../api/dtos/song";
+import type { song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 
 interface SongRowProps {

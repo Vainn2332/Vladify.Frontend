@@ -11,7 +11,7 @@ export interface SongRequests {
   ): Promise<pagedResult<song>>;
   getById(id: string, signal?: AbortSignal): Promise<song>;
   update(dto: updateSongDto): Promise<song>;
-  delete(id: number): Promise<void>;
+  delete(id: string): Promise<void>;
 }
 
 const defaultRoute = "/songs";

@@ -5,7 +5,7 @@ import { IconButton } from "../../Buttons/IconButton";
 interface SongRowProps {
   index: number;
   song: song;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
   onClick: (id: string) => void;
   showAddedAt?: boolean;
 }
@@ -40,16 +40,18 @@ export function SongRow({
       <td className="hidden p-2 sm:table-cell">{song.album}</td>
       {showAddedAt && <td className="p-2">{song.addedAt}</td>}
       <td className="p-2">{song.duration}</td>
-      <td className="p-2 text-center">
-        <IconButton
-          className="aspect-square w-5 cursor-pointer hover:text-red-500"
-          icon={DeleteIcon}
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(song.id);
-          }}
-        />
-      </td>
+      {onDelete && (
+        <td className="p-2 text-center">
+          <IconButton
+            className="aspect-square w-5 cursor-pointer hover:text-red-500"
+            icon={DeleteIcon}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(song.id);
+            }}
+          />
+        </td>
+      )}
     </tr>
   );
 }

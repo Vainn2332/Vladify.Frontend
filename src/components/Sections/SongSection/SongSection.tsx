@@ -5,7 +5,7 @@ import type { song } from "../../../api/song/song";
 interface SongSectionProps {
   songs: song[];
   showAddedAt?: boolean;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
   onClick: (id: string) => void;
 }
 
@@ -33,7 +33,7 @@ export function SongSection({
           <th className="w-10 p-4 sm:w-20">
             <Clock className="size-4" />
           </th>
-          <th className="w-10 p-4" />
+          {onDelete && <th className="w-10 p-4" />}
         </tr>
       </thead>
 

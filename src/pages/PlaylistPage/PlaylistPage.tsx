@@ -64,15 +64,16 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
         metadata={
           <div className="list-inside list-disc">
             <li> {data.authorName}</li>
+            <li> {songs.length} songs</li>
           </div>
         }
-        onRename={() => setIsRenameOpen(true)}
+        onRename={data.isOwner ? () => setIsRenameOpen(true) : undefined}
       />
 
       <div className="mt-16">
         <SongSection
           songs={songs}
-          onDelete={findSongToDelete}
+          onDelete={data.isOwner ? findSongToDelete : undefined}
           onClick={handleClick}
           showAddedAt={true}
         />

@@ -75,7 +75,7 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
           songs={songs}
           onDelete={data.isOwner ? findSongToDelete : undefined}
           onClick={handleClick}
-          showAddedAt={true}
+          showAddedAt={data.isOwner}
         />
       </div>
 

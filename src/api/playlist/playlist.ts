@@ -3,6 +3,7 @@ import type { song } from "../song/song";
 export interface playlist {
   id: string;
   name: string;
+  isOwner: boolean;
   authorName: string;
   songs: song[];
 }

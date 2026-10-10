@@ -68,7 +68,7 @@ export function SearchInput({
       />
       <SearchResult
         searchResult={seedData}
-        onClick={() => console.log("bla")}
+        onClick={(id) => console.log(`id clicked: ${id}`)}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../../../assets/logo.png";
-import { SearchInput } from "../../SearchInput/SearchInput";
+import { SearchInput } from "../../Search/SearchInput";
 
 export function Header() {
   const { logout } = useAuth0();

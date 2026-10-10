@@ -31,7 +31,7 @@ export function SearchData({
         <span className="truncate text-xs">{subtitle}</span>
       </div>
       {description && (
-        <span className="ml-auto hidden text-gray-500 sm:text-sm">
+        <span className="ml-auto hidden text-sm text-gray-500 sm:inline">
           {description}
         </span>
       )}

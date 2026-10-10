@@ -3,7 +3,7 @@ export interface song {
   title: string;
   album: string;
   author: string;
-  authorId: string;
+  authorId: number;
   duration: string;
   addedAt: string;
   coverUrl: string;

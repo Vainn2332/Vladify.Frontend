@@ -17,7 +17,7 @@ export function SearchData({
 }: SearchData) {
   return (
     <div
-      className="m-1.5 flex items-center gap-2 hover:cursor-pointer hover:text-inherit/40"
+      className="hover:bg-primary/10 flex items-center gap-2 rounded-lg p-2 transition-colors duration-150 hover:cursor-pointer"
       onClick={(e) => {
         onClick(id);
         e.stopPropagation();

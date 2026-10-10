@@ -15,6 +15,16 @@ const seedData: SearchResponse = {
     },
     {
       addedAt: "2023-06-01",
+      album: "Album 1asdasd",
+      author: "Author 1sssdas",
+      authorId: 21,
+      coverUrl: "https://picsum.photos/seed/song1/300/300",
+      duration: "3:45",
+      id: "song1",
+      title: "Song 1zxcvdsdf",
+    },
+    {
+      addedAt: "2023-06-01",
       album: "Album 1",
       author: "Author 1",
       authorId: 21,

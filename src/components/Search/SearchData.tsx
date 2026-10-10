@@ -23,7 +23,7 @@ export function SearchData({
         e.stopPropagation();
       }}
     >
-      <div className="aspect-square w-10 overflow-hidden rounded-lg bg-gray-300 sm:w-11">
+      <div className="aspect-square w-8 shrink-0 overflow-hidden rounded-lg bg-gray-300 sm:w-11">
         <img
           src={imageUrl}
           alt={title}
@@ -35,7 +35,7 @@ export function SearchData({
         <span className="truncate text-xs text-gray-500">{subtitle}</span>
       </div>
       {description && (
-        <span className="ml-auto pr-4 text-sm text-gray-500 sm:p-2">
+        <span className="ml-auto text-xs text-gray-500 sm:p-2 sm:text-sm">
           {description}
         </span>
       )}

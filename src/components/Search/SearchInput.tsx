@@ -59,12 +59,12 @@ export function SearchInput({
   ...props
 }: ComponentPropsWithRef<"input">) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`sm:relative ${className}`}>
       <input
         type="text"
         placeholder="Search"
         {...props}
-        className={`w-full rounded-2xl bg-white/85 py-1 text-center text-cyan-950 shadow-sm backdrop-blur-md transition-colors duration-200 outline-none hover:bg-white/70 focus:bg-white/70 ${className}`}
+        className="w-full rounded-2xl bg-white/85 py-1 text-center text-cyan-950 shadow-sm backdrop-blur-md transition-colors duration-200 outline-none hover:bg-white/70 focus:bg-white/70"
       />
       <SearchResult
         searchResult={seedData}

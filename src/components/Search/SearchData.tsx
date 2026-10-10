@@ -23,15 +23,19 @@ export function SearchData({
         e.stopPropagation();
       }}
     >
-      <div className="aspect-square w-5 overflow-hidden rounded-md bg-gray-300 sm:w-11 sm:rounded-lg">
-        <img src={imageUrl} alt="searchDataImage" className="object-contain" />
+      <div className="aspect-square w-10 overflow-hidden rounded-lg bg-gray-300 sm:w-11">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="h-full w-full object-cover"
+        />
       </div>
-      <div className="flex flex-col overflow-hidden">
+      <div className="flex min-w-0 flex-col">
         <span className="truncate text-sm font-bold">{title}</span>
-        <span className="truncate text-xs">{subtitle}</span>
+        <span className="truncate text-xs text-gray-500">{subtitle}</span>
       </div>
       {description && (
-        <span className="ml-auto hidden text-sm text-gray-500 sm:inline">
+        <span className="ml-auto pr-4 text-sm text-gray-500 sm:p-2">
           {description}
         </span>
       )}

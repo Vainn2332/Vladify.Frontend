@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { playlist } from "../../api/dtos/playlist";
 import type { song } from "../../api/dtos/song";
 import type { user } from "../../api/dtos/user";
@@ -15,9 +16,23 @@ const imageUrl = (id: string) => `https://picsum.photos/seed/${id}/300/300`;
 interface SearchResultProps {
   searchResult: SearchResponse;
   onClick: (id: string) => void;
+  onClose: () => void;
 }
 
-export function SearchResult({ searchResult, onClick }: SearchResultProps) {
+export function SearchResult({
+  searchResult,
+  onClick,
+  onClose,
+}: SearchResultProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   return (
     <div className="absolute top-full left-1/2 z-10 mt-1 w-1/2 -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-md sm:left-0 sm:w-full sm:translate-x-0">
       <div className="flex max-h-48 scrollbar-thin flex-col gap-1 overflow-y-auto py-2 pr-1 pl-2">

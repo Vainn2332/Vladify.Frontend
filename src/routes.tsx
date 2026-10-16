@@ -5,7 +5,6 @@ import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { MainLayout } from "./components/Layout/MainLayout";
 import { MyPlaylistsPage } from "./pages/MyPlaylistsPage/MyPlaylistsPage";
 import { PlaylistPage } from "./pages/PlaylistPage/PlaylistPage";
-import { CreateSongModal } from "./components/Modals/CreateSongModal/CreateSongModal";
 
 export const router = createBrowserRouter([
   {
@@ -27,10 +26,6 @@ export const router = createBrowserRouter([
             element: <PlaylistPage />,
           },
         ],
-      },
-      {
-        path: "/test",
-        element: <CreateSongModal onClose={() => console.log(1)} />,
       },
       {
         path: "*",

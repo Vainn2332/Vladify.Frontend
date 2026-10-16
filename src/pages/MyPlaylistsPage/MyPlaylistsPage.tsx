@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   CardSection,
   type CardSectionItem,
 } from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
-import { usePlaylistsService } from "../../api/services/usePlaylistsService";
-import type { playlist } from "../../api/dtos/playlist";
+import type { playlist } from "../../api/playlist/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { usePagination } from "../../hooks/usePagination";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { playlistQueries } from "../../api/playlist/playlistQueries";
+import { playlistMutations } from "../../api/playlist/playlistMutations";
 
 function toCardItem(playlist: playlist): CardSectionItem {
   return {
@@ -20,43 +22,31 @@ function toCardItem(playlist: playlist): CardSectionItem {
 }
 
 export function MyPlaylistsPage() {
-  const playlistsService = usePlaylistsService();
-  const [playlists, setPlaylists] = useState<playlist[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [reloadToken, setReloadToken] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { pageNumber, pageSize, goToNextPage, goToPrevPage } = usePagination();
-  const [hasNextPage, setHasNextPage] = useState(false);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    setIsLoading(true);
-
-    playlistsService
-      .getAll({ pageNumber, pageSize })
-      .then((response) => {
-        setPlaylists(response.data);
-        setHasNextPage(response.hasNextPage);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        if (!abortController.signal.aborted) {
-          console.error("Failed to load playlists:", error);
-          setIsLoading(false);
-        }
-      });
-
-    return () => abortController.abort();
-  }, [playlistsService, pageNumber, pageSize, reloadToken]);
+  const {
+    data: response,
+    isPending,
+    isError,
+  } = useQuery(playlistQueries.page({ pageNumber, pageSize }));
+  const createPlaylist = useMutation(playlistMutations.create);
 
   const handleCreatePlaylist = async (title: string) => {
     try {
-      await playlistsService.add({ name: title });
-      setReloadToken((token) => token + 1);
+      await createPlaylist.mutateAsync({ name: title });
     } catch (error) {
       console.error("Failed to create playlist:", error);
     }
   };
+
+  const playlists = response?.data ?? [];
+  const hasNextPage = response?.hasNextPage ?? false;
+
+  const placeholderText = isPending
+    ? "Loading…"
+    : isError
+      ? "Failed to load playlists"
+      : "Create your first playlist";
 
   return (
     <>
@@ -64,11 +54,7 @@ export function MyPlaylistsPage() {
         items={playlists.map(toCardItem)}
         title="My playlists"
         linkTemplate={(item) => `/playlists/${item.id}`}
-        placeholder={
-          <p className="text-primary">
-            {isLoading ? "Loading…" : "Create your first playlist"}
-          </p>
-        }
+        placeholder={<p className="text-primary">{placeholderText}</p>}
         action={
           <button
             type="button"
@@ -87,7 +73,7 @@ export function MyPlaylistsPage() {
             hasNextPage={hasNextPage}
             onNextPage={() => goToNextPage()}
             onPrevPage={() => goToPrevPage()}
-            isLoading={isLoading}
+            isLoading={isPending}
           />
         </div>
       )}

@@ -8,9 +8,10 @@ import { Modal } from "../Modal";
 
 interface CreateSongModalProps {
   onClose: () => void;
+  onConfirm: () => void;
 }
 
-export function CreateSongModal({ onClose }: CreateSongModalProps) {
+export function CreateSongModal({ onClose, onConfirm }: CreateSongModalProps) {
   return (
     <Modal onClose={onClose} title="Create new song">
       <TextField title="Name" placeholder="Your song name" />
@@ -30,7 +31,10 @@ export function CreateSongModal({ onClose }: CreateSongModalProps) {
       />
 
       <div className="flex items-center justify-center gap-10">
-        <button className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white transition-colors hover:bg-cyan-400">
+        <button
+          onClick={onConfirm}
+          className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white transition-colors hover:bg-cyan-400"
+        >
           Confirm
         </button>
         <button

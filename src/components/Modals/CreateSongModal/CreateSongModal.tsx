@@ -27,7 +27,6 @@ export function CreateSongModal({ onClose }: CreateSongModalProps) {
         title="CoverImage"
         allowedExtensions={COVER_IMAGE_EXTENSIONS}
         placeholder="Your cover image"
-        preview
       />
 
       <div className="flex items-center justify-center gap-10">

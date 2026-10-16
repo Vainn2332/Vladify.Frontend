@@ -5,14 +5,12 @@ interface FileFieldProps extends Omit<ComponentProps<"input">, "accept"> {
   title: string;
   placeholder: string;
   allowedExtensions: string[];
-  preview?: boolean;
 }
 
 export function FileField({
   title,
   placeholder,
   allowedExtensions,
-  preview = false,
   className,
   onChange,
   ...props
@@ -41,9 +39,7 @@ export function FileField({
 
     setFileName(file?.name ?? null);
     setPreviewUrl(
-      preview && file?.type.startsWith("image/")
-        ? URL.createObjectURL(file)
-        : null,
+      file?.type.startsWith("image/") ? URL.createObjectURL(file) : null,
     );
     onChange?.(e);
   };

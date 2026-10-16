@@ -15,6 +15,12 @@ export const playlistMutations = {
       client.invalidateQueries({ queryKey: playlistKeys.list() }),
   }),
 
+  delete: mutationOptions({
+    mutationFn: (id: string) => playlistRequests.delete(id),
+    onSuccess: (_data, _variables, _onMutateResult, { client }) =>
+      client.invalidateQueries({ queryKey: playlistKeys.list() }),
+  }),
+
   rename: mutationOptions({
     mutationFn: (dto: updatePlaylistDto) => playlistRequests.update(dto),
     onMutate: async ({ id, name }, { client }) => {

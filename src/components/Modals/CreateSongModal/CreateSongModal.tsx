@@ -1,3 +1,7 @@
+import {
+  AUDIO_EXTENSIONS,
+  COVER_IMAGE_EXTENSIONS,
+} from "../../../constants/fileExtensions";
 import { FileField } from "../Fields/FileField";
 import { TextField } from "../Fields/TextField";
 import { Modal } from "../Modal";
@@ -16,28 +20,28 @@ export function CreateSongModal({ onClose, onConfirm }: CreateSongModalProps) {
 
       <FileField
         title="AudioFile"
-        accept="audio/*"
+        allowedExtensions={AUDIO_EXTENSIONS}
         placeholder="Your audio file"
       />
 
       <FileField
         title="CoverImage"
-        accept="image/*"
+        allowedExtensions={COVER_IMAGE_EXTENSIONS}
         placeholder="Your cover image"
       />
 
       <div className="flex items-center justify-center gap-10">
         <button
           onClick={onConfirm}
-          className="cursor-pointer rounded-2xl bg-cyan-300 px-4 shadow-md transition-colors hover:bg-cyan-400/85"
+          className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white shadow-md transition-colors hover:bg-cyan-400"
         >
-          confirm
+          Confirm
         </button>
         <button
-          className="cursor-pointer rounded-2xl bg-black/10 px-4 transition-colors hover:bg-black/20"
+          className="cursor-pointer rounded-2xl bg-black/10 px-4 shadow-md transition-colors hover:bg-black/20"
           onClick={onClose}
         >
-          cancel
+          Cancel
         </button>
       </div>
     </Modal>

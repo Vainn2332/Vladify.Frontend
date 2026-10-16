@@ -1,3 +1,7 @@
+import {
+  AUDIO_EXTENSIONS,
+  COVER_IMAGE_EXTENSIONS,
+} from "../../../constants/fileExtensions";
 import { FileField } from "../Fields/FileField";
 import { TextField } from "../Fields/TextField";
 import { Modal } from "../Modal";
@@ -15,16 +19,14 @@ export function CreateSongModal({ onClose }: CreateSongModalProps) {
 
       <FileField
         title="AudioFile"
-        accept="audio/*"
+        allowedExtensions={AUDIO_EXTENSIONS}
         placeholder="Your audio file"
-        invalidTypeMessage="Only audio files are allowed"
       />
 
       <FileField
         title="CoverImage"
-        accept="image/*"
+        allowedExtensions={COVER_IMAGE_EXTENSIONS}
         placeholder="Your cover image"
-        invalidTypeMessage="Only images are allowed"
         preview
       />
 

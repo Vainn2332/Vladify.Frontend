@@ -1,36 +1,18 @@
 import { useEffect, useId, useState, type ComponentProps } from "react";
+import { isValidExtension } from "../../../utils/validators/isValidExtension";
 
-interface FileFieldProps extends ComponentProps<"input"> {
+interface FileFieldProps extends Omit<ComponentProps<"input">, "accept"> {
   title: string;
   placeholder: string;
+  allowedExtensions: string[];
   preview?: boolean;
-  invalidTypeMessage?: string;
-}
-
-// Mirrors the browser's `accept` syntax: ".mp3", "audio/*", "image/png"
-function isAccepted(file: File, accept?: string) {
-  if (!accept) return true;
-
-  const name = file.name.toLowerCase();
-  const type = file.type.toLowerCase();
-
-  return accept
-    .split(",")
-    .map((token) => token.trim().toLowerCase())
-    .filter(Boolean)
-    .some((token) => {
-      if (token.startsWith(".")) return name.endsWith(token);
-      if (token.endsWith("/*")) return type.startsWith(token.slice(0, -1));
-      return type === token;
-    });
 }
 
 export function FileField({
   title,
   placeholder,
+  allowedExtensions,
   preview = false,
-  invalidTypeMessage = "Unsupported file format",
-  accept,
   className,
   onChange,
   ...props
@@ -49,10 +31,10 @@ export function FileField({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files?.[0] ?? null;
 
-    if (file && !isAccepted(file, accept)) {
+    if (file && !isValidExtension(file, allowedExtensions)) {
       e.target.value = "";
       file = null;
-      setError(invalidTypeMessage);
+      setError(`Allowed formats: ${allowedExtensions.join(", ")}`);
     } else {
       setError(null);
     }
@@ -88,7 +70,7 @@ export function FileField({
       <input
         id={id}
         type="file"
-        accept={accept}
+        accept={allowedExtensions.join(",")}
         className="hidden"
         onChange={handleChange}
         {...props}

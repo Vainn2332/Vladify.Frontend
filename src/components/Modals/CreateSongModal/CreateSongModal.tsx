@@ -17,16 +17,19 @@ export function CreateSongModal({ onClose }: CreateSongModalProps) {
         title="AudioFile"
         accept="audio/*"
         placeholder="Your audio file"
+        invalidTypeMessage="Only audio files are allowed"
       />
 
       <FileField
         title="CoverImage"
         accept="image/*"
         placeholder="Your cover image"
+        invalidTypeMessage="Only images are allowed"
+        preview
       />
 
       <div className="flex items-center justify-center gap-10">
-        <button className="cursor-pointer rounded-2xl bg-cyan-500 px-4 transition-colors hover:bg-cyan-400">
+        <button className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white transition-colors hover:bg-cyan-400">
           confirm
         </button>
         <button

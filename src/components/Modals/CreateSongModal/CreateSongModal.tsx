@@ -33,12 +33,12 @@ export function CreateSongModal({ onClose, onConfirm }: CreateSongModalProps) {
       <div className="flex items-center justify-center gap-10">
         <button
           onClick={onConfirm}
-          className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white transition-colors hover:bg-cyan-400"
+          className="cursor-pointer rounded-2xl bg-cyan-500 px-4 text-white shadow-md transition-colors hover:bg-cyan-400"
         >
           Confirm
         </button>
         <button
-          className="cursor-pointer rounded-2xl bg-black/10 px-4 transition-colors hover:bg-black/20"
+          className="cursor-pointer rounded-2xl bg-black/10 px-4 shadow-md transition-colors hover:bg-black/20"
           onClick={onClose}
         >
           Cancel

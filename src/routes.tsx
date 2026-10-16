@@ -29,10 +29,6 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/test",
-        element: <CreateSongModal onClose={() => console.log(1)} />,
-      },
-      {
         path: "*",
         element: (
           <div className="p-8 text-center">

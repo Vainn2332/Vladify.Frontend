@@ -50,6 +50,7 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const handleDelete = (id: string) => {
     deletePlaylist.mutate(id, {
       onSuccess: () => navigate("/MyPlaylists", { replace: true }),
+      onError: () => alert("Failed to delete playlist"),
     });
   };
 

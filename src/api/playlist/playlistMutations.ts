@@ -3,8 +3,10 @@ import { mutationOptions } from "@tanstack/react-query";
 import type {
   createPlaylistDto,
   deleteSongFromPlaylistDto,
+  playlist,
   updatePlaylistDto,
 } from "./playlist";
+import type { pagedResult } from "../dtos/pagedResult";
 import { playlistKeys } from "./playlistKeys";
 import { playlistQueries } from "./playlistQueries";
 
@@ -17,8 +19,14 @@ export const playlistMutations = {
 
   delete: mutationOptions({
     mutationFn: (id: string) => playlistRequests.delete(id),
-    onSuccess: (_data, _variables, _onMutateResult, { client }) =>
-      client.invalidateQueries({ queryKey: playlistKeys.list() }),
+    onSuccess: (_data, id, _onMutateResult, { client }) => {
+      client.setQueriesData<pagedResult<playlist>>(
+        { queryKey: playlistKeys.list() },
+        (old) => old && { ...old, data: old.data.filter((p) => p.id !== id) },
+      );
+
+      return client.invalidateQueries({ queryKey: playlistKeys.list() });
+    },
   }),
 
   rename: mutationOptions({

@@ -52,7 +52,7 @@ export function FileField({
       </div>
       <label
         htmlFor={id}
-        className={`mb-4 flex h-28 cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-dashed ${error ? "border-red-400" : "border-gray-300"} bg-gray-100/70 px-4 text-sm font-bold text-black/70 hover:bg-gray-200/80 ${className ?? ""}`}
+        className={`flex h-28 cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-dashed ${error ? "border-red-400" : "border-gray-300"} ${fileName && "border-green-500"} bg-gray-100/70 px-4 text-sm font-bold text-black/70 hover:bg-gray-200/80 ${className ?? ""}`}
       >
         {previewUrl && (
           <img

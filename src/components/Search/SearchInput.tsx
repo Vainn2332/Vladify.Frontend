@@ -49,6 +49,7 @@ const seedData: SearchResponse = {
     {
       authorName: "Author 1",
       id: "playlist1",
+      isOwner: false,
       name: "Playlist 1",
       songs: [],
     },

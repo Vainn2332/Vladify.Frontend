@@ -7,7 +7,7 @@ export function LoginPage() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const handleLogin = () => {
     setIsLoggingIn(true);
-    loginWithRedirect();
+    loginWithRedirect().catch(() => setIsLoggingIn(false));
   };
 
   const isDisabled = isLoading || isLoggingIn;

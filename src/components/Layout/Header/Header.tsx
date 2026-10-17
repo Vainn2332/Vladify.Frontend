@@ -9,7 +9,9 @@ export function Header() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const handleLogout = () => {
     setIsLoggingOut(true);
-    logout({ logoutParams: { returnTo: window.location.origin } });
+    logout({ logoutParams: { returnTo: window.location.origin } }).catch(() =>
+      setIsLoggingOut(false),
+    );
   };
 
   return (

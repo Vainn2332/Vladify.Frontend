@@ -31,13 +31,13 @@ export function MyPlaylistsPage() {
   } = useQuery(playlistQueries.page({ pageNumber, pageSize }));
   const createPlaylist = useMutation(playlistMutations.create);
 
-  const handleCreatePlaylist = async (title: string) => {
-    try {
-      await createPlaylist.mutateAsync({ name: title });
-    } catch (error) {
-      console.error("Failed to create playlist:", error);
-    }
-  };
+  const handleCreatePlaylist = (title: string) =>
+    createPlaylist.mutate(
+      { name: title },
+      {
+        onError: (error) => console.error("Failed to create playlist:", error),
+      },
+    );
 
   const playlists = response?.data ?? [];
   const hasNextPage = response?.hasNextPage ?? false;

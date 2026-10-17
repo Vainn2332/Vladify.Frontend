@@ -4,7 +4,7 @@ import { SongSection } from "../../components/Sections/SongSection/SongSection";
 import type { song } from "../../api/song/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { playlistQueries } from "../../api/playlist/playlistQueries";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { playlistMutations } from "../../api/playlist/playlistMutations";
@@ -25,11 +25,17 @@ export function PlaylistPage() {
 
 function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   const [songToDelete, setSongToDelete] = useState<song | null>(null);
-  const [isRenameOpen, setIsRenameOpen] = useState(false);
+  const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
+  const [isDeletePlaylistModalOpen, setIsDeletePlaylistModalOpen] =
+    useState(false);
+
+  const navigate = useNavigate();
+
   const { data, isPending, isError } = useQuery(
     playlistQueries.detail(playlistId),
   );
   const renamePlaylist = useMutation(playlistMutations.rename);
+  const deletePlaylist = useMutation(playlistMutations.delete);
   const deleteSongFromPlaylist = useMutation(
     playlistMutations.removeSongFromPlaylist,
   );
@@ -41,6 +47,12 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
 
   const handleRename = (name: string) =>
     renamePlaylist.mutate({ id: playlistId, name });
+  const handleDelete = (id: string) => {
+    deletePlaylist.mutate(id, {
+      onSuccess: () => navigate("/MyPlaylists", { replace: true }),
+      onError: () => alert("Failed to delete playlist"),
+    });
+  };
 
   const findSongToDelete = (id: string) =>
     setSongToDelete(songs.find((s) => s.id === id) ?? null);
@@ -67,7 +79,10 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
             <li> {songs.length} songs</li>
           </div>
         }
-        onRename={data.isOwner ? () => setIsRenameOpen(true) : undefined}
+        onDelete={
+          data.isOwner ? () => setIsDeletePlaylistModalOpen(true) : undefined
+        }
+        onRename={data.isOwner ? () => setIsRenameModalOpen(true) : undefined}
       />
 
       <div className="mt-16">
@@ -92,13 +107,26 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
         />
       )}
 
-      {isRenameOpen && (
+      {isRenameModalOpen && (
         <TextInputModal
           title="Rename playlist"
           placeholder="Playlist name"
           initialValue={data.name}
-          onClose={() => setIsRenameOpen(false)}
+          onClose={() => setIsRenameModalOpen(false)}
           onSubmit={handleRename}
+        />
+      )}
+
+      {isDeletePlaylistModalOpen && (
+        <ConfirmModal
+          message={
+            <>
+              Are you sure you want to delete <b>{data.name}</b>?
+            </>
+          }
+          onClose={() => setIsDeletePlaylistModalOpen(false)}
+          onConfirm={() => handleDelete(playlistId)}
+          title="Delete playlist"
         />
       )}
     </>

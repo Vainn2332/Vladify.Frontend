@@ -1,10 +1,11 @@
-import { SquarePen as RenameIcon } from "lucide-react";
+import { Trash2 as DeleteIcon, SquarePen as RenameIcon } from "lucide-react";
 import { IconButton } from "../Buttons/IconButton";
 
 interface PlaylistHeaderProps {
   headerImage: string;
   headerName: string;
   metadata: React.ReactNode;
+  onDelete?: () => void;
   onRename?: () => void;
 }
 
@@ -13,6 +14,7 @@ export function PlaylistHeader({
   headerName,
   metadata,
   onRename,
+  onDelete,
 }: PlaylistHeaderProps) {
   return (
     <div className="flex gap-5">
@@ -35,6 +37,16 @@ export function PlaylistHeader({
           )}
         </div>
         {metadata}
+        {onDelete && (
+          <button
+            type="button"
+            onClick={onDelete}
+            className="mt-auto mb-3 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-red-200 bg-red-100/50 px-4 py-1.5 text-sm font-semibold text-red-500 transition-colors hover:bg-red-300/50"
+          >
+            <DeleteIcon className="h-4 w-4" />
+            Delete playlist
+          </button>
+        )}
       </div>
     </div>
   );

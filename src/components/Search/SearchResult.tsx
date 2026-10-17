@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import type { playlist } from "../../api/dtos/playlist";
-import type { song } from "../../api/dtos/song";
+import type { playlist } from "../../api/playlist/playlist";
+import type { song } from "../../api/song/song";
 import type { user } from "../../api/dtos/user";
 import { SearchData } from "./SearchData";
 

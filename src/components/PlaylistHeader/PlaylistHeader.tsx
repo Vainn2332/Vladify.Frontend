@@ -41,7 +41,7 @@ export function PlaylistHeader({
           <button
             type="button"
             onClick={onDelete}
-            className="mt-auto mb-3 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-red-300 bg-red-50 px-4 py-1.5 text-sm font-semibold text-red-500 transition-colors hover:bg-red-100"
+            className="mt-auto mb-3 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-red-200 bg-red-100/50 px-4 py-1.5 text-sm font-semibold text-red-500 transition-colors hover:bg-red-300/50"
           >
             <DeleteIcon className="h-4 w-4" />
             Delete playlist

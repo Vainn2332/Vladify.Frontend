@@ -1,28 +1,28 @@
-import type { song } from "../song/song";
+import type { Song } from "../song/song";
 
-export interface playlist {
+export interface Playlist {
   id: string;
   name: string;
   isOwner: boolean;
   authorName: string;
-  songs: song[];
+  songs: Song[];
 }
 
-export interface createPlaylistDto {
+export interface CreatePlaylistDto {
   name: string;
 }
 
-export interface addSongToPlaylistDto {
+export interface AddSongToPlaylistDto {
   playlistId: string;
   songId: string;
 }
 
-export interface updatePlaylistDto {
+export interface UpdatePlaylistDto {
   id: string;
   name: string;
 }
 
-export interface deleteSongFromPlaylistDto {
+export interface DeleteSongFromPlaylistDto {
   playlistId: string;
   songId: string;
 }

@@ -5,14 +5,14 @@ import {
 } from "../../components/Sections/CardSection/CardSection";
 import { CirclePlus } from "lucide-react";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
-import type { playlist } from "../../api/playlist/playlist";
+import type { Playlist } from "../../api/playlist/playlist";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { usePagination } from "../../hooks/usePagination";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { playlistQueries } from "../../api/playlist/playlistQueries";
 import { playlistMutations } from "../../api/playlist/playlistMutations";
 
-function toCardItem(playlist: playlist): CardSectionItem {
+function toCardItem(playlist: Playlist): CardSectionItem {
   return {
     id: playlist.id,
     title: playlist.name,

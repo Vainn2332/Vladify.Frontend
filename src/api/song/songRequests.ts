@@ -1,35 +1,35 @@
 import { apiClient as api } from "../apiClient";
-import type { addSongDto, song, updateSongDto } from "./song";
-import type { paginationParams } from "../dtos/paginationParams";
-import type { pagedResult } from "../dtos/pagedResult";
+import type { AddSongDto, Song, UpdateSongDto } from "./song";
+import type { PaginationParams } from "../dtos/paginationParams";
+import type { PagedResult } from "../dtos/pagedResult";
 
 export interface SongRequests {
-  add(dto: addSongDto): Promise<song>;
+  add(dto: AddSongDto): Promise<Song>;
   getAll(
-    params: paginationParams,
+    params: PaginationParams,
     signal?: AbortSignal,
-  ): Promise<pagedResult<song>>;
-  getById(id: string, signal?: AbortSignal): Promise<song>;
-  update(dto: updateSongDto): Promise<song>;
+  ): Promise<PagedResult<Song>>;
+  getById(id: string, signal?: AbortSignal): Promise<Song>;
+  update(dto: UpdateSongDto): Promise<Song>;
   delete(id: string): Promise<void>;
 }
 
 const defaultRoute = "/songs";
 
 export const songRequests: SongRequests = {
-  add: (dto) => api.post<song>(defaultRoute, dto).then((r) => r.data),
+  add: (dto) => api.post<Song>(defaultRoute, dto).then((r) => r.data),
 
   getAll: (params, signal) =>
     api
-      .get<pagedResult<song>>(defaultRoute, { params, signal })
+      .get<PagedResult<Song>>(defaultRoute, { params, signal })
       .then((r) => r.data),
 
   getById: (id, signal) =>
-    api.get<song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
+    api.get<Song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
 
   update: (dto) => {
     const { id, ...body } = dto;
-    return api.put<song>(`${defaultRoute}/${id}`, body).then((r) => r.data);
+    return api.put<Song>(`${defaultRoute}/${id}`, body).then((r) => r.data);
   },
   delete: (id) => api.delete<void>(`${defaultRoute}/${id}`).then(() => {}),
 };

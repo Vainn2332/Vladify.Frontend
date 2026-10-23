@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PlaylistHeader } from "../../components/PlaylistHeader/PlaylistHeader";
 import { SongSection } from "../../components/Sections/SongSection/SongSection";
-import type { song } from "../../api/song/song";
+import type { Song } from "../../api/song/song";
 import { ConfirmModal } from "../../components/Modals/ConfirmModal/ConfirmModal";
 import { TextInputModal } from "../../components/Modals/TextInputModal";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
@@ -24,7 +24,7 @@ export function PlaylistPage() {
 }
 
 function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
-  const [songToDelete, setSongToDelete] = useState<song | null>(null);
+  const [songToDelete, setSongToDelete] = useState<Song | null>(null);
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const [isDeletePlaylistModalOpen, setIsDeletePlaylistModalOpen] =
     useState(false);

@@ -1,10 +1,10 @@
 import { queryOptions } from "@tanstack/react-query";
 import { songKeys } from "./songKeys";
-import type { paginationParams } from "../dtos/paginationParams";
+import type { PaginationParams } from "../dtos/paginationParams";
 import { songRequests } from "./songRequests";
 
 export const songQueries = {
-  page: (params: paginationParams) =>
+  page: (params: PaginationParams) =>
     queryOptions({
       queryKey: songKeys.page(params),
       queryFn: ({ signal }) => songRequests.getAll(params, signal),

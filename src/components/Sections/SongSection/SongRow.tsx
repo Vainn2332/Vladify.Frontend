@@ -1,12 +1,12 @@
 import { Trash2 as DeleteIcon } from "lucide-react";
-import type { song } from "../../../api/song/song";
+import type { Song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 import { formatDuration } from "../../../utils/formatDuration";
 import { CoverImage } from "../../CoverImage/CoverImage";
 
 interface SongRowProps {
   index: number;
-  song: song;
+  song: Song;
   onDelete?: (id: string) => void;
   onClick: (id: string) => void;
   showAddedAt?: boolean;

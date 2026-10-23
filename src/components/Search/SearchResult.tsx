@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import type { playlist } from "../../api/playlist/playlist";
-import type { song } from "../../api/song/song";
-import type { user } from "../../api/dtos/user";
+import type { Playlist } from "../../api/playlist/playlist";
+import type { Song } from "../../api/song/song";
+import type { User } from "../../api/dtos/user";
 import { SearchData } from "./SearchData";
 
 export interface SearchResponse {
   //temporary stub for mock data
-  songs: song[];
-  playlists: playlist[];
-  users: user[];
+  songs: Song[];
+  playlists: Playlist[];
+  users: User[];
 }
 
 const imageUrl = (id: string) => `https://picsum.photos/seed/${id}/300/300`;

@@ -2,5 +2,5 @@
 export function formatDuration(duration: string): string {
   const [, minutes = "0", seconds = "0"] = duration.split(":");
 
-  return `${parseInt(minutes)}:${seconds.slice(0, 2)}`;
+  return `${Number.parseInt(minutes)}:${seconds.slice(0, 2)}`;
 }

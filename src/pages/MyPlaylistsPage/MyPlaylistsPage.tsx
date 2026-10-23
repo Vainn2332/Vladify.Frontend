@@ -42,11 +42,11 @@ export function MyPlaylistsPage() {
   const playlists = response?.data ?? [];
   const hasNextPage = response?.hasNextPage ?? false;
 
-  const placeholderText = isPending
-    ? "Loading…"
-    : isError
-      ? "Failed to load playlists"
-      : "Create your first playlist";
+  const getPlaceholderText = () => {
+    if (isPending) return "Loading...";
+    if (isError) return "Failed to load playlists";
+    return "Create your first playlist";
+  };
 
   return (
     <>
@@ -54,7 +54,7 @@ export function MyPlaylistsPage() {
         items={playlists.map(toCardItem)}
         title="My playlists"
         linkTemplate={(item) => `/playlists/${item.id}`}
-        placeholder={<p className="text-primary">{placeholderText}</p>}
+        placeholder={<p className="text-primary">{getPlaceholderText()}</p>}
         action={
           <button
             type="button"

@@ -23,6 +23,8 @@ export function Modal({ title, onClose, children }: ModalProps) {
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
+      role="button"
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-4 pb-28"
     >
       <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl">

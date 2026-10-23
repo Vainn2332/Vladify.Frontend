@@ -17,6 +17,8 @@ export function SearchData({
 }: SearchData) {
   return (
     <div
+      role="button"
+      tabIndex={0}
       className="hover:bg-primary/10 flex items-center gap-2 rounded-lg p-2 transition-colors duration-150 hover:cursor-pointer"
       onClick={(e) => {
         onClick(id);

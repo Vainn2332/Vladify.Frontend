@@ -26,6 +26,12 @@ export function SearchData({
         onClick(id);
         e.stopPropagation();
       }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick(id);
+        }
+      }}
     >
       <CoverImage alt="song image" url={imageUrl} size="xs" />
 

@@ -5,16 +5,17 @@ import {
   Volume1 as VolumeIcon,
 } from "lucide-react";
 import { IconButton } from "../../Buttons/IconButton";
+import { CoverImage } from "../../CoverImage/CoverImage";
 
 export function Player() {
   return (
     <div className="fixed right-0 bottom-0 left-0 z-50 grid grid-cols-3 items-center bg-cyan-950 p-2 px-1 text-white sm:px-2">
       <div className="flex items-center gap-1 sm:gap-2">
         <div className="aspect-square w-11 shrink-0 overflow-hidden rounded-lg bg-gray-100 sm:w-14">
-          <img
-            src="https://picsum.photos/seed/track4/300/300"
+          <CoverImage
             alt="track logo"
-            className="h-full w-full object-cover"
+            url="https://picsum.photos/seed/track4/300/300"
+            className="w-full sm:w-full"
           />
         </div>
         <div className="flex min-w-0 flex-col">

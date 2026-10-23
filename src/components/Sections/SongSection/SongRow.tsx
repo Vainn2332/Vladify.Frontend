@@ -2,6 +2,7 @@ import { Trash2 as DeleteIcon } from "lucide-react";
 import type { song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 import { formatDuration } from "../../../utils/formatDuration";
+import { CoverImage } from "../../CoverImage/CoverImage";
 
 interface SongRowProps {
   index: number;
@@ -25,13 +26,8 @@ export function SongRow({
     >
       <td className="p-2 text-center">{index + 1}</td>
       <td className="p-2">
-        <div className="flex items-center gap-3">
-          <img
-            className="aspect-square w-12 rounded"
-            src={song.coverUrl}
-            onError={(e) => (e.currentTarget.style.display = "none")}
-            alt="song cover"
-          />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <CoverImage alt="song cover" url={song.coverUrl} size="xs" />
           <div className="overflow-hidden">
             <p className="truncate font-bold">{song.title}</p>
             <p className="text-secondary truncate">{song.author}</p>

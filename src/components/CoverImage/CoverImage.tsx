@@ -6,10 +6,10 @@ interface CoverImageProps extends React.ComponentProps<"img"> {
 }
 
 const sizes = {
-  xs: "w-8 h-8 sm:w-12 sm:h-12",
-  sm: "w-16 h-16 sm:w-20 sm:h-20",
-  md: "w-20 h-20 sm:w-24 sm:h-24",
-  lg: "w-24 h-24 sm:w-32 sm:h-32",
+  xs: "w-8 sm:w-12",
+  sm: "w-16 sm:w-20",
+  md: "w-20 sm:w-24",
+  lg: "w-24 sm:w-32",
 } as const;
 
 export function CoverImage({
@@ -21,7 +21,7 @@ export function CoverImage({
 }: CoverImageProps) {
   return (
     <div
-      className={`from-card-cover-start via-card-cover-mid to-card-cover-end aspect-square shrink-0 overflow-hidden rounded-lg border border-white bg-linear-to-br ${sizes[size]} ${className}`}
+      className={`from-card-cover-start via-card-cover-mid to-card-cover-end aspect-square shrink-0 self-start overflow-hidden rounded-lg border border-white bg-linear-to-br ${sizes[size]} ${className}`}
     >
       <img
         src={url}

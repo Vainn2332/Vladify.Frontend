@@ -1,3 +1,5 @@
+import { CoverImage } from "../CoverImage/CoverImage";
+
 interface SearchData {
   id: string;
   imageUrl: string;
@@ -25,13 +27,8 @@ export function SearchData({
         e.stopPropagation();
       }}
     >
-      <div className="aspect-square w-8 shrink-0 overflow-hidden rounded-lg bg-gray-300 sm:w-11">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="h-full w-full object-cover"
-        />
-      </div>
+      <CoverImage alt="song image" url={imageUrl} size="xs" />
+
       <div className="flex min-w-0 flex-col">
         <span className="truncate text-sm font-bold">{title}</span>
         <span className="truncate text-xs text-gray-500">{subtitle}</span>

@@ -1,4 +1,4 @@
-export interface song {
+export interface Song {
   id: string;
   title: string;
   album: string;
@@ -9,13 +9,13 @@ export interface song {
   coverUrl: string;
 }
 
-export interface addSongDto {
+export interface AddSongDto {
   title: string;
   album: string;
   duration: string;
 }
 
-export interface updateSongDto {
+export interface UpdateSongDto {
   id: string;
   title: string;
   album: string;

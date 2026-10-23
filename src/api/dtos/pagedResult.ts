@@ -1,4 +1,4 @@
-export interface pagedResult<T> {
+export interface PagedResult<T> {
   data: T[];
   hasNextPage: boolean;
 }

@@ -1,18 +1,18 @@
 import { playlistRequests } from "./playlistRequests";
 import { mutationOptions } from "@tanstack/react-query";
 import type {
-  createPlaylistDto,
-  deleteSongFromPlaylistDto,
-  playlist,
-  updatePlaylistDto,
+  CreatePlaylistDto,
+  DeleteSongFromPlaylistDto,
+  Playlist,
+  UpdatePlaylistDto,
 } from "./playlist";
-import type { pagedResult } from "../dtos/pagedResult";
+import type { PagedResult } from "../dtos/pagedResult";
 import { playlistKeys } from "./playlistKeys";
 import { playlistQueries } from "./playlistQueries";
 
 export const playlistMutations = {
   create: mutationOptions({
-    mutationFn: (dto: createPlaylistDto) => playlistRequests.add(dto),
+    mutationFn: (dto: CreatePlaylistDto) => playlistRequests.add(dto),
     onSuccess: (_data, _variables, _onMutateResult, { client }) =>
       client.invalidateQueries({ queryKey: playlistKeys.list() }),
   }),
@@ -20,7 +20,7 @@ export const playlistMutations = {
   delete: mutationOptions({
     mutationFn: (id: string) => playlistRequests.delete(id),
     onSuccess: (_data, id, _onMutateResult, { client }) => {
-      client.setQueriesData<pagedResult<playlist>>(
+      client.setQueriesData<PagedResult<Playlist>>(
         { queryKey: playlistKeys.list() },
         (old) => old && { ...old, data: old.data.filter((p) => p.id !== id) },
       );
@@ -30,7 +30,7 @@ export const playlistMutations = {
   }),
 
   rename: mutationOptions({
-    mutationFn: (dto: updatePlaylistDto) => playlistRequests.update(dto),
+    mutationFn: (dto: UpdatePlaylistDto) => playlistRequests.update(dto),
     onMutate: async ({ id, name }, { client }) => {
       const queryKey = playlistQueries.detail(id).queryKey;
       await client.cancelQueries({ queryKey });
@@ -60,7 +60,7 @@ export const playlistMutations = {
   }),
 
   removeSongFromPlaylist: mutationOptions({
-    mutationFn: (dto: deleteSongFromPlaylistDto) =>
+    mutationFn: (dto: DeleteSongFromPlaylistDto) =>
       playlistRequests.deleteSongFromPlaylist(dto),
 
     onMutate: async ({ playlistId, songId }, { client }) => {

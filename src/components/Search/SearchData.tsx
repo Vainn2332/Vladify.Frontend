@@ -1,3 +1,5 @@
+import { CoverImage } from "../CoverImage/CoverImage";
+
 interface SearchData {
   id: string;
   imageUrl: string;
@@ -17,19 +19,22 @@ export function SearchData({
 }: SearchData) {
   return (
     <div
+      role="button"
+      tabIndex={0}
       className="hover:bg-primary/10 flex items-center gap-2 rounded-lg p-2 transition-colors duration-150 hover:cursor-pointer"
       onClick={(e) => {
         onClick(id);
         e.stopPropagation();
       }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick(id);
+        }
+      }}
     >
-      <div className="aspect-square w-8 shrink-0 overflow-hidden rounded-lg bg-gray-300 sm:w-11">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="h-full w-full object-cover"
-        />
-      </div>
+      <CoverImage alt="song image" url={imageUrl} size="xs" />
+
       <div className="flex min-w-0 flex-col">
         <span className="truncate text-sm font-bold">{title}</span>
         <span className="truncate text-xs text-gray-500">{subtitle}</span>

@@ -5,14 +5,14 @@ export interface CardSectionItem {
   id: string;
   title: string;
   subtitle?: string;
-  imageUrl?: string;
+  imageUrl: string;
 }
 
 interface CardSectionProps {
   title: string;
   action?: React.ReactNode;
   items: CardSectionItem[];
-  linkTemplate?: (item: CardSectionItem) => string;
+  linkTemplate: (item: CardSectionItem) => string;
   placeholder?: React.ReactNode;
 }
 
@@ -43,7 +43,7 @@ export function CardSection({
               title={item.title}
               subtitle={item.subtitle}
               imageUrl={item.imageUrl}
-              linkUrl={linkTemplate?.(item)}
+              linkUrl={linkTemplate(item)}
             />
           ))}
         </div>

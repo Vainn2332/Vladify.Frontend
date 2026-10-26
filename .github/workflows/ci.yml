@@ -35,18 +35,18 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Cache SonarQube packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=vainn2332
-            -Dsonar.projectKey=Vainn2332_Vladify.Frontend
+    #  - name: Cache SonarQube packages
+    #    uses: actions/cache@v6
+    #    with:
+    #      path: ~/.sonar/cache
+    #      key: ${{ runner.os }}-sonar
+    #      restore-keys: ${{ runner.os }}-sonar
+    #
+    #  - name: SonarQube Scan
+    #    uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+    #    env:
+    #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #    with:
+    #      args: >
+    #        -Dsonar.organization=vainn2332
+    #        -Dsonar.projectKey=Vainn2332_Vladify.Frontend

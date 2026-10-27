@@ -31,9 +31,9 @@ export function SearchResult({
 
   return (
     <div className="absolute top-full left-1/2 z-10 mt-1 w-1/2 -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-md sm:left-0 sm:w-full sm:translate-x-0">
-      <div className="flex h-48 scrollbar-thin flex-col gap-1 overflow-y-auto py-2 pr-1 pl-2">
+      <div className="flex max-h-48 min-h-20 scrollbar-thin flex-col gap-1 overflow-y-auto py-2 pr-1 pl-1">
         {!hasResults && (
-          <div className="mt-auto mb-2 self-center"> No results found</div>
+          <div className="mt-auto self-center p-2">No results found</div>
         )}
         {searchResult.songs.map((song) => (
           <SearchData

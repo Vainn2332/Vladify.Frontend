@@ -20,3 +20,11 @@ export interface UpdateSongDto {
   title: string;
   album: string;
 }
+
+export interface SongSearchResult {
+  id: string;
+  title: string;
+  author: string;
+  audioUrl: string;
+  coverUrl: string;
+}

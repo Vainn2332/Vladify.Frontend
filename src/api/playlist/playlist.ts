@@ -26,3 +26,9 @@ export interface DeleteSongFromPlaylistDto {
   playlistId: string;
   songId: string;
 }
+
+export interface PlaylistSearchResult {
+  id: string;
+  name: string;
+  authorName: string;
+}

@@ -6,3 +6,7 @@ export interface User {
   age: number;
   gender: number;
 }
+export interface UserSearchResult {
+  id: string;
+  name: string;
+}

@@ -4,7 +4,7 @@ interface SearchData {
   id: string;
   imageUrl: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   description?: string;
   onClick: (id: string) => void;
 }
@@ -37,7 +37,9 @@ export function SearchData({
 
       <div className="flex min-w-0 flex-col">
         <span className="truncate text-sm font-bold">{title}</span>
-        <span className="truncate text-xs text-gray-500">{subtitle}</span>
+        {subtitle && (
+          <span className="truncate text-xs text-gray-500">{subtitle}</span>
+        )}
       </div>
       {description && (
         <span className="ml-auto text-xs text-gray-500 sm:p-2 sm:text-sm">

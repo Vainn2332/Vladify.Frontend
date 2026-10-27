@@ -7,8 +7,14 @@ interface SearchRequest {
 const searchDefaultRoute = "/search";
 
 export const searchRequest: SearchRequest = {
-  search: (query, signal) =>
-    api
-      .get<SearchResult>(`${searchDefaultRoute}?query=${query}`, { signal })
-      .then((r) => r.data),
+  search: async (query, signal) => {
+    const encodedQuery = encodeURIComponent(query);
+
+    const r = await api.get<SearchResult>(
+      `${searchDefaultRoute}?query=${encodedQuery}`,
+      { signal },
+    );
+
+    return r.data;
+  },
 };

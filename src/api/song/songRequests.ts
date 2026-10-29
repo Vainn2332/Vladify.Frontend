@@ -10,6 +10,11 @@ export interface SongRequests {
     signal?: AbortSignal,
   ): Promise<PagedResult<Song>>;
   getById(id: string, signal?: AbortSignal): Promise<Song>;
+  getSongsOfAuthor: (
+    authorId: string,
+    params: PaginationParams,
+    signal?: AbortSignal,
+  ) => Promise<PagedResult<Song>>;
   update(dto: UpdateSongDto): Promise<Song>;
   delete(id: string): Promise<void>;
 }
@@ -26,6 +31,14 @@ export const songRequests: SongRequests = {
 
   getById: (id, signal) =>
     api.get<Song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
+
+  getSongsOfAuthor: (authorId, params, signal) =>
+    api
+      .get<PagedResult<Song>>(`${defaultRoute}/author/${authorId}`, {
+        params,
+        signal,
+      })
+      .then((r) => r.data),
 
   update: (dto) => {
     const { id, ...body } = dto;

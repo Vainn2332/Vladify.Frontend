@@ -8,12 +8,12 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { playlistQueries } from "../../api/playlist/playlistQueries";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { playlistMutations } from "../../api/playlist/playlistMutations";
+import { HEADER_IMAGE_URL } from "../../constants/urls";
 
 interface PlaylistPageContentProps {
   playlistId: string;
 }
-
-const headerImageUrl = "https://picsum.photos/seed/late-night-drive/300/300";
+//TODO: add default imageUrl
 
 export function PlaylistPage() {
   const { playlistId } = useParams<string>();
@@ -71,7 +71,7 @@ function PlaylistPageContent({ playlistId }: PlaylistPageContentProps) {
   return (
     <>
       <PlaylistHeader
-        headerImage={headerImageUrl}
+        headerImage={HEADER_IMAGE_URL}
         headerName={data.name}
         metadata={
           <div className="list-inside list-disc">

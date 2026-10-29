@@ -4,8 +4,10 @@ export interface Song {
   album: string;
   author: string;
   authorId: number;
+  isAuthor: boolean;
   duration: string;
   addedAt: string;
+  audioUrl: string;
   coverUrl: string;
 }
 

@@ -9,12 +9,16 @@ export interface SongRequests {
     params: PaginationParams,
     signal?: AbortSignal,
   ): Promise<PagedResult<Song>>;
-  getById(id: string, signal?: AbortSignal): Promise<Song>;
   getSongsOfAuthor: (
     authorId: string,
     params: PaginationParams,
     signal?: AbortSignal,
   ) => Promise<PagedResult<Song>>;
+  getMySongs: (
+    params: PaginationParams,
+    signal?: AbortSignal,
+  ) => Promise<PagedResult<Song>>;
+  getById(id: string, signal?: AbortSignal): Promise<Song>;
   update(dto: UpdateSongDto): Promise<Song>;
   delete(id: string): Promise<void>;
 }
@@ -29,9 +33,6 @@ export const songRequests: SongRequests = {
       .get<PagedResult<Song>>(defaultRoute, { params, signal })
       .then((r) => r.data),
 
-  getById: (id, signal) =>
-    api.get<Song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
-
   getSongsOfAuthor: (authorId, params, signal) =>
     api
       .get<PagedResult<Song>>(`${defaultRoute}/author/${authorId}`, {
@@ -39,6 +40,14 @@ export const songRequests: SongRequests = {
         signal,
       })
       .then((r) => r.data),
+
+  getMySongs: (params, signal) =>
+    api
+      .get<PagedResult<Song>>(`${defaultRoute}/my`, { params, signal })
+      .then((r) => r.data),
+
+  getById: (id, signal) =>
+    api.get<Song>(`${defaultRoute}/${id}`, { signal }).then((r) => r.data),
 
   update: (dto) => {
     const { id, ...body } = dto;

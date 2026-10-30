@@ -2,7 +2,6 @@ import { mutationOptions } from "@tanstack/react-query";
 import type { AddSongDto, Song } from "./song";
 import { songRequests } from "./songRequests";
 import { songKeys } from "./songKeys";
-import { songQueries } from "./songQueries";
 import type { PagedResult } from "../dtos/pagedResult";
 
 export const songMutations = {

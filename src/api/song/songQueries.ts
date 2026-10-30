@@ -7,7 +7,7 @@ export const songQueries = {
   mySongs: (params: PaginationParams) =>
     queryOptions({
       queryKey: songKeys.mySongs(params),
-      queryFn: ({ signal }) => songRequests.getAll(params, signal),
+      queryFn: ({ signal }) => songRequests.getMySongs(params, signal),
     }),
 
   userSongs: (params: PaginationParams, authorId: string) =>

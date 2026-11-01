@@ -14,7 +14,8 @@ export interface Song {
 export interface AddSongDto {
   title: string;
   album: string;
-  duration: string;
+  audioFile: File;
+  coverImage: File;
 }
 
 export interface UpdateSongDto {

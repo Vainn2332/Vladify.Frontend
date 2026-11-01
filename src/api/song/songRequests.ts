@@ -26,7 +26,15 @@ export interface SongRequests {
 const defaultRoute = "/songs";
 
 export const songRequests: SongRequests = {
-  add: (dto) => api.post<Song>(defaultRoute, dto).then((r) => r.data),
+  add: (dto) => {
+    const formData = new FormData();
+    formData.append("title", dto.title);
+    formData.append("album", dto.album);
+    formData.append("audio", dto.audioFile);
+    formData.append("cover", dto.coverImage);
+
+    return api.post<Song>(defaultRoute, formData).then((r) => r.data);
+  },
 
   getAll: (params, signal) =>
     api

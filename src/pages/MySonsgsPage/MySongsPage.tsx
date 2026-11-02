@@ -60,7 +60,7 @@ export function MySongsPage() {
           }
         />
         <button
-          className="mr-10 cursor-pointer self-end rounded-xl bg-green-500/80 px-6 py-2 text-sm font-semibold transition-colors hover:bg-green-400/80"
+          className="mr-4 cursor-pointer self-end rounded-xl bg-green-500/80 px-4 py-2 text-xs font-semibold transition-colors hover:bg-green-400/80 sm:mr-10 sm:px-6 sm:text-sm"
           onClick={() => setIsCreateSongModalOpen(true)}
         >
           Create new song

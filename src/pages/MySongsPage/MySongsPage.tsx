@@ -69,7 +69,7 @@ export function MySongsPage() {
           songs={songs}
           onDelete={isAuthor ? findSongToDelete : undefined}
           onClick={handleClick}
-          showAddedAt={isAuthor}
+          showStatus
         />
       </div>
       {isCreateSongModalOpen && (

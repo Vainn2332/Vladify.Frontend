@@ -1,18 +1,23 @@
+import type { SongStatus } from "./songStatus";
+
 export interface Song {
   id: string;
   title: string;
   album: string;
   author: string;
+  status: SongStatus;
   authorId: number;
+  isAuthor: boolean;
   duration: string;
-  addedAt: string;
+  audioUrl: string;
   coverUrl: string;
 }
 
 export interface AddSongDto {
   title: string;
   album: string;
-  duration: string;
+  audioFile: File;
+  coverImage: File;
 }
 
 export interface UpdateSongDto {

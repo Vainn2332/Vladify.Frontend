@@ -3,13 +3,14 @@ import type { Song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 import { formatDuration } from "../../../utils/formatDuration";
 import { CoverImage } from "../../CoverImage/CoverImage";
+import { SongStatusDot } from "../../SongStatusDot/SongStatusDot";
 
 interface SongRowProps {
   index: number;
   song: Song;
   onDelete?: (id: string) => void;
   onClick: (id: string) => void;
-  showAddedAt?: boolean;
+  showStatus?: boolean;
 }
 
 export function SongRow({
@@ -17,7 +18,7 @@ export function SongRow({
   song,
   onDelete,
   onClick,
-  showAddedAt = false,
+  showStatus = false,
 }: SongRowProps) {
   return (
     <tr
@@ -35,8 +36,13 @@ export function SongRow({
         </div>
       </td>
       <td className="hidden p-2 sm:table-cell">{song.album}</td>
-      {showAddedAt && <td className="p-2">{song.addedAt}</td>}
+      {showStatus && (
+        <td className="p-4">
+          <SongStatusDot className="ml-3" songStatus={song.status} />
+        </td>
+      )}
       <td className="p-2">{formatDuration(song.duration)}</td>
+
       {onDelete && (
         <td className="p-2 text-center">
           <IconButton

@@ -4,14 +4,14 @@ import type { Song } from "../../../api/song/song";
 
 interface SongSectionProps {
   songs: Song[];
-  showAddedAt?: boolean;
+  showStatus?: boolean;
   onDelete?: (id: string) => void;
   onClick: (id: string) => void;
 }
 
 export function SongSection({
   songs,
-  showAddedAt = false,
+  showStatus = false,
   onDelete,
   onClick,
 }: SongSectionProps) {
@@ -29,7 +29,7 @@ export function SongSection({
           <th className="w-4 p-2 sm:p-4">#</th>
           <th className="p-4">Title</th>
           <th className="hidden p-4 sm:table-cell">Album</th>
-          {showAddedAt && <th className="w-18 p-4 sm:w-auto">Date</th>}
+          {showStatus && <th className="w-18 p-4 sm:w-auto">Status</th>}
           <th className="w-10 p-4 sm:w-20">
             <Clock className="size-4" />
           </th>
@@ -44,7 +44,7 @@ export function SongSection({
             onDelete={onDelete}
             onClick={onClick}
             song={song}
-            showAddedAt={showAddedAt}
+            showStatus={showStatus}
             key={song.id}
           />
         ))}

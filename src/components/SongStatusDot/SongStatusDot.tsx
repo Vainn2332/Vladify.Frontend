@@ -18,7 +18,7 @@ export function SongStatusDot({ songStatus, className }: SongStatusDotProps) {
   return (
     <div
       title={label}
-      className={`size-3 rounded-full ${STATUS_DOT_STYLES[songStatus]} ${className}`}
+      className={`size-2 rounded-full sm:size-3 ${STATUS_DOT_STYLES[songStatus]} ${className}`}
     />
   );
 }

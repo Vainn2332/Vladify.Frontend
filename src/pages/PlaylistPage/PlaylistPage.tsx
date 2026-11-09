@@ -13,7 +13,6 @@ import { HEADER_IMAGE_URL } from "../../constants/urls";
 interface PlaylistPageContentProps {
   playlistId: string;
 }
-//TODO: add default imageUrl
 
 export function PlaylistPage() {
   const { playlistId } = useParams<string>();

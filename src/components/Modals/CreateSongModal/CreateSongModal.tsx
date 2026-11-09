@@ -13,7 +13,6 @@ interface CreateSongModalProps {
   onConfirm: (dto: AddSongDto) => void;
 }
 
-//TODO: add useStateS and call onConfirm
 export function CreateSongModal({ onClose, onConfirm }: CreateSongModalProps) {
   const [songName, setSongName] = useState("");
   const [albumName, setAlbumName] = useState("");

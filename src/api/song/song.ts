@@ -1,8 +1,11 @@
+import type { SongStatus } from "./songStatus";
+
 export interface Song {
   id: string;
   title: string;
   album: string;
   author: string;
+  status: SongStatus;
   authorId: number;
   isAuthor: boolean;
   duration: string;

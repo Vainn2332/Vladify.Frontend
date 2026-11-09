@@ -9,7 +9,6 @@ export interface Song {
   authorId: number;
   isAuthor: boolean;
   duration: string;
-  addedAt: string;
   audioUrl: string;
   coverUrl: string;
 }

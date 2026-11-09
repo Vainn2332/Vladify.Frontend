@@ -5,7 +5,7 @@ import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { MainLayout } from "./components/Layout/MainLayout";
 import { MyPlaylistsPage } from "./pages/MyPlaylistsPage/MyPlaylistsPage";
 import { PlaylistPage } from "./pages/PlaylistPage/PlaylistPage";
-import { MySongsPage } from "./pages/MySonsgsPage/MySongsPage";
+import { MySongsPage } from "./pages/MySongsPage/MySongsPage";
 
 export const router = createBrowserRouter([
   {

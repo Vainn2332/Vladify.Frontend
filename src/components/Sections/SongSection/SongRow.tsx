@@ -3,7 +3,7 @@ import type { Song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 import { formatDuration } from "../../../utils/formatDuration";
 import { CoverImage } from "../../CoverImage/CoverImage";
-import { SongStatusCell } from "../../SongStatus/SongStatusCell";
+import { SongStatusDot } from "../../SongStatusDot/SongStatusDot";
 
 interface SongRowProps {
   index: number;
@@ -37,8 +37,8 @@ export function SongRow({
       </td>
       <td className="hidden p-2 sm:table-cell">{song.album}</td>
       {showStatus && (
-        <td className="p-2">
-          <SongStatusCell songStatus={song.status} />
+        <td className="p-4">
+          <SongStatusDot className="ml-3" songStatus={song.status} />
         </td>
       )}
       <td className="p-2">{formatDuration(song.duration)}</td>

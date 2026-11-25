@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock as ClockIcon } from "lucide-react";
 import { SongRow } from "./SongRow";
 import type { Song } from "../../../api/song/song";
 
@@ -26,14 +26,14 @@ export function SongSection({
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
       <thead className="text-2xs border-b border-black/10 text-black/50 uppercase sm:text-xs">
         <tr>
-          <th className="w-4 p-2 sm:p-4">#</th>
-          <th className="p-4">Title</th>
-          <th className="hidden p-4 sm:table-cell">Album</th>
-          {showStatus && <th className="w-18 p-4 sm:w-auto">Status</th>}
-          <th className="w-10 p-4 sm:w-20">
-            <Clock className="size-4" />
+          <th className="w-8 p-2 text-center sm:w-10">#</th>
+          <th className="p-2 py-4">Title</th>
+          <th className="hidden p-2 sm:table-cell">Album</th>
+          {showStatus && <th className="w-14 p-2 pl-2 sm:w-auto">Status</th>}
+          <th className="w-12 p-2 sm:w-20">
+            <ClockIcon className="size-4" />
           </th>
-          {onDelete && <th className="w-10 p-4" />}
+          {onDelete && <th className="w-10 sm:w-12" />}
         </tr>
       </thead>
 

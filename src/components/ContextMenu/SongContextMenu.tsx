@@ -1,4 +1,4 @@
-import { TrashIcon } from "lucide-react";
+import { TrashIcon, Share as ShareIcon, Plus as AddIcon } from "lucide-react";
 import type { Song } from "../../api/song/song";
 import { ContextMenuItem } from "./ContextMenuItem";
 
@@ -21,15 +21,14 @@ export function SongContextMenu({
       onClick={(e) => e.stopPropagation()}
     >
       <div className="flex min-w-50 flex-col truncate rounded-md">
-        <ContextMenuItem text="Share with someone" icon={TrashIcon} />
-        <ContextMenuItem text="Share with someone" icon={TrashIcon} />
         {onAddSongToPlaylist && (
           <ContextMenuItem
             text="Add to playlist"
-            icon={TrashIcon}
+            icon={AddIcon}
             onClick={() => onAddSongToPlaylist(song.id)}
           />
         )}
+        <ContextMenuItem text="Share with someone" icon={ShareIcon} />
         {onDeleteSongFromPlaylist && (
           <ContextMenuItem
             text="Delete from playlist"

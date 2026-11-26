@@ -16,7 +16,10 @@ export function SongContextMenu({
   onDeleteSong,
 }: SongContextMenuProps) {
   return (
-    <div className="absolute top-1/2 right-full z-60 -translate-y-3/4 rounded-xl border border-white bg-gray-100 p-2">
+    <div
+      className="absolute top-1/2 right-full z-60 -translate-y-3/4 rounded-xl border border-white bg-gray-100 p-2"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className="flex min-w-50 flex-col truncate rounded-md">
         <ContextMenuItem text="Share with someone" icon={TrashIcon} />
         <ContextMenuItem text="Share with someone" icon={TrashIcon} />

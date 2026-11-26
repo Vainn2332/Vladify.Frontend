@@ -14,6 +14,8 @@ interface SongRowProps {
   isMenuOpen: boolean;
   onToggleMenu: (id: string) => void;
   onCloseMenu: () => void;
+  onDeleteSong?: (id: string) => void;
+  onAddSongToPlaylist?: (id: string) => void;
 }
 
 export function SongRow({
@@ -24,6 +26,8 @@ export function SongRow({
   isMenuOpen,
   onToggleMenu,
   onCloseMenu,
+  onDeleteSong,
+  onAddSongToPlaylist,
 }: SongRowProps) {
   return (
     <tr
@@ -52,7 +56,13 @@ export function SongRow({
       <td className="p-2">{formatDuration(song.duration)}</td>
 
       <td className="relative z-60 p-2 text-center">
-        {isMenuOpen && <SongContextMenu song={song} />}
+        {isMenuOpen && (
+          <SongContextMenu
+            song={song}
+            onAddSongToPlaylist={onAddSongToPlaylist}
+            onDeleteSong={onDeleteSong}
+          />
+        )}
         <IconButton
           className="aspect-square w-5 cursor-pointer hover:text-black/80"
           icon={OptionsIcon}

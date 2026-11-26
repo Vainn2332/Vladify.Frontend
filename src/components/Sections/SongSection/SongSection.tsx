@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import { Clock as ClockIcon } from "lucide-react";
 import { SongRow } from "./SongRow";
 import type { Song } from "../../../api/song/song";
-import { useEffect, useState } from "react";
 
 interface SongSectionProps {
   songs: Song[];
   showStatus?: boolean;
   onDelete?: (id: string) => void;
+  onAddSongToPlaylist?: (id: string) => void;
   onClick: (id: string) => void;
 }
 
@@ -14,15 +15,9 @@ export function SongSection({
   songs,
   showStatus = false,
   onDelete,
+  onAddSongToPlaylist,
   onClick,
 }: SongSectionProps) {
-  if (songs.length === 0)
-    return (
-      <div className="text-secondary flex h-32 justify-center">
-        No songs in this playlist.
-      </div>
-    );
-
   const [openMenuSongId, setOpenMenuId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,6 +30,13 @@ export function SongSection({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [openMenuSongId]);
+
+  if (songs.length === 0)
+    return (
+      <div className="text-secondary flex h-32 justify-center">
+        No songs in this playlist.
+      </div>
+    );
 
   const toggleMenu = (id: string) =>
     setOpenMenuId((current) => (current === id ? null : id));
@@ -52,7 +54,7 @@ export function SongSection({
           <th className="w-12 p-2 sm:w-20">
             <ClockIcon className="size-4" />
           </th>
-          {onDelete && <th className="w-10 sm:w-12" />}
+          <th className="w-10 sm:w-12" />
         </tr>
       </thead>
 
@@ -67,6 +69,8 @@ export function SongSection({
             isMenuOpen={openMenuSongId === song.id}
             onToggleMenu={toggleMenu}
             onCloseMenu={closeMenu}
+            onDeleteSong={onDelete}
+            onAddSongToPlaylist={onAddSongToPlaylist}
           />
         ))}
       </tbody>

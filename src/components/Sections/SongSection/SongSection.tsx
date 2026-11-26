@@ -7,7 +7,6 @@ interface SongSectionProps {
   songs: Song[];
   showStatus?: boolean;
   onDelete?: (id: string) => void;
-  onAddSongToPlaylist?: (id: string) => void;
   onClick: (id: string) => void;
 }
 
@@ -15,16 +14,15 @@ export function SongSection({
   songs,
   showStatus = false,
   onDelete,
-  onAddSongToPlaylist,
   onClick,
 }: SongSectionProps) {
-  const [openMenuSongId, setOpenMenuId] = useState<string | null>(null);
+  const [openMenuSongId, setOpenMenuSongId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!openMenuSongId) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenMenuId(null);
+      if (e.key === "Escape") setOpenMenuSongId(null);
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -39,9 +37,9 @@ export function SongSection({
     );
 
   const toggleMenu = (id: string) =>
-    setOpenMenuId((current) => (current === id ? null : id));
+    setOpenMenuSongId((current) => (current === id ? null : id));
 
-  const closeMenu = () => setOpenMenuId(null);
+  const closeMenu = () => setOpenMenuSongId(null);
 
   return (
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
@@ -70,7 +68,6 @@ export function SongSection({
             onToggleMenu={toggleMenu}
             onCloseMenu={closeMenu}
             onDeleteSong={onDelete}
-            onAddSongToPlaylist={onAddSongToPlaylist}
           />
         ))}
       </tbody>

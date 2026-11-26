@@ -15,7 +15,6 @@ interface SongRowProps {
   onToggleMenu: (id: string) => void;
   onCloseMenu: () => void;
   onDeleteSong?: (id: string) => void;
-  onAddSongToPlaylist?: (id: string) => void;
 }
 
 export function SongRow({
@@ -27,7 +26,6 @@ export function SongRow({
   onToggleMenu,
   onCloseMenu,
   onDeleteSong,
-  onAddSongToPlaylist,
 }: SongRowProps) {
   return (
     <tr
@@ -59,7 +57,7 @@ export function SongRow({
         {isMenuOpen && (
           <SongContextMenu
             song={song}
-            onAddSongToPlaylist={onAddSongToPlaylist}
+            onClose={onCloseMenu}
             onDeleteSong={onDeleteSong}
           />
         )}

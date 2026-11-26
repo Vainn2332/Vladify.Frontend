@@ -1,6 +1,7 @@
 import { Clock as ClockIcon } from "lucide-react";
 import { SongRow } from "./SongRow";
 import type { Song } from "../../../api/song/song";
+import { useEffect, useState } from "react";
 
 interface SongSectionProps {
   songs: Song[];
@@ -22,6 +23,24 @@ export function SongSection({
       </div>
     );
 
+  const [openMenuSongId, setOpenMenuId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openMenuSongId) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenMenuId(null);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [openMenuSongId]);
+
+  const toggleMenu = (id: string) =>
+    setOpenMenuId((current) => (current === id ? null : id));
+
+  const closeMenu = () => setOpenMenuId(null);
+
   return (
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
       <thead className="text-2xs border-b border-black/10 text-black/50 uppercase sm:text-xs">
@@ -41,11 +60,13 @@ export function SongSection({
         {songs.map((song, index) => (
           <SongRow
             index={index}
-            onDelete={onDelete}
-            onClick={onClick}
             song={song}
+            onClick={onClick}
             showStatus={showStatus}
             key={song.id}
+            isMenuOpen={openMenuSongId === song.id}
+            onToggleMenu={toggleMenu}
+            onCloseMenu={closeMenu}
           />
         ))}
       </tbody>

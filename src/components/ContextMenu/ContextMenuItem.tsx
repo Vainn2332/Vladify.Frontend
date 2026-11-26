@@ -13,14 +13,14 @@ export function ContextMenuItem({
   ...props
 }: ContextMenuItemProps) {
   return (
-    <div
-      className={`p-2 py-1 font-bold hover:bg-white/70 ${className ?? ""} flex items-center gap-2 rounded-xl`}
+    <button
+      onClick={onClick}
+      {...props}
+      className={`flex cursor-pointer items-center gap-2 rounded-xl p-2 py-1 font-bold hover:bg-white/70`}
     >
       {Icon && <Icon className="size-5" />}
 
-      <button onClick={onClick} {...props} className="cursor-pointer">
-        {text}
-      </button>
-    </div>
+      <div className={`${className ?? ""}`}>{text}</div>
+    </button>
   );
 }

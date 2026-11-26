@@ -1,6 +1,7 @@
 import { playlistRequests } from "./playlistRequests";
 import { mutationOptions } from "@tanstack/react-query";
 import type {
+  AddSongToPlaylistDto,
   CreatePlaylistDto,
   DeleteSongFromPlaylistDto,
   Playlist,
@@ -15,6 +16,13 @@ export const playlistMutations = {
     mutationFn: (dto: CreatePlaylistDto) => playlistRequests.add(dto),
     onSuccess: (_data, _variables, _onMutateResult, { client }) =>
       client.invalidateQueries({ queryKey: playlistKeys.list() }),
+  }),
+
+  addSongToPlaylist: mutationOptions({
+    mutationFn: (dto: AddSongToPlaylistDto) =>
+      playlistRequests.addSongToPlaylist(dto),
+    onSuccess: (data, { playlistId }, _onMutateResult, { client }) =>
+      client.setQueryData(playlistKeys.detail(playlistId), data),
   }),
 
   delete: mutationOptions({

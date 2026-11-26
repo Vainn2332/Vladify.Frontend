@@ -35,7 +35,7 @@ export function PlaylistSubmenu({ song, onClose }: PlaylistSubmenuProps) {
             key={playlist.id}
             type="button"
             className="cursor-pointer truncate rounded-xl p-2 py-1 text-left font-bold hover:bg-white/70"
-            onClick={() =>
+            onClick={() => {
               addSongToPlaylist.mutate(
                 { playlistId: playlist.id, songId: song.id },
                 {
@@ -43,8 +43,9 @@ export function PlaylistSubmenu({ song, onClose }: PlaylistSubmenuProps) {
                   onError: (error) =>
                     console.error("Failed to add song to playlist", error),
                 },
-              )
-            }
+              );
+              onClose();
+            }}
           >
             {playlist.name}
           </button>

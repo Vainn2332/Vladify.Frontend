@@ -21,12 +21,20 @@ export function SongSection({
   useEffect(() => {
     if (!openMenuSongId) return;
 
+    const closeMenu = () => setOpenMenuSongId(null);
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenMenuSongId(null);
+      if (e.key === "Escape") closeMenu();
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("scroll", closeMenu);
+    window.addEventListener("resize", closeMenu);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", closeMenu);
+      window.removeEventListener("resize", closeMenu);
+    };
   }, [openMenuSongId]);
 
   if (songs.length === 0)

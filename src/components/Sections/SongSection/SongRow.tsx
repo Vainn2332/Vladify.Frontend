@@ -72,7 +72,7 @@ export function SongRow({
       )}
       <td className="p-2">{formatDuration(song.duration)}</td>
 
-      <td className="relative z-60 p-2 text-center">
+      <td className="relative p-2 text-center">
         <IconButton
           ref={buttonRef}
           className="aspect-square w-5 cursor-pointer hover:text-black/80"

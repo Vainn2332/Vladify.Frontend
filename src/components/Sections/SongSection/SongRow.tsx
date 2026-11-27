@@ -1,10 +1,15 @@
+import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Ellipsis as OptionsIcon } from "lucide-react";
 import type { Song } from "../../../api/song/song";
 import { IconButton } from "../../Buttons/IconButton";
 import { formatDuration } from "../../../utils/formatDuration";
 import { CoverImage } from "../../CoverImage/CoverImage";
 import { SongStatusDot } from "../../SongStatusDot/SongStatusDot";
-import { SongContextMenu } from "../../ContextMenu/SongContextMenu";
+import {
+  SongContextMenu,
+  type MenuPosition,
+} from "../../ContextMenu/SongContextMenu";
 
 interface SongRowProps {
   index: number;
@@ -27,6 +32,20 @@ export function SongRow({
   onCloseMenu,
   onDeleteSong,
 }: SongRowProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
+
+  const handleToggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (!isMenuOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setMenuPosition({ top: rect.top + rect.height / 2, left: rect.left - 4 });
+    }
+
+    onToggleMenu(song.id);
+  };
+
   return (
     <tr
       className="text-primary hover:bg-primary/10 cursor-pointer"
@@ -54,22 +73,26 @@ export function SongRow({
       <td className="p-2">{formatDuration(song.duration)}</td>
 
       <td className="relative z-60 p-2 text-center">
-        {isMenuOpen && (
-          <SongContextMenu
-            song={song}
-            onClose={onCloseMenu}
-            onDeleteSong={onDeleteSong}
-          />
-        )}
         <IconButton
+          ref={buttonRef}
           className="aspect-square w-5 cursor-pointer hover:text-black/80"
           icon={OptionsIcon}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleMenu(song.id);
-          }}
+          onClick={handleToggleMenu}
         />
       </td>
+
+      {isMenuOpen &&
+        menuPosition &&
+        createPortal(
+          <SongContextMenu
+            song={song}
+            position={menuPosition}
+            onClose={onCloseMenu}
+            onDeleteSong={onDeleteSong}
+            triggerRef={buttonRef}
+          />,
+          document.body,
+        )}
     </tr>
   );
 }

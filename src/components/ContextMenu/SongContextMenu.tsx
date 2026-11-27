@@ -53,19 +53,16 @@ export function SongContextMenu({
       ref={menuRef}
       className="sm:text-medium shadow-card fixed z-60 -translate-x-full -translate-y-3/4 rounded-xl border border-white bg-gray-100 p-2 text-xs"
       style={{ top: position.top, left: position.left }}
-      onClick={(e) => e.stopPropagation()}
       onMouseLeave={() => setIsPlaylistSubmenuOpen(false)}
     >
       <div className="flex flex-col rounded-md sm:min-w-50">
         {song.status === SONG_STATUS.Approved && (
-          <div
-            className="relative"
-            onMouseEnter={() => setIsPlaylistSubmenuOpen(true)}
-          >
+          <div className="relative">
             <ContextMenuItem
               text="Add to playlist"
               icon={AddIcon}
               onClick={() => setIsPlaylistSubmenuOpen(true)}
+              onMouseEnter={() => setIsPlaylistSubmenuOpen(true)}
             />
             {isPlaylistSubmenuOpen && (
               <PlaylistSubmenu song={song} onClose={close} />

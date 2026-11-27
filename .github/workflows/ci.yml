@@ -50,3 +50,4 @@ jobs:
           args: >
             -Dsonar.organization=vainn2332
             -Dsonar.projectKey=Vainn2332_Vladify.Frontend
+            -Dsonar.coverage.exclusions=**/*

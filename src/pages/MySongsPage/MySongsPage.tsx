@@ -23,10 +23,6 @@ export function MySongsPage() {
   const deleteSong = useMutation(songMutations.delete);
   const createSong = useMutation(songMutations.create);
 
-  const handleDeleteSong = () =>
-    deleteSong.mutate(songToDelete!.id, {
-      onError: (error) => console.error("Failed to delete song", error),
-    });
   const handleCreateSong = (dto: AddSongDto) =>
     createSong.mutate(dto, {
       onError: (error) => console.error("Failed to create song", error),
@@ -37,15 +33,15 @@ export function MySongsPage() {
 
   const songs = response.data ?? [];
 
-  const findSongToDelete = (id: string) =>
-    setSongToDelete(songs.find((s) => s.id === id) ?? null);
+  const handleDeleteSong = (id: string) => {
+    const song = songs.find((s) => s.id === id);
+    if (song) setSongToDelete(song);
+  };
 
   //TODO: implement song playback when clicking on a song in the playlist
   const handleClick = (id: string) => {
     console.log(`song with ${id} clicked!`);
   };
-
-  const isAuthor = songs[0]?.isAuthor ?? false;
 
   return (
     <>
@@ -67,11 +63,12 @@ export function MySongsPage() {
         </button>
         <SongSection
           songs={songs}
-          onDelete={isAuthor ? findSongToDelete : undefined}
+          onDelete={handleDeleteSong}
           onClick={handleClick}
           showStatus
         />
       </div>
+
       {isCreateSongModalOpen && (
         <CreateSongModal
           onClose={() => setIsCreateSongModalOpen(false)}
@@ -81,14 +78,18 @@ export function MySongsPage() {
 
       {songToDelete && (
         <ConfirmModal
+          title="Delete song"
           message={
             <>
               Remove <b>{songToDelete.title}</b> from playlist?
             </>
           }
           onClose={() => setSongToDelete(null)}
-          onConfirm={handleDeleteSong}
-          title="Delete song"
+          onConfirm={() =>
+            deleteSong.mutate(songToDelete.id, {
+              onError: (error) => console.error("Failed to delete song", error),
+            })
+          }
         />
       )}
     </>

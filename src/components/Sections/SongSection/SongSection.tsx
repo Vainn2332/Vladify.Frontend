@@ -1,4 +1,5 @@
-import { Clock } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Clock as ClockIcon } from "lucide-react";
 import { SongRow } from "./SongRow";
 import type { Song } from "../../../api/song/song";
 
@@ -15,6 +16,27 @@ export function SongSection({
   onDelete,
   onClick,
 }: SongSectionProps) {
+  const [openMenuSongId, setOpenMenuSongId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openMenuSongId) return;
+
+    const closeMenu = () => setOpenMenuSongId(null);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("scroll", closeMenu);
+    window.addEventListener("resize", closeMenu);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", closeMenu);
+      window.removeEventListener("resize", closeMenu);
+    };
+  }, [openMenuSongId]);
+
   if (songs.length === 0)
     return (
       <div className="text-secondary flex h-32 justify-center">
@@ -22,18 +44,23 @@ export function SongSection({
       </div>
     );
 
+  const toggleMenu = (id: string) =>
+    setOpenMenuSongId((current) => (current === id ? null : id));
+
+  const closeMenu = () => setOpenMenuSongId(null);
+
   return (
     <table className="sm:text-medium w-full table-fixed overflow-hidden rounded-xl bg-white/85 text-left text-xs">
       <thead className="text-2xs border-b border-black/10 text-black/50 uppercase sm:text-xs">
         <tr>
-          <th className="w-4 p-2 sm:p-4">#</th>
-          <th className="p-4">Title</th>
-          <th className="hidden p-4 sm:table-cell">Album</th>
-          {showStatus && <th className="w-18 p-4 sm:w-auto">Status</th>}
-          <th className="w-10 p-4 sm:w-20">
-            <Clock className="size-4" />
+          <th className="w-8 p-2 text-center sm:w-10">#</th>
+          <th className="p-2 py-4">Title</th>
+          <th className="hidden p-2 sm:table-cell">Album</th>
+          {showStatus && <th className="w-14 p-2 pl-2 sm:w-auto">Status</th>}
+          <th className="w-12 p-2 sm:w-20">
+            <ClockIcon className="size-4" />
           </th>
-          {onDelete && <th className="w-10 p-4" />}
+          <th className="w-10 sm:w-12" />
         </tr>
       </thead>
 
@@ -41,11 +68,14 @@ export function SongSection({
         {songs.map((song, index) => (
           <SongRow
             index={index}
-            onDelete={onDelete}
-            onClick={onClick}
             song={song}
+            onClick={onClick}
             showStatus={showStatus}
             key={song.id}
+            isMenuOpen={openMenuSongId === song.id}
+            onToggleMenu={toggleMenu}
+            onCloseMenu={closeMenu}
+            onDeleteSong={onDelete}
           />
         ))}
       </tbody>

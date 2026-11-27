@@ -51,12 +51,12 @@ export function SongContextMenu({
   return (
     <div
       ref={menuRef}
-      className="shadow-card fixed z-60 -translate-x-full -translate-y-3/4 rounded-xl border border-white bg-gray-100 p-2"
+      className="sm:text-medium shadow-card fixed z-60 -translate-x-full -translate-y-3/4 rounded-xl border border-white bg-gray-100 p-2 text-xs"
       style={{ top: position.top, left: position.left }}
       onClick={(e) => e.stopPropagation()}
       onMouseLeave={() => setIsPlaylistSubmenuOpen(false)}
     >
-      <div className="flex min-w-50 flex-col rounded-md">
+      <div className="flex flex-col rounded-md sm:min-w-50">
         {song.status === SONG_STATUS.Approved && (
           <div
             className="relative"
@@ -64,7 +64,6 @@ export function SongContextMenu({
           >
             <ContextMenuItem
               text="Add to playlist"
-              className="w-full"
               icon={AddIcon}
               onClick={() => setIsPlaylistSubmenuOpen(true)}
             />
